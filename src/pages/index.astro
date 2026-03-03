@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Pillars from '../components/Pillars.astro';
+import Card from '../components/Card.astro';
+import CTASection from '../components/CTASection.astro';
+import { siteConfig } from '../config/site.config';
+
+// Mock data for tools
+const featuredTools = [
+  {
+    title: "Simulateur ROI IA",
+    description: "Calculez le retour sur investissement potentiel de l'intégration d'outils IA dans votre activité.",
+    href: "/outils/simulateur-roi-ia",
+    image: "/images/tools/roi-ia.jpg",
+    tags: ["IA", "Simulateur"],
+  },
+  {
+    title: "Template Stratégie Crypto",
+    description: "Framework complet pour structurer votre approche d'investissement crypto de manière rationnelle.",
+    href: "/outils/template-strategie-crypto",
+    image: "/images/tools/crypto-strategy.jpg",
+    tags: ["Crypto", "Template"],
+    premium: true,
+  },
+  {
+    title: "Checklist Automatisation",
+    description: "Identifiez les processus automatisables dans votre activité et priorisez vos actions.",
+    href: "/outils/checklist-automatisation",
+    image: "/images/tools/automation.jpg",
+    tags: ["Automatisation", "Template"],
+  }
+];
+
+// Mock data for articles
+const latestArticles = [
+  {
+    title: "L'IA générative en 2026 : opportunités et risques",
+    description: "Analyse approfondie des dernières avancées en IA générative et leurs implications pour les entrepreneurs.",
+    href: "/decrypter/ia-generative-2026",
+    image: "/images/articles/ia-2026.jpg",
+    tags: ["IA", "Stratégie"],
+    date: "2026-02-14",
+  },
+  {
+    title: "Automatiser sa veille tech sans se perdre",
+    description: "Méthodologie pratique pour construire un système de veille efficace avec les bons outils.",
+    href: "/decrypter/automatiser-veille-tech",
+    image: "/images/articles/veille-tech.jpg",
+    tags: ["Automatisation", "Outils"],
+    date: "2026-02-09",
+  },
+  {
+    title: "Crypto et conformité en France : guide 2026",
+    description: "Comprendre le cadre légal français pour utiliser et investir dans les cryptomonnaies en toute sécurité.",
+    href: "/decrypter/crypto-conformite-france",
+    image: "/images/articles/crypto-legal.jpg",
+    tags: ["Crypto", "Conformité"],
+    date: "2026-02-04",
+  }
+];
+---
+
+<BaseLayout
+  title={siteConfig.siteName}
+  description={`${siteConfig.tagline} Laboratoire indépendant d'exploration en IA, crypto, automatisation et outils numériques.`}
+>
+  <Hero />
+  
+  <Pillars />
+  
+  <!-- Featured Tools - Dark Section -->
+  <section class="py-32 bg-volkano-dark relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-pattern-dark opacity-20"></div>
+    <div class="container relative z-10 mx-auto px-4">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+            Outils à la une
+          </h2>
+          <p class="text-xl text-gray-400">
+            Des ressources concrètes et des frameworks actionnables pour passer à l'action immédiatement.
+          </p>
+        </div>
+        <a href="/outils" class="btn-outline-white group shrink-0">
+          Voir tous les outils
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {featuredTools.map(tool => (
+          <Card {...tool} />
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <!-- Latest Articles -->
+  <section class="py-32 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-5xl font-display font-bold text-volkano-dark mb-6">
+            Derniers articles
+          </h2>
+          <p class="text-xl text-gray-600">
+            Décryptage, analyse et vulgarisation des tendances tech pour mieux comprendre le monde de demain.
+          </p>
+        </div>
+        <a href="/decrypter" class="btn-secondary group shrink-0">
+          Lire tous les articles
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {latestArticles.map(article => (
+          <Card {...article} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</BaseLayout>

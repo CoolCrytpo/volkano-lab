@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site.config';
+---
+
+<BaseLayout
+  title="Disclaimer"
+  description={`Avertissement et limitations de responsabilité du site ${siteConfig.siteName}`}
+>
+  <div class="py-20">
+    <div class="container mx-auto px-4 max-w-4xl prose prose-lg">
+      <h1 class="font-display font-bold text-4xl md:text-5xl text-volkano-dark mb-8">Disclaimer</h1>
+
+      <p>Dernière mise à jour : 18 février 2026</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">1. Nature du contenu</h2>
+      <p>Le contenu présent sur {siteConfig.siteName} est fourni à titre purement informatif et pédagogique. Il vise à vulgariser des concepts liés à l'intelligence artificielle, aux crypto-actifs, à l'automatisation et aux outils numériques.</p>
+      <p><strong>{siteConfig.siteName} ne fournit aucun conseil financier, juridique, fiscal ou professionnel.</strong> Les informations présentées ne doivent pas être interprétées comme des recommandations d'investissement ou d'action.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">2. Risques liés aux crypto-actifs</h2>
+      <p>Les crypto-actifs sont des instruments financiers extrêmement volatils et risqués. Leur valeur peut fluctuer de manière importante en très peu de temps. <strong>Vous pouvez perdre tout ou partie de votre investissement.</strong></p>
+      <p>Avant d'investir dans des crypto-actifs, nous vous recommandons vivement de :</p>
+      <ul>
+        <li>Consulter un conseiller financier agréé</li>
+        <li>Vous informer sur la réglementation applicable dans votre pays</li>
+        <li>N'investir que des sommes que vous pouvez vous permettre de perdre</li>
+      </ul>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">3. Exactitude des informations</h2>
+      <p>Nous nous efforçons de fournir des informations exactes et à jour. Cependant, les technologies évoluent rapidement et les réglementations changent fréquemment. <strong>Nous ne garantissons pas l'exactitude, l'exhaustivité ou l'actualité des informations publiées.</strong></p>
+      <p>Il est de votre responsabilité de vérifier les informations auprès de sources officielles avant de prendre une décision.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">4. Outils et simulateurs</h2>
+      <p>Les outils, simulateurs et calculateurs proposés sur ce site sont fournis à titre indicatif et pédagogique. <strong>Les résultats obtenus ne constituent en aucun cas une garantie de performance future.</strong></p>
+      <p>Ces outils sont basés sur des hypothèses et des modèles simplifiés qui peuvent ne pas refléter la complexité de votre situation réelle.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">5. Liens externes</h2>
+      <p>Notre site peut contenir des liens vers des sites web tiers. <strong>Nous ne sommes pas responsables du contenu, des politiques de confidentialité ou des pratiques de ces sites.</strong> L'inclusion d'un lien ne signifie pas que nous approuvons le site en question.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">6. Limitation de responsabilité</h2>
+      <p>{siteConfig.siteName} et ses contributeurs ne pourront en aucun cas être tenus responsables de tout dommage direct, indirect, accessoire, consécutif ou punitif résultant de :</p>
+      <ul>
+        <li>L'utilisation ou l'impossibilité d'utiliser le site ou son contenu</li>
+        <li>Des décisions prises sur la base des informations fournies</li>
+        <li>Des erreurs ou omissions dans le contenu</li>
+        <li>Des pertes financières liées à des investissements ou des transactions</li>
+      </ul>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">7. Indépendance</h2>
+      <p>{siteConfig.siteName} est un projet indépendant. Nous ne sommes affiliés à aucune institution financière, plateforme d'échange de crypto-actifs ou fournisseur de services. Les mentions de produits ou services tiers sont faites à titre informatif uniquement.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">8. Contact</h2>
+      <p>Pour toute question concernant ce disclaimer, veuillez nous contacter à <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.</p>
+    </div>
+  </div>
+</BaseLayout>

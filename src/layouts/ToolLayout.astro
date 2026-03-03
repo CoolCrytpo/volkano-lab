@@ -1,0 +1,254 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Button from '../components/Button.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  tags?: string[];
+  premium?: boolean;
+  price?: string;
+  lemonSqueezyUrl?: string;
+  cryptoPaymentUrl?: string;
+}
+
+const {
+  title,
+  description,
+  image,
+  tags = [],
+  premium = false,
+  price = "Gratuit",
+  lemonSqueezyUrl,
+  cryptoPaymentUrl,
+} = Astro.props;
+
+const useCases = [
+  "Cas d'usage 1",
+  "Cas d'usage 2",
+  "Cas d'usage 3",
+];
+
+const faq = [
+  {
+    question: "Comment utiliser cet outil ?",
+    answer: "Instructions détaillées d'utilisation de l'outil.",
+  },
+  {
+    question: "Est-ce compatible avec mon activité ?",
+    answer: "Informations sur la compatibilité et les prérequis.",
+  },
+];
+---
+
+<BaseLayout title={title} description={description} image={image}>
+  <article class="py-12">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <!-- Main Content -->
+        <div class="lg:col-span-2">
+          <!-- Header -->
+          <header class="mb-12">
+            <div class="flex flex-wrap gap-2 mb-4">
+              {tags.map((tag) => (
+                <span class="px-3 py-1 bg-volkano-blue/10 text-volkano-blue text-sm font-medium rounded-full">
+                  {tag}
+                </span>
+              ))}
+              {premium && (
+                <span class="px-3 py-1 bg-volkano-orange text-white text-sm font-semibold rounded-full">
+                  Premium
+                </span>
+              )}
+            </div>
+            
+            <h1 class="font-display font-bold text-4xl md:text-5xl text-volkano-dark mb-6">
+              {title}
+            </h1>
+            
+            <p class="text-xl text-gray-600 leading-relaxed mb-8">
+              {description}
+            </p>
+            
+            {image && (
+              <div class="aspect-video rounded-xl overflow-hidden bg-volkano-gray mb-8">
+                <img src={image} alt={title} class="w-full h-full object-cover" />
+              </div>
+            )}
+          </header>
+          
+          <!-- Problem -->
+          <section class="mb-12">
+            <h2 class="font-display font-bold text-3xl text-volkano-dark mb-6">
+              Problème adressé
+            </h2>
+            <div class="prose prose-lg max-w-none">
+              <slot name="problem" />
+            </div>
+          </section>
+          
+          <!-- How it works -->
+          <section class="mb-12">
+            <h2 class="font-display font-bold text-3xl text-volkano-dark mb-6">
+              Fonctionnement
+            </h2>
+            <div class="prose prose-lg max-w-none">
+              <slot name="how-it-works" />
+            </div>
+          </section>
+          
+          <!-- Demo -->
+          <section class="mb-12 bg-volkano-gray rounded-xl p-8">
+            <h2 class="font-display font-bold text-3xl text-volkano-dark mb-6">
+              Démo
+            </h2>
+            <slot name="demo" />
+          </section>
+          
+          <!-- Use Cases -->
+          <section class="mb-12">
+            <h2 class="font-display font-bold text-3xl text-volkano-dark mb-6">
+              Cas d'usage
+            </h2>
+            <div class="space-y-4">
+              <slot name="use-cases">
+                {useCases.map((useCase) => (
+                  <div class="flex items-start p-4 bg-white border border-gray-200 rounded-lg">
+                    <span class="text-volkano-orange mr-3 text-xl">✓</span>
+                    <p class="text-gray-700">{useCase}</p>
+                  </div>
+                ))}
+              </slot>
+            </div>
+          </section>
+          
+          <!-- FAQ -->
+          <section class="mb-12">
+            <h2 class="font-display font-bold text-3xl text-volkano-dark mb-6">
+              FAQ
+            </h2>
+            <div class="space-y-6">
+              <slot name="faq">
+                {faq.map((item) => (
+                  <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">
+                      {item.question}
+                    </h3>
+                    <p class="text-gray-700">{item.answer}</p>
+                  </div>
+                ))}
+              </slot>
+            </div>
+          </section>
+          
+          <!-- Disclaimer -->
+          <section class="bg-volkano-gray border-l-4 border-volkano-orange rounded-lg p-6">
+            <h3 class="font-display font-semibold text-lg text-volkano-dark mb-3">
+              ⚠️ Disclaimer légal pédagogique
+            </h3>
+            <p class="text-gray-700 text-sm leading-relaxed">
+              Cet outil est fourni à titre pédagogique et informatif. Les résultats ne constituent pas des conseils financiers, juridiques ou professionnels. Consultez toujours un expert qualifié avant de prendre des décisions importantes. Volkano Lab décline toute responsabilité quant à l'utilisation des informations fournies.
+            </p>
+          </section>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="lg:col-span-1">
+          <div class="sticky top-24 space-y-6">
+            <!-- Pricing Card -->
+            <div class="bg-white border-2 border-volkano-orange rounded-xl p-6">
+              <div class="text-center mb-6">
+                <div class="font-display font-bold text-4xl text-volkano-dark mb-2">
+                  {price}
+                </div>
+                {premium && (
+                  <p class="text-gray-600 text-sm">Paiement unique</p>
+                )}
+              </div>
+              
+              <div class="space-y-3">
+                {!premium ? (
+                  <Button href="#demo" variant="primary" class="w-full">
+                    Utiliser gratuitement
+                  </Button>
+                ) : (
+                  <>
+                    {lemonSqueezyUrl && (
+                      <Button href={lemonSqueezyUrl} variant="primary" class="w-full">
+                        Acheter maintenant
+                      </Button>
+                    )}
+                    {cryptoPaymentUrl && (
+                      <Button href={cryptoPaymentUrl} variant="outline" class="w-full">
+                        Payer en crypto
+                      </Button>
+                    )}
+                  </>
+                )}
+              </div>
+              
+              <div class="mt-6 pt-6 border-t border-gray-200">
+                <ul class="space-y-3 text-sm text-gray-700">
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-volkano-orange mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    Accès immédiat
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-volkano-orange mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    Mises à jour incluses
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-volkano-orange mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    Support par email
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <!-- Info Card -->
+            <div class="bg-volkano-gray rounded-xl p-6">
+              <h3 class="font-display font-semibold text-lg text-volkano-dark mb-4">
+                Besoin d'aide ?
+              </h3>
+              <p class="text-gray-700 text-sm mb-4">
+                Des questions sur cet outil ou son utilisation ?
+              </p>
+              <Button href="/a-propos" variant="outline" class="w-full">
+                Nous contacter
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose {
+    @apply text-gray-700;
+  }
+  
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+  
+  .prose ul, .prose ol {
+    @apply mb-4 space-y-2;
+  }
+  
+  .prose a {
+    @apply text-volkano-orange hover:underline;
+  }
+  
+  .prose strong {
+    @apply font-semibold text-volkano-dark;
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  image?: string;
+  tags?: string[];
+  date?: string;
+  premium?: boolean;
+}
+
+const { title, description, href, image, tags = [], date, premium = false } = Astro.props;
+---
+
+<a href={href} class="group block h-full">
+  <article class="h-full flex flex-col bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+    {image && (
+      <div class="relative aspect-video overflow-hidden">
+        <img 
+          src={image} 
+          alt={title}
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          loading="lazy"
+        />
+        {premium && (
+          <div class="absolute top-4 right-4 px-3 py-1 bg-volkano-orange text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg">
+            Premium
+          </div>
+        )}
+        <div class="absolute inset-0 bg-gradient-to-t from-volkano-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+      </div>
+    )}
+    
+    <div class="p-8 flex-1 flex flex-col">
+      <div class="flex flex-wrap gap-2 mb-4">
+        {tags.map(tag => (
+          <span class="px-2 py-1 bg-gray-50 text-gray-500 text-[10px] font-bold uppercase tracking-widest rounded-md border border-gray-100">
+            {tag}
+          </span>
+        ))}
+      </div>
+      
+      <h3 class="text-xl font-display font-bold text-volkano-dark mb-3 group-hover:text-volkano-orange transition-colors line-clamp-2">
+        {title}
+      </h3>
+      
+      <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3 flex-1">
+        {description}
+      </p>
+      
+      <div class="flex items-center justify-between pt-6 border-t border-gray-50">
+        {date && (
+          <time class="text-xs font-medium text-gray-400">
+            {new Date(date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+        )}
+        <span class="text-volkano-orange font-bold text-sm inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+          Découvrir
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </article>
+</a>

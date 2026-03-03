@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site.config';
+---
+
+<BaseLayout
+  title="Politique de Confidentialité"
+  description={`Politique de confidentialité du site ${siteConfig.siteName}`}
+>
+  <div class="py-20">
+    <div class="container mx-auto px-4 max-w-4xl prose prose-lg">
+      <h1 class="font-display font-bold text-4xl md:text-5xl text-volkano-dark mb-8">Politique de Confidentialité</h1>
+
+      <p>Dernière mise à jour : 18 février 2026</p>
+
+      <p>La présente Politique de Confidentialité décrit la manière dont {siteConfig.siteName} collecte, utilise et protège les informations que vous nous fournissez lorsque vous utilisez notre site web {siteConfig.domainPrimary}.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">1. Collecte de l'information</h2>
+      <p>Nous collectons des informations lorsque vous vous inscrivez à notre newsletter ou remplissez un formulaire. Les informations collectées incluent votre nom et votre adresse e-mail.</p>
+      <p>En outre, nous recevons et enregistrons automatiquement des informations à partir de votre ordinateur et navigateur, y compris votre adresse IP, vos logiciels et votre matériel, et la page que vous demandez, via notre outil d'analyse d'audience (Google Analytics 4), sous réserve de votre consentement.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">2. Utilisation des informations</h2>
+      <p>Toutes les informations que nous recueillons auprès de vous peuvent être utilisées pour :</p>
+      <ul>
+        <li>Personnaliser votre expérience et répondre à vos besoins individuels</li>
+        <li>Fournir un contenu publicitaire personnalisé</li>
+        <li>Améliorer notre site</li>
+        <li>Vous contacter par e-mail</li>
+      </ul>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">3. Confidentialité</h2>
+      <p>Nous sommes les seuls propriétaires des informations recueillies sur ce site. Vos informations personnelles ne seront pas vendues, échangées, transférées, ou données à une autre société pour n'importe quelle raison, sans votre consentement, en dehors de ce qui est nécessaire pour répondre à une demande ou une transaction.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">4. Divulgation à des tiers</h2>
+      <p>Nous ne vendons, n'échangeons et ne transférons pas vos informations personnelles identifiables à des tiers. Cela ne comprend pas les tierces parties de confiance qui nous aident à exploiter notre site Web ou à mener nos affaires, tant que ces parties conviennent de garder ces informations confidentielles.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">5. Protection des informations</h2>
+      <p>Nous mettons en œuvre une variété de mesures de sécurité pour préserver la sécurité de vos informations personnelles. Nous utilisons un cryptage à la pointe de la technologie pour protéger les informations sensibles transmises en ligne. Nous protégeons également vos informations hors ligne.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">6. Cookies</h2>
+      <p>Nous utilisons des cookies pour améliorer l'accès à notre site et identifier les visiteurs réguliers. Cependant, cette utilisation des cookies n'est en aucune façon liée à des informations personnelles identifiables sur notre site.</p>
+      <p>Un bandeau de consentement aux cookies est affiché lors de votre première visite pour recueillir votre accord avant le dépôt de tout cookie non essentiel.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">7. Vos droits</h2>
+      <p>Conformément au RGPD, vous disposez des droits suivants concernant vos données personnelles :</p>
+      <ul>
+        <li>Droit d'accès</li>
+        <li>Droit de rectification</li>
+        <li>Droit à l'effacement (droit à l'oubli)</li>
+        <li>Droit à la limitation du traitement</li>
+        <li>Droit à la portabilité des données</li>
+        <li>Droit d'opposition</li>
+      </ul>
+      <p>Pour exercer ces droits, veuillez nous contacter à <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">8. Consentement</h2>
+      <p>En utilisant notre site, vous consentez à notre politique de confidentialité.</p>
+    </div>
+  </div>
+</BaseLayout>

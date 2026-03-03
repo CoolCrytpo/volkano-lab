@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site.config';
+---
+
+<BaseLayout
+  title="Mentions Légales"
+  description={`Mentions légales du site ${siteConfig.siteName}`}
+>
+  <div class="py-20">
+    <div class="container mx-auto px-4 max-w-4xl prose prose-lg">
+      <h1 class="font-display font-bold text-4xl md:text-5xl text-volkano-dark mb-8">Mentions Légales</h1>
+      
+      <p>Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour la confiance en l'économie numérique, il est précisé aux utilisateurs du site {siteConfig.siteName} l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">Édition du site</h2>
+      <p>Le présent site, accessible à l’URL {siteConfig.domainPrimary}, est édité par :</p>
+      <p>{siteConfig.ownerName}, résidant à {siteConfig.location}, de nationalité Française.</p>
+      <p><strong>Statut :</strong> {siteConfig.legalStatus}</p>
+      {siteConfig.showSiret && siteConfig.siret && <p><strong>SIRET :</strong> {siteConfig.siret}</p>}
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">Hébergement</h2>
+      <p>Le Site est hébergé par la société OVH SAS, situé 2 rue Kellermann - BP 80157 - 59053 Roubaix Cedex 1, (contact téléphonique ou email : 1007).</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">Directeur de publication</h2>
+      <p>Le Directeur de la publication du Site est {siteConfig.ownerName}.</p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">Nous contacter</h2>
+      <p>Par email : <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
+
+      <h2 class="font-display font-bold text-3xl text-volkano-dark mt-12 mb-6">Données personnelles</h2>
+      <p>Le traitement de vos données à caractère personnel est régi par notre <a href="/politique-confidentialite">Politique de Confidentialité</a> conformément au Règlement Général sur la Protection des Données 2016/679 du 27 avril 2016 (« RGPD »).</p>
+    </div>
+  </div>
+</BaseLayout>

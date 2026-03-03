@@ -1,0 +1,76 @@
+---
+layout: ../../layouts/ArticleLayout.astro
+title: "Automatiser sa veille tech sans se perdre"
+description: "Méthodologie pratique pour construire un système de veille efficace avec les bons outils."
+date: "2026-02-10"
+image: "/images/articles/veille.jpg"
+tags: ["Automatisation", "Outils"]
+readingTime: "6 min"
+tldr:
+  - "La veille manuelle est chronophage et inefficace."
+  - "Un système automatisé combine agrégation, filtrage et synthèse."
+  - "Les outils clés sont les flux RSS, les agrégateurs (Feedly, Inoreader) et les plateformes d'automatisation (Zapier, Make)."
+impact: "Transformer une corvée en un processus fluide qui vous apporte uniquement l'information pertinente, au bon moment, et dans le bon format. Vous passez de la réaction à l'anticipation."
+risks: "Le principal risque est la \"bulle de filtres\", qui vous enferme dans vos certitudes. Il est crucial de conserver des sources de découverte aléatoires et de remettre en question régulièrement ses filtres."
+checklist:
+  - "Lister vos sources d'information clés (blogs, newsletters, chaînes YouTube)."
+  - "Choisir un agrégateur de flux RSS."
+  - "Créer des scénarios d'automatisation pour filtrer et envoyer les informations vers votre outil de prise de notes."
+---
+
+## Le problème : l'infobésité
+
+La quantité d'informations produites chaque jour est astronomique. Tenter de suivre manuellement les dernières tendances, les nouveaux outils ou les analyses de fond est une bataille perdue d'avance. On passe plus de temps à chercher et trier l'information qu'à la consommer et l'utiliser.
+
+> La veille technologique ne consiste pas à tout lire, mais à lire ce qui compte pour vous, au moment où ça compte.
+
+Un système de veille efficace doit répondre à trois objectifs :
+
+1.  **Exhaustivité** : Collecter l'information depuis toutes vos sources pertinentes.
+2.  **Pertinence** : Filtrer le bruit pour ne conserver que ce qui est important pour vos objectifs.
+3.  **Accessibilité** : Vous présenter l'information de manière synthétique et actionnable.
+
+## La solution : un système automatisé en 3 étapes
+
+L'automatisation permet de construire un pipeline de l'information, depuis sa source jusqu'à votre cerveau.
+
+### 1. Agrégation : Centraliser les sources
+
+La première étape est de regrouper tous les flux d'information en un seul endroit. L'outil le plus ancien et toujours le plus efficace pour cela est le **flux RSS**. La quasi-totalité des blogs, sites d'actualités et même des chaînes YouTube en proposent un.
+
+**Outils recommandés :**
+
+-   **[Feedly](https://feedly.com/)** : Un agrégateur puissant avec des fonctionnalités d'IA pour prioriser les articles.
+-   **[Inoreader](https://www.inoreader.com/)** : Très personnalisable, il permet de créer des règles de filtrage avancées.
+-   **[Kill the Newsletter!](https://kill-the-newsletter.com/)** : Un service qui transforme n'importe quelle newsletter en flux RSS.
+
+### 2. Filtrage : Isoler les signaux faibles
+
+Une fois tout centralisé, il faut trier. C'est ici que l'automatisation prend tout son sens. Vous pouvez créer des règles pour ne laisser passer que les articles qui vous intéressent.
+
+**Exemples de filtres :**
+
+-   Ne conserver que les articles contenant certains mots-clés (`"IA générative"`, `"Astro"`, `"RGPD"`).
+-   Exclure les articles contenant des mots-clés non pertinents (`"recrutement"`, `"promotion"`).
+-   Prioriser les articles provenant de vos sources les plus fiables.
+
+### 3. Synthèse et distribution : Recevoir l'information digérée
+
+La dernière étape consiste à recevoir l'information filtrée là où vous en avez besoin, et dans un format facile à consommer. Au lieu de consulter votre agrégateur tous les jours, vous pouvez recevoir un résumé par email, un message dans Slack ou une nouvelle tâche dans votre gestionnaire de projets.
+
+**Outils d'automatisation :**
+
+-   **[Zapier](https://zapier.com/)** / **[Make](https://www.make.com/)** : Ces plateformes permettent de connecter votre agrégateur à des milliers d'autres applications. Par exemple : "Quand un nouvel article contenant `mot-clé` est publié, envoie son contenu à ChatGPT pour le résumer, puis crée une nouvelle note dans Notion avec le résumé et le lien."
+
+## Exemple de workflow complet
+
+1.  **Sources** : Blogs tech, newsletters spécialisées, chaînes YouTube.
+2.  **Agrégation** : Tous les flux RSS sont centralisés dans Inoreader.
+3.  **Filtrage** : Des règles dans Inoreader taguent automatiquement les articles pertinents (ex: "IA", "Crypto").
+4.  **Automatisation (Make)** : Toutes les heures, Make récupère les articles tagués "IA" dans Inoreader.
+5.  **Synthèse (ChatGPT)** : L'article est envoyé à l'API de ChatGPT avec le prompt "Résume cet article en 3 points clés pour un entrepreneur".
+6.  **Distribution (Notion)** : Le résumé, le titre et le lien de l'article sont ajoutés à une base de données "Veille IA" dans Notion.
+
+## Conclusion : Reprendre le contrôle
+
+Automatiser sa veille n'est pas un projet technique complexe. C'est une démarche stratégique qui demande de la méthode. En investissant quelques heures pour mettre en place votre système, vous gagnerez un temps précieux chaque semaine et vous assurerez de ne plus jamais passer à côté d'une information cruciale pour votre activité.

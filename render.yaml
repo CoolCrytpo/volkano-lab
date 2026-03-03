@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: volkano-lab
+    env: node
+    plan: free
+    buildCommand: pnpm install && pnpm run build
+    startCommand: pnpm run preview
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SITE
+        value: https://volkano-lab.onrender.com
+      - key: PUBLIC_STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+    staticPublishPath: dist
+    routes:
+      - path: /admin
+        destination: /admin
+      - path: /api
+        destination: /api

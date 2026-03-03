@@ -1,0 +1,53 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply font-sans text-volkano-dark bg-white antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-sm;
+  }
+  
+  .dark-glass-card {
+    @apply bg-volkano-dark/90 backdrop-blur-md border border-white/10 shadow-xl;
+  }
+
+  .tech-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-volkano-dark to-volkano-blue;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-volkano-orange hover:bg-opacity-90 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-volkano-dark text-base font-medium rounded-full text-volkano-dark bg-transparent hover:bg-volkano-dark hover:text-white transition-all duration-200;
+  }
+
+  .btn-outline-white {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-white text-base font-medium rounded-full text-white bg-transparent hover:bg-white hover:text-volkano-dark transition-all duration-200;
+  }
+}
+
+/* Custom selection color */
+::selection {
+  @apply bg-volkano-orange/20 text-volkano-dark;
+}

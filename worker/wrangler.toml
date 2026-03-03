@@ -1,0 +1,29 @@
+# VOLKANO License Worker — Cloudflare Workers
+# Deploy: wrangler deploy
+
+name = "volkano-license"
+main = "volkano-license-worker.js"
+compatibility_date = "2024-12-01"
+
+# KV Namespace for license storage
+# Create first: wrangler kv namespace create LICENSE_KV
+# Then paste the id below
+[[kv_namespaces]]
+binding = "LICENSE_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+
+# Public variables
+[vars]
+STRIPE_PRICE_ID = "price_REPLACE_ME"
+SITE_URL = "https://volkanolab.com"
+
+# Secrets (set via CLI, NOT in this file):
+# wrangler secret put STRIPE_SECRET_KEY
+# wrangler secret put STRIPE_WEBHOOK_SECRET
+# wrangler secret put ADMIN_KEY
+# wrangler secret put RESEND_API_KEY  (optional, for email delivery)
+
+# Custom domain (optional)
+# routes = [
+#   { pattern = "license.volkano.workers.dev", custom_domain = true }
+# ]

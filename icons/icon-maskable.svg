@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Solid background for maskable icon (safe zone = center 80%) -->
+  <rect width="512" height="512" fill="#0a0b0d"/>
+  <!-- Volcano body (shifted slightly down for safe zone) -->
+  <polygon points="256,110 168,360 344,360" fill="#f06c18"/>
+  <!-- Crater shadow -->
+  <polygon points="256,110 230,215 282,215" fill="#c04d00"/>
+  <!-- Lava glow -->
+  <ellipse cx="256" cy="360" rx="88" ry="16" fill="#f7b731" opacity="0.6"/>
+  <!-- Base -->
+  <rect x="140" y="360" width="232" height="32" rx="6" fill="#191b1f"/>
+  <!-- Sparks -->
+  <circle cx="256" cy="98" r="6" fill="#f7b731"/>
+  <circle cx="240" cy="86" r="4" fill="#f06c18" opacity="0.8"/>
+  <circle cx="272" cy="82" r="5" fill="#f7b731" opacity="0.9"/>
+</svg>

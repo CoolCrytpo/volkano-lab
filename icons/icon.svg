@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#0a0b0d"/>
+  <!-- Volcano body -->
+  <polygon points="256,80 160,340 352,340" fill="#f06c18"/>
+  <!-- Crater shadow -->
+  <polygon points="256,80 228,200 284,200" fill="#c04d00"/>
+  <!-- Lava glow -->
+  <ellipse cx="256" cy="340" rx="96" ry="18" fill="#f7b731" opacity="0.6"/>
+  <!-- Base rock -->
+  <rect x="130" y="340" width="252" height="36" rx="8" fill="#191b1f"/>
+  <!-- Eruption sparks -->
+  <circle cx="256" cy="68" r="6" fill="#f7b731"/>
+  <circle cx="238" cy="56" r="4" fill="#f06c18" opacity="0.8"/>
+  <circle cx="274" cy="52" r="5" fill="#f7b731" opacity="0.9"/>
+  <circle cx="248" cy="44" r="3" fill="#fff" opacity="0.7"/>
+  <!-- Monogram VK bottom -->
+  <text x="256" y="430" font-family="system-ui,sans-serif" font-size="80" font-weight="700" fill="#f4f4f6" text-anchor="middle" opacity="0.9">VK</text>
+</svg>

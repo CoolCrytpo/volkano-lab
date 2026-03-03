@@ -1,0 +1,47 @@
+{
+  "name": "VOLKANO — Cockpit Crypto Fiscal",
+  "short_name": "VOLKANO",
+  "description": "Journal crypto structuré & organisation déclarative. Revenus DeFi, plus-values, rapport fiscal.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0b0d",
+  "theme_color": "#f06c18",
+  "lang": "fr",
+  "categories": ["finance", "productivity"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Importer des données",
+      "short_name": "Import",
+      "url": "/?tab=import",
+      "icons": [{ "src": "icons/icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Journal des revenus",
+      "short_name": "Journal",
+      "url": "/?tab=journal",
+      "icons": [{ "src": "icons/icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Exporter le rapport",
+      "short_name": "Export",
+      "url": "/?tab=export",
+      "icons": [{ "src": "icons/icon.svg", "sizes": "any" }]
+    }
+  ]
+}

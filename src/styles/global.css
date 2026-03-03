@@ -1,9 +1,8 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Google Fonts - loaded via BaseLayout for performance */
 
 @layer base {
   html {
@@ -21,11 +20,11 @@
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
   .glass-card {
     @apply bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-sm;
   }
-  
+
   .dark-glass-card {
     @apply bg-volkano-dark/90 backdrop-blur-md border border-white/10 shadow-xl;
   }
@@ -35,19 +34,49 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-volkano-orange hover:bg-opacity-90 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98];
+    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-full shadow-sm text-white bg-volkano-orange hover:bg-opacity-90 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-volkano-orange focus:ring-offset-2;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-volkano-dark text-base font-medium rounded-full text-volkano-dark bg-transparent hover:bg-volkano-dark hover:text-white transition-all duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 border border-volkano-dark text-base font-semibold rounded-full text-volkano-dark bg-transparent hover:bg-volkano-dark hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-volkano-dark focus:ring-offset-2;
   }
 
   .btn-outline-white {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-white text-base font-medium rounded-full text-white bg-transparent hover:bg-white hover:text-volkano-dark transition-all duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 border border-white/40 text-base font-semibold rounded-full text-white bg-transparent hover:bg-white hover:text-volkano-dark transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-volkano-dark;
+  }
+
+  /* Section headings with decorative line */
+  .section-label {
+    @apply inline-flex items-center px-4 py-2 bg-volkano-orange/10 text-volkano-orange rounded-full text-sm font-bold uppercase tracking-wider mb-6;
+  }
+
+  /* Prose overrides for article pages */
+  .prose-volkano {
+    @apply prose-headings:text-volkano-dark prose-a:text-volkano-orange prose-a:no-underline hover:prose-a:underline prose-strong:text-volkano-dark prose-blockquote:border-volkano-orange prose-blockquote:text-gray-600;
   }
 }
 
-/* Custom selection color */
+/* Custom text selection color */
 ::selection {
   @apply bg-volkano-orange/20 text-volkano-dark;
+}
+
+/* Smooth scrollbar for Webkit */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F39C12;
+}
+
+/* Focus ring improvements */
+*:focus-visible {
+  @apply outline-none ring-2 ring-volkano-orange ring-offset-2;
 }

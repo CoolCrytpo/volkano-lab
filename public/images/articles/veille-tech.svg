@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <rect width="800" height="450" fill="#1A1A1A"/>
+  <rect width="800" height="450" fill="url(#grid2)" opacity="0.1"/>
+  <defs>
+    <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M0 40V0H40" stroke="white" stroke-width="0.5" fill="none"/>
+    </pattern>
+  </defs>
+  <!-- Flow diagram lines -->
+  <line x1="150" y1="225" x2="300" y2="225" stroke="#F39C12" stroke-width="2" stroke-dasharray="6 3" opacity="0.7"/>
+  <line x1="350" y1="225" x2="450" y2="225" stroke="#F39C12" stroke-width="2" stroke-dasharray="6 3" opacity="0.7"/>
+  <line x1="500" y1="225" x2="650" y2="225" stroke="#F39C12" stroke-width="2" stroke-dasharray="6 3" opacity="0.7"/>
+  <!-- Nodes -->
+  <rect x="90" y="195" width="110" height="60" rx="12" fill="#F39C12" opacity="0.15" stroke="#F39C12" stroke-width="1.5"/>
+  <text x="145" y="230" font-family="system-ui" font-size="11" fill="#F39C12" text-anchor="middle" font-weight="600">Sources RSS</text>
+  <rect x="300" y="195" width="100" height="60" rx="12" fill="#34A2ED" opacity="0.15" stroke="#34A2ED" stroke-width="1.5"/>
+  <text x="350" y="230" font-family="system-ui" font-size="11" fill="#34A2ED" text-anchor="middle" font-weight="600">Filtrage</text>
+  <rect x="450" y="195" width="100" height="60" rx="12" fill="#34A2ED" opacity="0.15" stroke="#34A2ED" stroke-width="1.5"/>
+  <text x="500" y="230" font-family="system-ui" font-size="11" fill="#34A2ED" text-anchor="middle" font-weight="600">Synthèse IA</text>
+  <rect x="600" y="195" width="100" height="60" rx="12" fill="#F39C12" opacity="0.15" stroke="#F39C12" stroke-width="1.5"/>
+  <text x="650" y="230" font-family="system-ui" font-size="11" fill="#F39C12" text-anchor="middle" font-weight="600">Notion</text>
+  <!-- Arrow heads -->
+  <polygon points="300,221 290,216 290,226" fill="#F39C12" opacity="0.7"/>
+  <polygon points="450,221 440,216 440,226" fill="#F39C12" opacity="0.7"/>
+  <polygon points="600,221 590,216 590,226" fill="#F39C12" opacity="0.7"/>
+  <!-- Tag -->
+  <rect x="30" y="390" width="160" height="32" rx="16" fill="#F39C12" opacity="0.9"/>
+  <text x="110" y="411" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1">AUTOMATISATION</text>
+</svg>

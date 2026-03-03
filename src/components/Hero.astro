@@ -1,55 +1,84 @@
 ---
 ---
 
-<section class="relative overflow-hidden bg-white pt-16 pb-24 md:pt-24 md:pb-32">
-  <!-- Background patterns -->
-  <div class="absolute inset-0 bg-grid-pattern opacity-100"></div>
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-volkano-orange/5 via-transparent to-transparent"></div>
+<section class="relative overflow-hidden bg-volkano-dark pt-16 pb-24 md:pt-28 md:pb-36">
+  <!-- Grid background -->
+  <div class="absolute inset-0 bg-grid-pattern-dark opacity-30"></div>
+  <!-- Radial glow top-center -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-volkano-orange/20 via-volkano-orange/5 to-transparent pointer-events-none"></div>
+  <!-- Bottom glow -->
+  <div class="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-volkano-blue/15 via-transparent to-transparent pointer-events-none"></div>
 
   <div class="container relative z-10 mx-auto px-4">
     <div class="max-w-4xl mx-auto text-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-volkano-orange/10 border border-volkano-orange/20 text-volkano-orange text-xs font-bold uppercase tracking-wider mb-8 animate-fade-in">
+
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs font-bold uppercase tracking-widest mb-10 animate-fade-in">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-volkano-orange opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-volkano-orange"></span>
         </span>
-        Laboratoire indépendant d'exploration tech
+        Laboratoire indépendant — La Réunion
       </div>
-      
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-volkano-dark tracking-tight mb-8 animate-slide-up">
-        Transformer la <span class="text-volkano-orange">complexité</span> en levier.
+
+      <!-- Heading -->
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white tracking-tight mb-8 animate-slide-up leading-[1.05]">
+        Comprendre avant
+        <br />
+        <span class="text-volkano-orange">d'agir.</span>
       </h1>
-      
-      <p class="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed animate-slide-up [animation-delay:200ms]">
-        Exploration, structuration et vulgarisation en <span class="font-semibold text-volkano-dark">IA</span>, <span class="font-semibold text-volkano-dark">crypto</span>, <span class="font-semibold text-volkano-dark">automatisation</span> et outils numériques.
+
+      <!-- Subheading -->
+      <p class="text-lg md:text-xl text-white/60 mb-12 max-w-2xl mx-auto leading-relaxed animate-slide-up [animation-delay:150ms]">
+        Décryptage, structuration et outils actionnables en
+        <span class="text-white font-semibold">IA</span>,
+        <span class="text-white font-semibold">crypto</span>,
+        <span class="text-white font-semibold">automatisation</span>
+        et outils numériques — sans sensationnalisme.
       </p>
-      
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up [animation-delay:400ms]">
-        <a href="/decrypter" class="btn-primary w-full sm:w-auto group">
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up [animation-delay:300ms]">
+        <a href="/decrypter" class="btn-primary w-full sm:w-auto group text-base px-8 py-3.5">
           Explorer les articles
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
         </a>
-        <a href="/outils" class="btn-secondary w-full sm:w-auto">
+        <a href="/outils" class="btn-outline-white w-full sm:w-auto text-base px-8 py-3.5">
           Voir les outils
         </a>
       </div>
 
-      <div class="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto animate-fade-in [animation-delay:600ms]">
+      <!-- Trust indicators -->
+      <div class="mt-20 pt-10 border-t border-white/10 grid grid-cols-3 gap-6 max-w-xl mx-auto animate-fade-in [animation-delay:600ms]">
         <div class="flex flex-col items-center gap-2">
-          <span class="text-2xl">⭐</span>
-          <span class="text-sm font-medium text-gray-500 uppercase tracking-widest">Pédagogique</span>
+          <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+            <svg class="w-5 h-5 text-volkano-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <span class="text-xs font-semibold text-white/50 uppercase tracking-widest text-center">Pédagogique</span>
         </div>
         <div class="flex flex-col items-center gap-2">
-          <span class="text-2xl">🛡️</span>
-          <span class="text-sm font-medium text-gray-500 uppercase tracking-widest">Indépendant</span>
+          <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+            <svg class="w-5 h-5 text-volkano-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <span class="text-xs font-semibold text-white/50 uppercase tracking-widest text-center">Indépendant</span>
         </div>
         <div class="flex flex-col items-center gap-2">
-          <span class="text-2xl">🇷🇪</span>
-          <span class="text-sm font-medium text-gray-500 uppercase tracking-widest">Basé à La Réunion</span>
+          <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+            <svg class="w-5 h-5 text-volkano-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <span class="text-xs font-semibold text-white/50 uppercase tracking-widest text-center">La Réunion</span>
         </div>
       </div>
+
     </div>
   </div>
 </section>

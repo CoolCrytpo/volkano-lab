@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <rect width="800" height="450" fill="#1A1A1A"/>
+  <defs>
+    <pattern id="grid4" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M0 40V0H40" stroke="white" stroke-width="0.3" fill="none"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#grid4)" opacity="0.08"/>
+  <!-- Chart bars going up (ROI) -->
+  <rect x="150" y="320" width="60" height="80" rx="6" fill="#34A2ED" opacity="0.5"/>
+  <rect x="240" y="270" width="60" height="130" rx="6" fill="#34A2ED" opacity="0.6"/>
+  <rect x="330" y="210" width="60" height="190" rx="6" fill="#F39C12" opacity="0.7"/>
+  <rect x="420" y="160" width="60" height="240" rx="6" fill="#F39C12" opacity="0.85"/>
+  <rect x="510" y="100" width="60" height="300" rx="6" fill="#F39C12" opacity="1"/>
+  <!-- Trend line -->
+  <polyline points="180,310 270,260 360,200 450,150 540,90" stroke="#F39C12" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- ROI label -->
+  <rect x="250" y="60" width="300" height="50" rx="10" fill="#F39C12" opacity="0.1" stroke="#F39C12" stroke-width="1"/>
+  <text x="400" y="91" font-family="system-ui" font-size="18" fill="#F39C12" text-anchor="middle" font-weight="700">ROI Simulateur IA</text>
+  <!-- Axis -->
+  <line x1="120" y1="400" x2="700" y2="400" stroke="white" stroke-width="1" opacity="0.2"/>
+  <line x1="120" y1="80" x2="120" y2="400" stroke="white" stroke-width="1" opacity="0.2"/>
+</svg>

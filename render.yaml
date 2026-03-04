@@ -4,7 +4,7 @@ services:
     env: node
     plan: free
     buildCommand: pnpm install && pnpm run build
-    startCommand: pnpm run preview
+    startCommand: node dist/server/entry.mjs
     envVars:
       - key: NODE_ENV
         value: production
@@ -14,7 +14,6 @@ services:
         sync: false
       - key: STRIPE_SECRET_KEY
         sync: false
-    staticPublishPath: dist
     routes:
       - path: /admin
         destination: /admin

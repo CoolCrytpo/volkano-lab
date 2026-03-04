@@ -1,0 +1,15 @@
+{
+  "slug": "checklist-automatisation",
+  "title": "Checklist Automatisation",
+  "description": "Identifiez les processus automatisables dans votre activité et priorisez vos actions pour maximiser le ROI.",
+  "image": "/images/tools/automation.svg",
+  "category": "gratuit",
+  "subcategory": "guides",
+  "tags": ["Automatisation", "Template"],
+  "premium": false,
+  "priceFiat": null,
+  "priceCrypto": null,
+  "stripeProductId": null,
+  "downloadUrl": null,
+  "content": []
+}

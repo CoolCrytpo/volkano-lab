@@ -1,0 +1,15 @@
+{
+  "slug": "simulateur-roi-ia",
+  "title": "Simulateur ROI IA",
+  "description": "Calculez le retour sur investissement potentiel de l'intégration d'outils IA dans votre activité.",
+  "image": "/images/tools/roi-ia.svg",
+  "category": "gratuit",
+  "subcategory": "outils-recommandes",
+  "tags": ["IA", "Simulateur"],
+  "premium": false,
+  "priceFiat": null,
+  "priceCrypto": null,
+  "stripeProductId": null,
+  "downloadUrl": null,
+  "content": []
+}

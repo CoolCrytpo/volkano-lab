@@ -1,0 +1,15 @@
+{
+  "slug": "template-strategie-crypto",
+  "title": "Template Stratégie Crypto",
+  "description": "Framework complet pour structurer votre approche d'investissement crypto de manière rationnelle et conforme.",
+  "image": "/images/tools/crypto-strategy.svg",
+  "category": "premium",
+  "subcategory": "templates",
+  "tags": ["Crypto", "Template"],
+  "premium": true,
+  "priceFiat": 29,
+  "priceCrypto": "29 USDC",
+  "stripeProductId": null,
+  "downloadUrl": null,
+  "content": []
+}

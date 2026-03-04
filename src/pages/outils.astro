@@ -1,199 +1,136 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Card from '../components/Card.astro';
+import { getCollection } from 'astro:content';
 
-// Temporary static data - will be replaced with content collections
-const tools = [
+// Chargement depuis Keystatic (src/content/tools/)
+const toolEntries = await getCollection('tools');
+
+// Tri par catégorie
+const categories = [
   {
-    title: "Simulateur ROI IA",
-    description: "Calculez le retour sur investissement potentiel de l'intégration d'outils IA dans votre activité.",
-    href: "/outils/simulateur-roi-ia",
-    image: "/images/tools/roi-ia.svg",
-    tags: ["IA", "Simulateur"],
-    premium: false,
+    id: 'gratuit',
+    label: 'Ressources gratuites',
+    icon: '🟢',
+    description: 'Templates, guides et outils recommandés — 100% gratuits',
+    subcategories: [
+      { id: 'templates', label: 'Templates' },
+      { id: 'guides', label: 'Guides pratiques' },
+      { id: 'outils-recommandes', label: 'Outils recommandés' },
+    ],
   },
   {
-    title: "Template Stratégie Crypto",
-    description: "Framework complet pour structurer votre approche d'investissement crypto de manière rationnelle.",
-    href: "/outils/template-strategie-crypto",
-    image: "/images/tools/crypto-strategy.svg",
-    tags: ["Crypto", "Template"],
-    premium: true,
+    id: 'premium',
+    label: 'Ressources premium',
+    icon: '🟠',
+    description: 'eBooks, dossiers approfondis et méthodes détaillées',
+    subcategories: [
+      { id: 'ebooks', label: 'eBooks' },
+      { id: 'dossiers', label: 'Dossiers premium' },
+      { id: 'methodes', label: 'Méthodes détaillées' },
+    ],
   },
   {
-    title: "Checklist Automatisation",
-    description: "Identifiez les processus automatisables dans votre activité et priorisez vos actions.",
-    href: "/outils/checklist-automatisation",
-    image: "/images/tools/automation.svg",
-    tags: ["Automatisation", "Template"],
-    premium: false,
+    id: 'services',
+    label: 'Produits & services',
+    icon: '🔵',
+    description: 'Coaching, packs stratégiques et divertissement éducatif',
+    subcategories: [
+      { id: 'coaching', label: 'Coaching' },
+      { id: 'packs', label: 'Packs stratégiques' },
+      { id: 'divertissement', label: 'Divertissement éducatif' },
+    ],
   },
 ];
 
-const filters = {
-  type: ["Tous", "Gratuit", "Premium"],
-  category: ["Tous", "IA", "Crypto", "Template", "Simulateur"],
-};
+// Adapter les entrées Keystatic au format Card
+function toCardProps(entry: typeof toolEntries[0]) {
+  const d = entry.data;
+  return {
+    title: d.title,
+    description: d.description,
+    href: `/outils/${d.slug}`,
+    image: d.image ?? undefined,
+    tags: d.tags ?? [],
+    premium: d.premium ?? false,
+    date: undefined,
+    price: d.priceFiat ? `${d.priceFiat}€` : undefined,
+  };
+}
 ---
 
 <BaseLayout
   title="Boîte à outils"
-  description="Outils, templates et simulateurs pour passer de la théorie à la pratique en IA, crypto et automatisation."
+  description="Outils, templates, guides et services pour passer de la théorie à la pratique en IA, crypto et automatisation."
 >
   <div class="py-20">
     <div class="container mx-auto px-4">
+
       <!-- Header -->
-      <div class="text-center mb-16">
-        <div class="inline-flex items-center px-4 py-2 bg-volkano-orange/10 text-volkano-orange rounded-full text-sm font-medium mb-6">
-          <span class="mr-2">🧰</span>
-          Outils
+      <div class="text-center mb-20">
+        <div class="section-label">
+          <span class="mr-2">🧪</span>
+          Boîte à outils
         </div>
         <h1 class="font-display font-bold text-4xl md:text-5xl text-volkano-dark mb-6">
-          Boîte à outils
+          Ressources & Outils
         </h1>
         <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-          Des ressources concrètes pour passer de la théorie à la pratique
+          Des ressources concrètes, organisées par besoin, pour passer de la théorie à l'action.
         </p>
       </div>
-      
-      <!-- Filters -->
-      <div class="mb-12 space-y-6">
-        <!-- Type Filter -->
-        <div>
-          <h3 class="font-display font-semibold text-sm text-gray-700 mb-3">Type</h3>
-          <div class="flex flex-wrap gap-3">
-            {filters.type.map((type) => (
-              <button
-                class={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  type === "Tous"
-                    ? "bg-volkano-orange text-white"
-                    : "bg-white border border-gray-200 text-gray-700 hover:border-volkano-orange hover:text-volkano-orange"
-                }`}
-                data-filter-type={type}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        <!-- Category Filter -->
-        <div>
-          <h3 class="font-display font-semibold text-sm text-gray-700 mb-3">Catégorie</h3>
-          <div class="flex flex-wrap gap-3">
-            {filters.category.map((category) => (
-              <button
-                class={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  category === "Tous"
-                    ? "bg-volkano-blue text-white"
-                    : "bg-white border border-gray-200 text-gray-700 hover:border-volkano-blue hover:text-volkano-blue"
-                }`}
-                data-filter-category={category}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-      
-      <!-- Tools Grid -->
-      <div id="tools-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-        {tools.map((tool) => (
-          <Card {...tool} />
-        ))}
-      </div>
-      
-      <!-- Empty State -->
-      <div id="empty-state" class="hidden text-center py-16">
-        <div class="text-6xl mb-4">🔍</div>
-        <h3 class="font-display font-semibold text-xl text-volkano-dark mb-2">
-          Aucun outil trouvé
-        </h3>
-        <p class="text-gray-600">
-          Essayez de modifier vos filtres
-        </p>
-      </div>
+
+      <!-- Sections par catégorie -->
+      {categories.map((cat) => {
+        const catTools = toolEntries.filter(e => e.data.category === cat.id);
+
+        return (
+          <section class="mb-24" id={`cat-${cat.id}`}>
+            <!-- En-tête de section -->
+            <div class="flex items-start gap-4 mb-10 pb-6 border-b-2 border-gray-100">
+              <div class={`text-3xl mt-1`}>{cat.icon}</div>
+              <div>
+                <h2 class="font-display font-bold text-2xl md:text-3xl text-volkano-dark mb-2">
+                  {cat.label}
+                </h2>
+                <p class="text-gray-500 text-base">{cat.description}</p>
+                <!-- Sous-catégories pills -->
+                <div class="flex flex-wrap gap-2 mt-3">
+                  {cat.subcategories.map(sub => (
+                    <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full">
+                      {sub.label}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {catTools.length > 0 ? (
+              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {catTools.map(entry => (
+                  <Card {...toCardProps(entry)} />
+                ))}
+              </div>
+            ) : (
+              <!-- Placeholder "Bientôt disponible" -->
+              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {cat.subcategories.map(sub => (
+                  <div class="group border-2 border-dashed border-gray-200 rounded-2xl p-8 flex flex-col items-center justify-center text-center hover:border-volkano-fire/40 transition-colors min-h-[200px]">
+                    <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center mb-4">
+                      <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                      </svg>
+                    </div>
+                    <p class="font-display font-semibold text-gray-500 mb-1">{sub.label}</p>
+                    <p class="text-xs text-gray-400">Bientôt disponible</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        );
+      })}
+
     </div>
   </div>
 </BaseLayout>
-
-<script>
-  // Filter functionality
-  let currentTypeFilter = 'Tous';
-  let currentCategoryFilter = 'Tous';
-  
-  const typeButtons = document.querySelectorAll('[data-filter-type]');
-  const categoryButtons = document.querySelectorAll('[data-filter-category]');
-  const toolsGrid = document.getElementById('tools-grid');
-  const emptyState = document.getElementById('empty-state');
-  
-  function updateFilters() {
-    const tools = toolsGrid?.querySelectorAll('article');
-    let visibleCount = 0;
-    
-    tools?.forEach((tool) => {
-      const isPremium = tool.querySelector('.bg-volkano-orange.text-white.text-xs') !== null;
-      const tags = Array.from(tool.querySelectorAll('.bg-volkano-gray.text-gray-700.text-xs')).map(
-        (tag) => tag.textContent?.trim() || ''
-      );
-      
-      let showTool = true;
-      
-      // Type filter
-      if (currentTypeFilter === 'Gratuit' && isPremium) showTool = false;
-      if (currentTypeFilter === 'Premium' && !isPremium) showTool = false;
-      
-      // Category filter
-      if (currentCategoryFilter !== 'Tous' && !tags.includes(currentCategoryFilter)) {
-        showTool = false;
-      }
-      
-      if (showTool) {
-        tool.classList.remove('hidden');
-        visibleCount++;
-      } else {
-        tool.classList.add('hidden');
-      }
-    });
-    
-    // Show/hide empty state
-    if (visibleCount === 0) {
-      emptyState?.classList.remove('hidden');
-    } else {
-      emptyState?.classList.add('hidden');
-    }
-  }
-  
-  typeButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      currentTypeFilter = button.getAttribute('data-filter-type') || 'Tous';
-      
-      // Update active button
-      typeButtons.forEach((btn) => {
-        btn.classList.remove('bg-volkano-orange', 'text-white');
-        btn.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-700');
-      });
-      button.classList.add('bg-volkano-orange', 'text-white');
-      button.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-700');
-      
-      updateFilters();
-    });
-  });
-  
-  categoryButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      currentCategoryFilter = button.getAttribute('data-filter-category') || 'Tous';
-      
-      // Update active button
-      categoryButtons.forEach((btn) => {
-        btn.classList.remove('bg-volkano-blue', 'text-white');
-        btn.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-700');
-      });
-      button.classList.add('bg-volkano-blue', 'text-white');
-      button.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-700');
-      
-      updateFilters();
-    });
-  });
-</script>

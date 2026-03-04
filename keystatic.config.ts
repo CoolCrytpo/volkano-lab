@@ -2,11 +2,23 @@ import { collection, config, fields } from '@keystatic/core';
 
 export default config({
   storage: {
-    kind: 'local',
+    kind: 'github',
+    repo: {
+      owner: 'CoolCrytpo',
+      name: 'volkano-lab',
+    },
+    branchPrefix: 'keystatic/',
   },
+
+  ui: {
+    brand: {
+      name: 'Volkano Lab Admin',
+    },
+  },
+
   collections: {
     articles: collection({
-      label: 'Articles',
+      label: 'Articles (Décrypter)',
       slugField: 'slug',
       path: 'src/content/articles/*',
       format: { data: 'json' },
@@ -62,13 +74,13 @@ export default config({
     }),
 
     tools: collection({
-      label: 'Outils',
+      label: 'Boîte à outils',
       slugField: 'slug',
       path: 'src/content/tools/*',
       format: { data: 'json' },
       schema: {
         slug: fields.slug({ name: { label: 'URL Slug' } }),
-        title: fields.text({ label: 'Titre' }),
+        title: fields.text({ label: 'Titre de l\'outil' }),
         description: fields.text({
           label: 'Description courte',
           validation: { length: { min: 20, max: 160 } },
@@ -78,29 +90,70 @@ export default config({
           directory: 'public/images/tools',
           publicPath: '/images/tools/',
         }),
+
+        // ── Catégorisation ──
+        category: fields.select({
+          label: 'Catégorie principale',
+          description: 'Correspond aux 3 grandes sections de la Boîte à outils',
+          options: [
+            { label: '🟢 Ressources gratuites', value: 'gratuit' },
+            { label: '🟠 Ressources premium', value: 'premium' },
+            { label: '🔵 Produits & services', value: 'services' },
+          ],
+          defaultValue: 'gratuit',
+        }),
+        subcategory: fields.select({
+          label: 'Sous-catégorie',
+          options: [
+            // Gratuit
+            { label: 'Templates', value: 'templates' },
+            { label: 'Guides pratiques', value: 'guides' },
+            { label: 'Outils recommandés', value: 'outils-recommandes' },
+            // Premium
+            { label: 'eBooks', value: 'ebooks' },
+            { label: 'Dossiers premium', value: 'dossiers' },
+            { label: 'Méthodes détaillées', value: 'methodes' },
+            // Services
+            { label: 'Coaching', value: 'coaching' },
+            { label: 'Packs stratégiques', value: 'packs' },
+            { label: 'Divertissement éducatif', value: 'divertissement' },
+          ],
+          defaultValue: 'templates',
+        }),
+
         tags: fields.array(fields.text({ label: 'Tag' }), {
-          label: 'Tags',
+          label: 'Tags (IA, Crypto, Automatisation…)',
           itemLabel: (props) => props.value,
         }),
-        premium: fields.checkbox({ label: 'Contenu Premium' }),
+
+        // ── Tarification ──
+        premium: fields.checkbox({
+          label: 'Contenu payant',
+          description: 'Cochez si cet outil nécessite un paiement',
+          defaultValue: false,
+        }),
         priceFiat: fields.number({
-          label: 'Prix en EUR (Stripe)',
-          description: 'Laissez vide si gratuit',
+          label: 'Prix en EUR (€)',
+          description: 'En euros entiers. Ex: 29 pour 29€. Laissez vide si gratuit.',
         }),
         priceCrypto: fields.text({
-          label: 'Prix en USDC (Stripe Crypto)',
-          description: 'Laissez vide si gratuit',
+          label: 'Prix en USDC (crypto)',
+          description: 'Ex: "29 USDC". Laissez vide si non disponible.',
         }),
         stripeProductId: fields.text({
           label: 'ID Produit Stripe',
-          description: 'Sera rempli automatiquement après création dans Stripe',
+          description: 'Rempli après création dans Stripe Dashboard (format: prod_xxx)',
         }),
+
         downloadUrl: fields.text({
-          label: 'Lien de téléchargement/accès',
-          description: 'URL vers le fichier ou page de contenu',
+          label: 'Lien d\'accès / téléchargement',
+          description: 'URL Gumroad, Notion, PDF, etc.',
         }),
+
+        // ── Contenu riche ──
         content: fields.document({
-          label: 'Contenu',
+          label: 'Contenu de la page',
+          description: 'Corps principal de la page outil — format riche avec titres, listes, images',
           formatting: true,
           dividers: true,
           links: true,
@@ -113,7 +166,7 @@ export default config({
     }),
 
     pages: collection({
-      label: 'Pages',
+      label: 'Pages statiques',
       slugField: 'slug',
       path: 'src/content/pages/*',
       format: { data: 'json' },
@@ -148,8 +201,8 @@ export default config({
         tagline: fields.text({ label: 'Slogan' }),
         email: fields.text({ label: 'Email de contact' }),
         stripePublishableKey: fields.text({
-          label: 'Clé publique Stripe',
-          description: 'Ne pas partager la clé secrète ici',
+          label: 'Clé publique Stripe (pk_live_xxx ou pk_test_xxx)',
+          description: 'Clé côté client uniquement — ne pas mettre la clé secrète ici',
         }),
       },
     }),

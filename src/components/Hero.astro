@@ -3,32 +3,40 @@
 
 <section class="relative overflow-hidden bg-volkano-dark pt-16 pb-24 md:pt-28 md:pb-36">
   <!-- Grid background -->
-  <div class="absolute inset-0 bg-grid-pattern-dark opacity-30"></div>
-  <!-- Radial glow top-center -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-volkano-orange/20 via-volkano-orange/5 to-transparent pointer-events-none"></div>
-  <!-- Bottom glow -->
-  <div class="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-volkano-blue/15 via-transparent to-transparent pointer-events-none"></div>
+  <div class="absolute inset-0 bg-grid-pattern-dark opacity-20"></div>
+
+  <!-- Glow magma principal — centre haut -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[700px] pointer-events-none"
+       style="background: radial-gradient(ellipse at center, rgba(157,2,8,0.28) 0%, rgba(232,93,4,0.15) 35%, transparent 70%);"></div>
+
+  <!-- Glow ember — bas gauche -->
+  <div class="absolute bottom-0 left-1/4 w-[500px] h-[300px] pointer-events-none"
+       style="background: radial-gradient(ellipse at center, rgba(250,163,7,0.12) 0%, transparent 70%);"></div>
+
+  <!-- Glow bleu — bas droite (tech/crypto) -->
+  <div class="absolute bottom-0 right-1/4 w-[400px] h-[250px] pointer-events-none"
+       style="background: radial-gradient(ellipse at center, rgba(52,162,237,0.10) 0%, transparent 70%);"></div>
 
   <div class="container relative z-10 mx-auto px-4">
     <div class="max-w-4xl mx-auto text-center">
 
-      <!-- Badge -->
+      <!-- Badge pulsant -->
       <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs font-bold uppercase tracking-widest mb-10 animate-fade-in">
         <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-volkano-orange opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-volkano-orange"></span>
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-volkano-fire opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-volkano-fire"></span>
         </span>
         Laboratoire indépendant — La Réunion
       </div>
 
-      <!-- Heading -->
+      <!-- Titre principal -->
       <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white tracking-tight mb-8 animate-slide-up leading-[1.05]">
         Comprendre avant
         <br />
-        <span class="text-volkano-orange">d'agir.</span>
+        <span class="magma-text glow-fire">d'agir.</span>
       </h1>
 
-      <!-- Subheading -->
+      <!-- Sous-titre -->
       <p class="text-lg md:text-xl text-white/60 mb-12 max-w-2xl mx-auto leading-relaxed animate-slide-up [animation-delay:150ms]">
         Décryptage, structuration et outils actionnables en
         <span class="text-white font-semibold">IA</span>,
@@ -53,24 +61,24 @@
       <!-- Trust indicators -->
       <div class="mt-20 pt-10 border-t border-white/10 grid grid-cols-3 gap-6 max-w-xl mx-auto animate-fade-in [animation-delay:600ms]">
         <div class="flex flex-col items-center gap-2">
-          <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-            <svg class="w-5 h-5 text-volkano-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-10 h-10 rounded-xl bg-volkano-fire/10 border border-volkano-fire/20 flex items-center justify-center">
+            <svg class="w-5 h-5 text-volkano-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
           </div>
           <span class="text-xs font-semibold text-white/50 uppercase tracking-widest text-center">Pédagogique</span>
         </div>
         <div class="flex flex-col items-center gap-2">
-          <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-            <svg class="w-5 h-5 text-volkano-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-10 h-10 rounded-xl bg-volkano-fire/10 border border-volkano-fire/20 flex items-center justify-center">
+            <svg class="w-5 h-5 text-volkano-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
           </div>
           <span class="text-xs font-semibold text-white/50 uppercase tracking-widest text-center">Indépendant</span>
         </div>
         <div class="flex flex-col items-center gap-2">
-          <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-            <svg class="w-5 h-5 text-volkano-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-10 h-10 rounded-xl bg-volkano-blue/10 border border-volkano-blue/20 flex items-center justify-center">
+            <svg class="w-5 h-5 text-volkano-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>

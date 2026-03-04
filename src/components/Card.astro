@@ -7,9 +7,10 @@ interface Props {
   tags?: string[];
   date?: string;
   premium?: boolean;
+  price?: string;
 }
 
-const { title, description, href, image, tags = [], date, premium = false } = Astro.props;
+const { title, description, href, image, tags = [], date, premium = false, price } = Astro.props;
 
 // Tag color mapping
 const tagColorMap: Record<string, string> = {
@@ -19,7 +20,7 @@ const tagColorMap: Record<string, string> = {
   'Stratégie': 'bg-green-50 text-green-700 border-green-200',
   'Conformité': 'bg-red-50 text-red-700 border-red-200',
   'Outils': 'bg-gray-50 text-gray-600 border-gray-200',
-  'Simulateur': 'bg-volkano-orange/10 text-volkano-orange border-volkano-orange/20',
+  'Simulateur': 'bg-volkano-fire/10 text-volkano-fire border-volkano-fire/20',
   'Template': 'bg-indigo-50 text-indigo-700 border-indigo-200',
 };
 
@@ -48,7 +49,7 @@ function getTagColor(tag: string): string {
       )}
 
       {premium && (
-        <div class="absolute top-4 right-4 px-3 py-1 bg-volkano-orange text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg">
+        <div class="absolute top-4 right-4 px-3 py-1 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg" style="background: linear-gradient(135deg, #E85D04, #FAA307);">
           Premium
         </div>
       )}
@@ -70,7 +71,7 @@ function getTagColor(tag: string): string {
       )}
 
       <!-- Title -->
-      <h3 class="text-lg font-display font-bold text-volkano-dark mb-3 group-hover:text-volkano-orange transition-colors line-clamp-2 leading-snug">
+      <h3 class="text-lg font-display font-bold text-volkano-dark mb-3 group-hover:text-volkano-fire transition-colors line-clamp-2 leading-snug">
         {title}
       </h3>
 
@@ -85,10 +86,12 @@ function getTagColor(tag: string): string {
           <time class="text-xs font-medium text-gray-400">
             {new Date(date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'short', day: 'numeric' })}
           </time>
+        ) : price ? (
+          <span class="text-sm font-bold text-volkano-dark">{price}</span>
         ) : (
           <span></span>
         )}
-        <span class="text-volkano-orange font-bold text-sm inline-flex items-center gap-1.5 group-hover:translate-x-1 transition-transform duration-200">
+        <span class="text-volkano-fire font-bold text-sm inline-flex items-center gap-1.5 group-hover:translate-x-1 transition-transform duration-200">
           Découvrir
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />

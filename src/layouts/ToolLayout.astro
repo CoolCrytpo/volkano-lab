@@ -3,26 +3,36 @@ import BaseLayout from './BaseLayout.astro';
 import Button from '../components/Button.astro';
 
 interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   image?: string;
   tags?: string[];
   premium?: boolean;
   price?: string;
   lemonSqueezyUrl?: string;
   cryptoPaymentUrl?: string;
+  frontmatter?: {
+    title?: string;
+    description?: string;
+    image?: string;
+    tags?: string[];
+    premium?: boolean;
+    price?: string;
+    lemonSqueezyUrl?: string;
+    cryptoPaymentUrl?: string;
+  };
 }
 
-const {
-  title,
-  description,
-  image,
-  tags = [],
-  premium = false,
-  price = "Gratuit",
-  lemonSqueezyUrl,
-  cryptoPaymentUrl,
-} = Astro.props;
+// In Astro 5, MDX layouts receive frontmatter under Astro.props.frontmatter
+const fm = Astro.props.frontmatter ?? Astro.props;
+const title = fm.title ?? '';
+const description = fm.description ?? '';
+const image = fm.image;
+const tags = fm.tags ?? [];
+const premium = fm.premium ?? false;
+const price = fm.price ?? "Gratuit";
+const lemonSqueezyUrl = fm.lemonSqueezyUrl;
+const cryptoPaymentUrl = fm.cryptoPaymentUrl;
 
 const useCases = [
   "Cas d'usage 1",

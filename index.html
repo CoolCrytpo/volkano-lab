@@ -930,6 +930,44 @@
             background: linear-gradient(135deg, rgba(240,108,24,0.08), transparent);
             border: 1px solid rgba(240,108,24,0.2);
         }
+
+        /* === QUICK PASTE ZONE === */
+        .paste-zone {
+            background: var(--bg-input);
+            border: 1px solid var(--border-mid);
+            border-radius: var(--radius-sm);
+            width: 100%;
+            min-height: 110px;
+            padding: 12px 14px;
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--fg-primary);
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.15s;
+            line-height: 1.7;
+        }
+        .paste-zone:focus { border-color: var(--accent); }
+        .paste-zone::placeholder { color: var(--fg-muted); font-family: var(--mono); }
+        .paste-preview-table { font-size: 11px; margin-top: 12px; }
+        .paste-preview-table td, .paste-preview-table th { padding: 6px 10px; }
+        .paste-row-ok { background: rgba(61,232,168,0.04); }
+        .paste-row-warn { background: rgba(247,183,49,0.06); }
+        .paste-row-err { background: rgba(245,90,90,0.06); opacity: 0.6; }
+
+        /* === PRICE FETCH BUTTON === */
+        .price-fetch-btn {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 2px 8px; border-radius: 4px; font-size: 10px;
+            background: var(--bg-elevated); border: 1px solid var(--border-mid);
+            color: var(--fg-muted); cursor: pointer; transition: all 0.15s;
+            margin-left: 6px; vertical-align: middle;
+        }
+        .price-fetch-btn:hover { border-color: var(--blue); color: var(--blue); }
+        .price-fetch-btn.loading { opacity: 0.5; pointer-events: none; }
+        .price-hint { font-size: 10px; color: var(--fg-muted); margin-top: 4px; min-height: 14px; }
+        .price-hint.ok { color: var(--green); }
+        .price-hint.warn { color: var(--amber); }
     </style>
 </head>
 <body>
@@ -1117,6 +1155,27 @@
                             <h3 style="font-size:16px;color:var(--accent)">Revenus DeFi — Ajout manuel</h3>
                             <span class="badge badge-accent" style="font-size:10px">BNC</span>
                         </div>
+                        <!-- ⚡ SAISIE RAPIDE DeFi -->
+                        <div class="card" style="margin-bottom:14px">
+                            <div class="card-head" style="cursor:pointer;display:flex;align-items:center" onclick="toggleQuickPaste()">
+                                <span>⚡ Saisie rapide — Coller depuis Excel / Google Sheets</span>
+                                <span id="qp-toggle-icon" style="margin-left:auto;font-size:11px;color:var(--fg-muted)">Afficher ▾</span>
+                            </div>
+                            <div id="quick-paste-panel" style="display:none">
+                                <div class="card-body">
+                                    <p style="font-size:11px;color:var(--fg-muted);margin-bottom:6px">Collez directement depuis un tableau (Excel, Google Sheets, e-mail). Séparateur : tabulation, virgule ou point-virgule.</p>
+                                    <p style="font-size:10px;color:var(--fg-muted);margin-bottom:8px;font-family:var(--mono)">Format : <strong>Date | Type | Protocole | Token | Quantité | Valeur EUR (optionnel)</strong></p>
+                                    <textarea class="paste-zone" id="quickPasteText" placeholder="2026-01-15&#9;staking&#9;Lido&#9;ETH&#9;0.5&#9;1200&#10;2026-02-10&#9;airdrop&#9;LayerZero&#9;ZRO&#9;100" onpaste="setTimeout(parseQuickPaste,50)" oninput="parseQuickPaste()"></textarea>
+                                    <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+                                        <button class="btn btn-sec btn-sm" onclick="parseQuickPaste()">Analyser</button>
+                                        <button class="btn btn-pri btn-sm" id="qp-import-btn" onclick="confirmQuickPaste()" style="display:none">Importer <span id="qp-import-count"></span> lignes</button>
+                                        <button type="button" onclick="document.getElementById('quickPasteText').value='';document.getElementById('qp-preview').innerHTML='';document.getElementById('qp-import-btn').style.display='none';window._qpParsed=null" style="margin-left:auto;font-size:11px;color:var(--fg-muted);background:none;border:none;cursor:pointer;padding:4px">Effacer</button>
+                                    </div>
+                                    <div id="qp-preview"></div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="card">
                             <div class="card-body">
                                 <p style="font-size:11px;color:var(--fg-muted);margin-bottom:12px">Staking, lending, farming, airdrops… Saisissez la valeur en EUR au moment de la réception.</p>
@@ -1154,7 +1213,13 @@
                                     </div>
                                     <div class="form-group"><label class="form-label">Crypto</label><input type="text" class="form-input" id="fiscalCrypto" placeholder="ex: BTC"></div>
                                     <div class="form-group"><label class="form-label">Quantité</label><input type="number" class="form-input" id="fiscalQty" step="any" placeholder="0.00"></div>
-                                    <div class="form-group"><label class="form-label">Prix unitaire EUR</label><input type="number" class="form-input" id="fiscalPrice" step="any" placeholder="0.00"></div>
+                                    <div class="form-group">
+                                        <label class="form-label">Prix unitaire EUR
+                                            <button class="price-fetch-btn" id="fiscal-price-fetch-btn" type="button" onclick="fetchFiscalPrice()" title="Récupérer le cours historique CoinGecko">🔍 Récupérer</button>
+                                        </label>
+                                        <input type="number" class="form-input" id="fiscalPrice" step="any" placeholder="0.00" oninput="document.getElementById('fiscal-price-hint').textContent=''">
+                                        <div class="price-hint" id="fiscal-price-hint"></div>
+                                    </div>
                                     <div class="form-group"><label class="form-label">Frais EUR</label><input type="number" class="form-input" id="fiscalFee" step="any" placeholder="0.00"></div>
                                     <div class="form-group" style="grid-column:span 2"><label class="form-label">Plateforme</label><input type="text" class="form-input" id="fiscalPlatform" placeholder="ex: Binance, Kraken…"></div>
                                 </div>
@@ -3610,66 +3675,227 @@
     }
 
     // =============================================
+    // QUICK PASTE — DeFi revenues
+    // =============================================
+    function toggleQuickPaste() {
+        const panel = document.getElementById('quick-paste-panel');
+        const icon = document.getElementById('qp-toggle-icon');
+        const hidden = panel.style.display === 'none';
+        panel.style.display = hidden ? 'block' : 'none';
+        icon.textContent = hidden ? 'Masquer ▴' : 'Afficher ▾';
+    }
+
+    function normalizeDate(s) {
+        if (!s) return '';
+        s = s.trim();
+        if (/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0, 10);
+        const parts = s.split(/[\/\-\.]/);
+        if (parts.length === 3) {
+            const [a, b, c] = parts;
+            if (c.length === 4) return `${c}-${b.padStart(2,'0')}-${a.padStart(2,'0')}`;
+            if (a.length === 4) return `${a}-${b.padStart(2,'0')}-${c.padStart(2,'0')}`;
+        }
+        return '';
+    }
+
+    function mapRevenueType(raw) {
+        const t = (raw || '').toLowerCase().trim();
+        if (['staking','stake','reward','récompense'].includes(t)) return 'staking';
+        if (['lending','lend','intérêt','interest'].includes(t)) return 'lending';
+        if (['farming','farm','yield','liquidity'].includes(t)) return 'farming';
+        if (['airdrop','drop','bounty'].includes(t)) return 'airdrop';
+        return 'staking';
+    }
+
+    function parseQuickPaste() {
+        const raw = document.getElementById('quickPasteText')?.value || '';
+        if (!raw.trim()) {
+            document.getElementById('qp-preview').innerHTML = '';
+            document.getElementById('qp-import-btn').style.display = 'none';
+            window._qpParsed = null;
+            return;
+        }
+        const rows = raw.trim().split('\n').map(l => l.trim()).filter(Boolean);
+        const parsed = rows.map((line) => {
+            const sep = line.includes('\t') ? '\t' : line.includes(';') ? ';' : ',';
+            const cols = line.split(sep).map(c => c.trim().replace(/^["']|["']$/g, ''));
+            const [rawDate, rawType, rawProto, rawToken, rawQty, rawEur] = cols;
+            const date = normalizeDate(rawDate);
+            const type = mapRevenueType(rawType);
+            const protocol = rawProto || '';
+            const token = (rawToken || '').toUpperCase();
+            const qty = parseFloat((rawQty || '').replace(',', '.')) || 0;
+            const valEur = parseFloat((rawEur || '').replace(',', '.')) || 0;
+            const ok = !!(date && token && qty > 0);
+            const warn = ok && valEur <= 0;
+            return { date, type, protocol, token, qty, valEur, ok, warn };
+        });
+
+        const valid = parsed.filter(p => p.ok).length;
+        const btn = document.getElementById('qp-import-btn');
+        const cnt = document.getElementById('qp-import-count');
+        btn.style.display = valid > 0 ? 'inline-flex' : 'none';
+        cnt.textContent = valid;
+        window._qpParsed = parsed;
+
+        const warn = parsed.filter(p => p.ok && p.warn).length;
+        const err = parsed.filter(p => !p.ok).length;
+        let html = `<div style="font-size:11px;color:var(--fg-muted);margin:10px 0 6px">${valid} ligne${valid>1?'s':''} valide${valid>1?'s':''} · ${warn} sans prix EUR · ${err} ignorée${err>1?'s':''}</div>`;
+        html += '<table class="data-table paste-preview-table"><thead><tr><th>#</th><th>Date</th><th>Type</th><th>Token</th><th>Qté</th><th>EUR</th><th>Statut</th></tr></thead><tbody>';
+        parsed.forEach((r, i) => {
+            const cls = r.ok ? (r.warn ? 'paste-row-warn' : 'paste-row-ok') : 'paste-row-err';
+            const status = r.ok ? (r.warn ? '⚠ prix manquant' : '✓') : '✗ invalide';
+            html += `<tr class="${cls}"><td>${i+1}</td><td>${r.date||'—'}</td><td>${r.type}</td><td>${r.token||'—'}</td><td>${r.qty||'—'}</td><td>${r.valEur||'—'}</td><td>${status}</td></tr>`;
+        });
+        html += '</tbody></table>';
+        document.getElementById('qp-preview').innerHTML = html;
+    }
+
+    function confirmQuickPaste() {
+        const parsed = window._qpParsed || [];
+        const valid = parsed.filter(p => p.ok);
+        if (!valid.length) return;
+        let added = 0;
+        const hasMissingPrice = valid.some(r => r.valEur <= 0);
+        for (const row of valid) {
+            if (!canAddRevenue()) { showToast(`Limite gratuite atteinte après ${added} ajout${added>1?'s':''}. Activez votre licence.`, 'warn'); openModal('limit'); break; }
+            state.revenues.push({
+                id: Date.now().toString(36) + Math.random().toString(36).slice(2,8),
+                date: row.date, type: row.type, protocol: row.protocol,
+                token: row.token, quantity: row.qty, valueEur: row.valEur,
+                status: 'pending', needsPrice: row.valEur <= 0
+            });
+            added++;
+        }
+        saveState();
+        showToast(`${added} revenu${added>1?'s':''} importé${added>1?'s':''}`, 'succ');
+        document.getElementById('quickPasteText').value = '';
+        document.getElementById('qp-preview').innerHTML = '';
+        document.getElementById('qp-import-btn').style.display = 'none';
+        window._qpParsed = null;
+        if (hasMissingPrice) setTimeout(() => fetchMissingPrices(), 800);
+    }
+
+    // =============================================
+    // PRICE FETCH — Fiscal tx (CoinGecko historical)
+    // =============================================
+    async function fetchFiscalPrice() {
+        const date = document.getElementById('fiscalDate')?.value;
+        const crypto = (document.getElementById('fiscalCrypto')?.value || '').toUpperCase();
+        const hint = document.getElementById('fiscal-price-hint');
+        const btn = document.getElementById('fiscal-price-fetch-btn');
+        if (!date) { hint.textContent = 'Sélectionnez une date d\'abord'; hint.className = 'price-hint warn'; return; }
+        if (!crypto) { hint.textContent = 'Saisissez un symbole crypto'; hint.className = 'price-hint warn'; return; }
+        const cgId = TOKEN_MAP[crypto];
+        if (!cgId) { hint.textContent = `"${crypto}" non reconnu — saisissez le prix manuellement`; hint.className = 'price-hint warn'; return; }
+        btn.classList.add('loading');
+        hint.textContent = 'Recherche…';
+        hint.className = 'price-hint';
+        try {
+            const [y, m, d] = date.split('-');
+            const cgDate = `${d}-${m}-${y}`;
+            const url = `${CONFIG.COINGECKO}/coins/${cgId}/history?date=${cgDate}&localization=false`;
+            const res = await fetch(url, { signal: AbortSignal.timeout(CONFIG.PRICE_TIMEOUT) });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            const eur = data?.market_data?.current_price?.eur;
+            if (eur && eur > 0) {
+                document.getElementById('fiscalPrice').value = eur.toFixed(6);
+                hint.textContent = `CoinGecko ${d}/${m}/${y} : ${fmtEur(eur)} / ${crypto}`;
+                hint.className = 'price-hint ok';
+            } else {
+                hint.textContent = 'Prix indisponible pour cette date — vérifiez le symbole';
+                hint.className = 'price-hint warn';
+            }
+        } catch(e) {
+            hint.textContent = 'Erreur réseau — vérifiez votre connexion';
+            hint.className = 'price-hint warn';
+        } finally {
+            btn.classList.remove('loading');
+        }
+    }
+
+    // =============================================
     // PRICE FETCHING — CoinGecko + GoldRush fallback
     // =============================================
     async function fetchMissingPrices() {
         if (isFetchingPrices) return;
-        const missing = state.revenues.filter(r => (!r.valueEur || r.valueEur <= 0) && r.token);
-        if (missing.length === 0) { showToast('Tous les prix sont renseignés', 'info'); return; }
+        const missingRev = state.revenues.filter(r => (!r.valueEur || r.valueEur <= 0) && r.token);
+        const missingFiscal = state.fiscalTxs.filter(t => (!t.price || t.price <= 0) && t.crypto && TOKEN_MAP[t.crypto.toUpperCase()]);
+        if (missingRev.length === 0 && missingFiscal.length === 0) { showToast('Tous les prix sont renseignés', 'info'); return; }
 
         isFetchingPrices = true;
-        showToast(`Recherche de prix pour ${missing.length} transaction${missing.length>1?'s':''}…`, 'info');
+        const total = missingRev.length + missingFiscal.length;
+        showToast(`Recherche de prix pour ${total} transaction${total>1?'s':''}…`, 'info');
 
-        // Collect unique tokens
-        const tokens = [...new Set(missing.map(r => r.token.toUpperCase()))];
-        const cgIds = tokens.map(t => TOKEN_MAP[t]).filter(Boolean);
-
-        let prices = {};
-        // Try CoinGecko first
-        if (cgIds.length > 0) {
-            try {
-                const batches = [];
-                for (let i = 0; i < cgIds.length; i += CONFIG.BATCH_SIZE) {
-                    batches.push(cgIds.slice(i, i + CONFIG.BATCH_SIZE));
+        // --- 1. Revenue prices (batch, current spot price) ---
+        let updatedRev = 0;
+        if (missingRev.length > 0) {
+            const tokens = [...new Set(missingRev.map(r => r.token.toUpperCase()))];
+            const cgIds = tokens.map(t => TOKEN_MAP[t]).filter(Boolean);
+            let prices = {};
+            if (cgIds.length > 0) {
+                try {
+                    for (let i = 0; i < cgIds.length; i += CONFIG.BATCH_SIZE) {
+                        const batch = cgIds.slice(i, i + CONFIG.BATCH_SIZE);
+                        const url = `${CONFIG.COINGECKO}/simple/price?ids=${batch.join(',')}&vs_currencies=eur`;
+                        const res = await fetch(url, { signal: AbortSignal.timeout(CONFIG.PRICE_TIMEOUT) });
+                        const data = await res.json();
+                        Object.entries(data).forEach(([id, val]) => {
+                            const sym = Object.keys(TOKEN_MAP).find(k => TOKEN_MAP[k] === id);
+                            if (sym && val.eur) prices[sym] = val.eur;
+                        });
+                        await new Promise(r => setTimeout(r, 1200));
+                    }
+                } catch (e) { console.warn('CoinGecko revenue price error:', e); }
+            }
+            missingRev.forEach(r => {
+                const p = prices[r.token.toUpperCase()];
+                if (p && p > 0) {
+                    r.valueEur = Math.round(r.quantity * p * 100) / 100;
+                    r.needsPrice = false;
+                    updatedRev++;
                 }
-                for (const batch of batches) {
-                    const url = `${CONFIG.COINGECKO}/simple/price?ids=${batch.join(',')}&vs_currencies=eur`;
-                    const res = await fetch(url, { signal: AbortSignal.timeout(CONFIG.PRICE_TIMEOUT) });
-                    const data = await res.json();
-                    Object.entries(data).forEach(([id, val]) => {
-                        const sym = Object.keys(TOKEN_MAP).find(k => TOKEN_MAP[k] === id);
-                        if (sym && val.eur) prices[sym] = val.eur;
-                    });
-                    await new Promise(r => setTimeout(r, 1200)); // Rate limit
-                }
-            } catch (e) { console.warn('CoinGecko fetch error:', e); }
+            });
+            Object.entries(prices).forEach(([sym, eur]) => {
+                state.priceCache[sym] = { eur, cachedAt: Date.now() };
+            });
         }
 
-        // Apply prices
-        let updated = 0;
-        missing.forEach(r => {
-            const p = prices[r.token.toUpperCase()];
-            if (p && p > 0) {
-                r.valueEur = Math.round(r.quantity * p * 100) / 100;
-                r.needsPrice = false;
-                updated++;
-            }
-        });
+        // --- 2. Fiscal tx prices (historical, per date — critical for PV accuracy) ---
+        let updatedFiscal = 0;
+        for (const tx of missingFiscal) {
+            try {
+                const [y, m, d] = tx.date.split('-');
+                const cgDate = `${d}-${m}-${y}`;
+                const cgId = TOKEN_MAP[tx.crypto.toUpperCase()];
+                const url = `${CONFIG.COINGECKO}/coins/${cgId}/history?date=${cgDate}&localization=false`;
+                const res = await fetch(url, { signal: AbortSignal.timeout(CONFIG.PRICE_TIMEOUT) });
+                if (!res.ok) continue;
+                const data = await res.json();
+                const eur = data?.market_data?.current_price?.eur;
+                if (eur && eur > 0) {
+                    tx.price = eur;
+                    tx.amount = tx.qty * eur;
+                    updatedFiscal++;
+                }
+                await new Promise(r => setTimeout(r, 1500)); // CoinGecko rate limit
+            } catch (e) { console.warn('CoinGecko historical price error:', e); }
+        }
 
-        // Cache
-        Object.entries(prices).forEach(([sym, eur]) => {
-            state.priceCache[sym] = { eur, cachedAt: Date.now() };
-        });
         state.lastPriceUpdate = Date.now();
         saveState();
-
         isFetchingPrices = false;
-        if (updated > 0) {
-            showToast(`${updated} prix mis à jour sur ${missing.length}`, 'succ');
-            renderJournal();
-            renderDashboard();
+
+        const totalUpdated = updatedRev + updatedFiscal;
+        if (totalUpdated > 0) {
+            const parts = [];
+            if (updatedRev > 0) parts.push(`${updatedRev} revenu${updatedRev>1?'s':''}`);
+            if (updatedFiscal > 0) parts.push(`${updatedFiscal} cession${updatedFiscal>1?'s':''}`);
+            showToast(`Prix mis à jour : ${parts.join(' + ')}`, 'succ');
+            renderJournal(); renderDashboard();
         } else {
-            showToast(`Aucun prix trouvé. Complétez manuellement (✎).`, 'warn');
+            showToast('Aucun prix trouvé. Complétez manuellement (✎).', 'warn');
         }
     }
 

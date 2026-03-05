@@ -1,0 +1,58 @@
+---
+layout: ../../layouts/ToolLayout.astro
+title: "Simulateur fiscalité crypto France"
+description: "Estimez votre imposition sur les plus-values crypto selon la flat tax française (PFU 30%). Calculez votre impôt, votre net après impôt et optimisez votre déclaration."
+tags: ["Crypto", "Fiscalité", "Simulateur"]
+premium: false
+---
+import SimulateurFiscaliteCrypto from '../../components/tools/SimulateurFiscaliteCrypto.tsx';
+
+<p slot="problem">
+  La fiscalité des crypto-actifs en France est opaque pour beaucoup d'investisseurs. Quand dois-je déclarer ? Combien vais-je payer ? Comment est calculée la plus-value ? Ce simulateur répond à ces questions avec des chiffres concrets basés sur votre situation.
+</p>
+
+<div slot="how-it-works">
+
+La flat tax française (PFU — Prélèvement Forfaitaire Unique) de **30%** s'applique sur les plus-values de cession de crypto-actifs.
+
+**Formule de calcul :**
+- Plus-value = Prix de vente − Prix d'acquisition − Frais
+- Impôt = Plus-value × 30%
+
+Le taux de 30% se décompose en 12,8% d'impôt sur le revenu + 17,2% de prélèvements sociaux.
+
+</div>
+
+<div slot="demo">
+  <SimulateurFiscaliteCrypto client:load />
+</div>
+
+<div slot="use-cases">
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Anticiper sa charge fiscale</strong> avant de vendre pour éviter les mauvaises surprises lors de la déclaration.</p>
+  </div>
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Comparer différents scénarios de vente</strong> : vendre tout maintenant vs. échelonner ses cessions.</p>
+  </div>
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Préparer sa déclaration</strong> en ayant une estimation claire des montants à reporter sur sa 2086.</p>
+  </div>
+</div>
+
+<div slot="faq">
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Quand est-ce que je dois déclarer ?</h3>
+    <p class="text-gray-600">Vous devez déclarer lorsque vous vendez des crypto-actifs contre des euros (ou d'autres monnaies fiat). Les échanges entre cryptomonnaies (ex: BTC → ETH) ne déclenchent pas d'imposition en France.</p>
+  </div>
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Puis-je opter pour le barème progressif ?</h3>
+    <p class="text-gray-600">Oui, si votre taux marginal d'imposition est inférieur à 12,8%, vous pouvez opter pour le barème progressif. Cela peut être avantageux pour les petits revenus. Consultez un expert-comptable pour votre situation.</p>
+  </div>
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Les résultats sont-ils fiables à 100% ?</h3>
+    <p class="text-gray-600">Ce simulateur donne une estimation basée sur la flat tax standard. Il ne couvre pas les cas spéciaux (mining, staking, airdrops, NFT). Pour une situation complexe, consultez un expert-comptable spécialisé crypto.</p>
+  </div>
+</div>

@@ -25,26 +25,64 @@ const legalInfo = siteConfig.showSiret && siteConfig.siret
       <!-- Brand Section -->
       <div class="lg:col-span-2">
         <a href="/" class="flex items-center gap-3 mb-6 group">
-          <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center transition-transform group-hover:rotate-12">
-            <span class="text-2xl">🌋</span>
+          <!-- Zangoun logo - fiole Erlenmeyer avec éruption -->
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110" style="background: #0D0D0F; border: 1px solid rgba(52,162,237,0.25); box-shadow: 0 0 10px rgba(52,162,237,0.1);">
+            <svg viewBox="0 0 200 220" class="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <filter id="fgb" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="fgo" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <linearGradient id="flava" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0%" stop-color="#9D0208"/>
+                  <stop offset="30%" stop-color="#DC2F02"/>
+                  <stop offset="65%" stop-color="#F48C06"/>
+                  <stop offset="100%" stop-color="#FFBA08"/>
+                </linearGradient>
+                <linearGradient id="ferupt" x1="0" y1="1" x2="0" y2="0">
+                  <stop offset="0%" stop-color="#F48C06"/>
+                  <stop offset="100%" stop-color="#FFBA08"/>
+                </linearGradient>
+              </defs>
+              <path d="M87 105 L58 178 Q53 193 68 195 L132 195 Q147 193 142 178 L113 105 L113 78 L87 78 Z" fill="url(#flava)"/>
+              <path d="M87 105 L58 178 Q52 195 68 197 L132 197 Q148 195 142 178 L113 105" fill="none" stroke="#34A2ED" stroke-width="2.8" stroke-linejoin="round" filter="url(#fgb)"/>
+              <line x1="87" y1="78" x2="87" y2="107" stroke="#34A2ED" stroke-width="2.8" filter="url(#fgb)"/>
+              <line x1="113" y1="78" x2="113" y2="107" stroke="#34A2ED" stroke-width="2.8" filter="url(#fgb)"/>
+              <line x1="84" y1="78" x2="116" y2="78" stroke="#34A2ED" stroke-width="2.5" stroke-linecap="round" filter="url(#fgb)"/>
+              <path d="M95 78 C93 62 90 46 88 30 Q86 18 100 12 Q114 18 112 30 C110 46 107 62 105 78 Z" fill="url(#ferupt)" filter="url(#fgo)"/>
+              <path d="M93 78 Q79 63 66 50 Q59 42 62 48 Q71 60 80 72 L88 78 Z" fill="#FAA307" opacity="0.82" filter="url(#fgo)"/>
+              <path d="M107 78 Q121 63 134 50 Q141 42 138 48 Q129 60 120 72 L112 78 Z" fill="#FAA307" opacity="0.82" filter="url(#fgo)"/>
+              <path d="M100 4 L113 11 L100 18 L87 11 Z" fill="none" stroke="#34A2ED" stroke-width="1.5" filter="url(#fgb)" opacity="0.9"/>
+              <path d="M113 11 L113 24 L100 31 L100 18 Z" fill="none" stroke="#34A2ED" stroke-width="1.5" filter="url(#fgb)" opacity="0.9"/>
+              <path d="M87 11 L87 24 L100 31 L100 18 Z" fill="none" stroke="#34A2ED" stroke-width="1.5" filter="url(#fgb)" opacity="0.9"/>
+              <path d="M52 65 L67 73.5 L67 90.5 L52 99 L37 90.5 L37 73.5 Z" fill="none" stroke="#34A2ED" stroke-width="1.8" filter="url(#fgb)" opacity="0.88"/>
+              <path d="M148 59 L161 66.5 L161 81.5 L148 89 L135 81.5 L135 66.5 Z" fill="none" stroke="#34A2ED" stroke-width="1.8" filter="url(#fgb)" opacity="0.88"/>
+            </svg>
           </div>
           <span class="font-display font-bold text-2xl tracking-tight">
             {siteConfig.siteName}
           </span>
         </a>
-        <p class="text-gray-400 max-w-sm mb-8 leading-relaxed">
-          Laboratoire indépendant d'exploration, structuration et vulgarisation en IA, crypto, automatisation et outils numériques. Basé à La Réunion.
+        <p class="text-gray-400 max-w-sm mb-4 leading-relaxed">
+          {siteConfig.tagline}
+        </p>
+        <p class="text-gray-500 text-sm max-w-sm mb-8 leading-relaxed">
+          IA, blockchain et automatisation expliquées simplement et transformées en outils utiles. Basé à La Réunion.
         </p>
         <div class="flex items-center gap-4">
-          <a href={siteConfig.social.linkedin} class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-volkano-orange hover:border-volkano-orange transition-all duration-300">
+          <a href={siteConfig.social.linkedin} class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-volkano-blue hover:border-volkano-blue transition-all duration-300">
             <span class="sr-only">LinkedIn</span>
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
           </a>
-          <a href={siteConfig.social.facebook} class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-volkano-orange hover:border-volkano-orange transition-all duration-300">
+          <a href={siteConfig.social.facebook} class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-volkano-blue hover:border-volkano-blue transition-all duration-300">
             <span class="sr-only">Facebook</span>
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
-          <a href={siteConfig.social.whatsapp} class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-volkano-orange hover:border-volkano-orange transition-all duration-300">
+          <a href={siteConfig.social.whatsapp} class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-volkano-blue hover:border-volkano-blue transition-all duration-300">
             <span class="sr-only">WhatsApp</span>
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
           </a>
@@ -58,11 +96,10 @@ const legalInfo = siteConfig.showSiret && siteConfig.siret
           <ul class="space-y-4">
             {section.links.map(link => (
               <li>
-                <a href={link.href} class="text-gray-400 hover:text-volkano-orange transition-colors text-sm">
+                <a href={link.href} class="text-gray-400 hover:text-volkano-blue transition-colors text-sm">
                   {link.name}
                 </a>
               </li>
-            </li>
             ))}
           </ul>
         </div>
@@ -72,7 +109,7 @@ const legalInfo = siteConfig.showSiret && siteConfig.siret
     <!-- Bottom Bar -->
     <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 uppercase tracking-widest">
       <p>
-        © {currentYear} {siteConfig.siteName}. Tous droits réservés.
+        &copy; {currentYear} {siteConfig.siteName}. Tous droits réservés.
       </p>
       <p>
         {legalInfo}

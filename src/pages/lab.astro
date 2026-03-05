@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const experiments = [
+  { title: "Test comparatif : GPT-4o vs Claude 3.5 pour la rédaction juridique", date: "2026-02-20", status: "Publié", tags: ["IA", "Comparatif"], icon: "🤖", excerpt: "Résultats détaillés de 20 prompts juridiques soumis aux deux modèles. Précision, hallucinations, format de sortie — tout est documenté." },
+  { title: "Expérimentation DeFi : yield farming sur Base Layer 2", date: "2026-02-10", status: "Publié", tags: ["DeFi", "Blockchain"], icon: "⛓️", excerpt: "30 jours de yield farming avec 500€ sur Base. Résultats réels, frais, risques rencontrés et leçons apprises." },
+  { title: "Automatisation de veille IA avec n8n + RSS + Notion", date: "2026-01-25", status: "En cours", tags: ["Automatisation", "No-code"], icon: "⚙️", excerpt: "Construction d'un workflow complet de veille technologique automatisée. Architecture, coûts et résultats après 3 semaines." },
+  { title: "Analyse smart contract : token ERC-20 minimaliste", date: "2026-01-15", status: "Publié", tags: ["Blockchain", "Solidity"], icon: "📜", excerpt: "Décodage d'un smart contract ERC-20 ligne par ligne. Pour comprendre ce que vous signez vraiment." },
+];
+---
+
+<BaseLayout title="Lab — Explorations" description="Espace d'expérimentation de Zangoun : tests, analyses technologiques, prototypes et retours d'expérience documentés.">
+  <!-- Hero -->
+  <section class="py-24 bg-volkano-dark relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-pattern-dark opacity-20"></div>
+    <div class="container relative z-10 mx-auto px-4">
+      <div class="max-w-3xl">
+        <span class="tag-blue mb-6 inline-block">Laboratoire</span>
+        <h1 class="font-display font-bold text-5xl md:text-6xl text-white mb-6">Explorations</h1>
+        <p class="text-xl text-gray-400 leading-relaxed">
+          Le Lab est l'espace d'expérimentation de Zangoun. Ici, on teste vraiment, on documente honnêtement, et on partage les résultats — bons et mauvais.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experiments list -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="space-y-6">
+        {experiments.map(exp => (
+          <article class="group p-6 border border-gray-100 rounded-2xl hover:border-volkano-blue/30 hover:shadow-lg transition-all duration-300 cursor-pointer">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 bg-gray-50 border border-gray-100">{exp.icon}</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex flex-wrap items-center gap-3 mb-2">
+                  <span class={`px-2 py-0.5 text-xs font-semibold rounded-full ${exp.status === 'Publié' ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700'}`}>
+                    {exp.status}
+                  </span>
+                  {exp.tags.map(t => <span class="tag-blue">{t}</span>)}
+                  <time class="text-xs text-gray-400">{new Date(exp.date).toLocaleDateString('fr-FR', {day:'numeric',month:'long',year:'numeric'})}</time>
+                </div>
+                <h2 class="font-display font-bold text-xl text-volkano-dark mb-2 group-hover:text-volkano-blue transition-colors">{exp.title}</h2>
+                <p class="text-gray-600 text-sm leading-relaxed">{exp.excerpt}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

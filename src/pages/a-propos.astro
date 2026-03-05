@@ -1,142 +1,161 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Button from '../components/Button.astro';
 import { siteConfig } from '../config/site.config';
 ---
 
 <BaseLayout
   title="À propos"
-  description="Découvrez Volkano Lab, laboratoire indépendant d'exploration en IA, crypto et automatisation basé à La Réunion."
+  description="Découvrez Zangoun, laboratoire technologique indépendant basé à La Réunion. IA, blockchain et automatisation expliquées simplement."
 >
-  <article class="py-20">
+  <!-- Hero -->
+  <section class="py-24 bg-volkano-dark relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-pattern-dark opacity-20"></div>
+    <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="background: radial-gradient(ellipse at 20% 50%, rgba(52,162,237,0.08) 0%, transparent 60%);"></div>
+    <div class="container relative z-10 mx-auto px-4 text-center">
+      <span class="tag-blue mb-6 inline-block">A propos</span>
+      <h1 class="font-display font-bold text-5xl md:text-6xl text-white mb-6">
+        Zangoun — Le projet
+      </h1>
+      <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+        Un laboratoire technologique indépendant basé à La Réunion, au service de ceux qui veulent comprendre et agir.
+      </p>
+    </div>
+  </section>
+
+  <article class="py-20 bg-white">
     <div class="container mx-auto px-4 max-w-4xl">
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <div class="inline-flex items-center px-4 py-2 bg-volkano-orange/10 text-volkano-orange rounded-full text-sm font-medium mb-6">
-          <span class="mr-2">👤</span>
-          À propos
-        </div>
-        <h1 class="font-display font-bold text-4xl md:text-5xl text-volkano-dark mb-6">
-          Contributeur passionné basé à La Réunion
-        </h1>
-        <p class="text-xl text-gray-600">
-          Transformer la complexité technologique en opportunités concrètes
-        </p>
-      </div>
-      
+
       <!-- Vision -->
       <section class="mb-16">
         <h2 class="font-display font-bold text-3xl text-volkano-dark mb-6">Vision</h2>
         <div class="prose prose-lg max-w-none">
           <p class="text-gray-700 leading-relaxed mb-4">
-            <strong class="text-volkano-orange">Volkano Lab</strong> est né d'une conviction simple : la technologie ne doit pas être réservée à une élite technique. L'intelligence artificielle, la blockchain, l'automatisation et les outils numériques représentent des leviers puissants de transformation, mais leur complexité apparente freine souvent leur adoption.
+            <strong class="text-volkano-blue">Zangoun</strong> est né d'une conviction simple : la technologie ne doit pas être réservée à une élite technique. L'intelligence artificielle, la blockchain, l'automatisation et les outils numériques représentent des leviers puissants de transformation, mais leur complexité apparente freine souvent leur adoption.
           </p>
           <p class="text-gray-700 leading-relaxed mb-4">
-            Notre mission est de <strong>décrypter, structurer et vulgariser</strong> ces technologies pour les rendre accessibles et actionnables. Nous croyons en une approche pédagogique, rationnelle et indépendante, loin du sensationnalisme et des promesses irréalistes.
+            La mission de Zangoun est de <strong>comprendre, structurer et vulgariser</strong> ces technologies pour les rendre accessibles et actionnables. Une approche pédagogique, rationnelle et indépendante, loin du sensationnalisme et des promesses irréalistes.
           </p>
           <p class="text-gray-700 leading-relaxed">
-            Basé à <strong>La Réunion</strong>, Volkano Lab incarne une vision frugale de la tech : privilégier l'efficacité, la simplicité et la conformité plutôt que la complexité inutile.
+            Basé à <strong>La Réunion</strong>, Zangoun incarne une vision frugale de la tech : privilégier l'efficacité, la simplicité et la conformité plutôt que la complexité inutile.
           </p>
         </div>
       </section>
-      
+
       <!-- Methodology -->
-      <section class="mb-16 bg-volkano-gray rounded-xl p-8">
-        <h2 class="font-display font-bold text-3xl text-volkano-dark mb-6">Méthodologie</h2>
+      <section class="mb-16 bg-volkano-gray rounded-2xl p-8">
+        <h2 class="font-display font-bold text-3xl text-volkano-dark mb-8">Approche</h2>
         <div class="space-y-6">
-          <div class="flex items-start">
-            <div class="flex-shrink-0 w-12 h-12 bg-volkano-orange rounded-lg flex items-center justify-center mr-4">
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background: rgba(52,162,237,0.08); border: 1px solid rgba(52,162,237,0.2);">
               <span class="text-2xl">🔍</span>
             </div>
             <div>
-              <h3 class="font-display font-semibold text-xl text-volkano-dark mb-2">Décrypter</h3>
-              <p class="text-gray-700">
+              <h3 class="font-display font-semibold text-xl text-volkano-dark mb-2">Comprendre</h3>
+              <p class="text-gray-600">
                 Analyser les tendances, identifier les signaux faibles et vulgariser les concepts complexes pour comprendre les enjeux réels.
               </p>
             </div>
           </div>
-          
-          <div class="flex items-start">
-            <div class="flex-shrink-0 w-12 h-12 bg-volkano-blue rounded-lg flex items-center justify-center mr-4">
+
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background: rgba(52,162,237,0.08); border: 1px solid rgba(52,162,237,0.2);">
               <span class="text-2xl">🏗️</span>
             </div>
             <div>
               <h3 class="font-display font-semibold text-xl text-volkano-dark mb-2">Structurer</h3>
-              <p class="text-gray-700">
-                Organiser l'information en frameworks actionnables, créer des méthodologies claires et des templates réutilisables.
+              <p class="text-gray-600">
+                Organiser l'information en frameworks actionnables, créer des méthodologies claires et des outils réutilisables.
               </p>
             </div>
           </div>
-          
-          <div class="flex items-start">
-            <div class="flex-shrink-0 w-12 h-12 bg-volkano-dark rounded-lg flex items-center justify-center mr-4">
+
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background: rgba(52,162,237,0.08); border: 1px solid rgba(52,162,237,0.2);">
               <span class="text-2xl">⚡</span>
             </div>
             <div>
               <h3 class="font-display font-semibold text-xl text-volkano-dark mb-2">Expérimenter</h3>
-              <p class="text-gray-700">
+              <p class="text-gray-600">
                 Développer des outils concrets, des simulateurs et des mini-applications pour tester et valider les hypothèses.
               </p>
             </div>
           </div>
         </div>
       </section>
-      
+
+      <!-- 3 Pillars -->
+      <section class="mb-16">
+        <h2 class="font-display font-bold text-3xl text-volkano-dark mb-8">3 domaines d'exploration</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          {[
+            { icon: '🤖', label: 'Intelligence Artificielle', color: '#34A2ED', desc: 'GPT, agents IA, automatisation cognitive, usages pratiques.' },
+            { icon: '⛓️', label: 'Blockchain & Crypto', color: '#FAA307', desc: 'Fiscalité, DCA, DeFi, smart contracts, régulation française.' },
+            { icon: '⚙️', label: 'Automatisation', color: '#E85D04', desc: 'No-code, workflows, ROI mesurable. Libérer du temps.' },
+          ].map(p => (
+            <div class="p-6 rounded-2xl border border-gray-100 text-center hover:shadow-md transition-all">
+              <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4" style={`background: ${p.color}10; border: 1px solid ${p.color}25;`}>{p.icon}</div>
+              <h3 class="font-display font-semibold text-volkano-dark mb-2">{p.label}</h3>
+              <p class="text-sm text-gray-500 leading-relaxed">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <!-- Compliance -->
       <section class="mb-16">
         <h2 class="font-display font-bold text-3xl text-volkano-dark mb-6">Approche conformité</h2>
         <div class="prose prose-lg max-w-none">
           <p class="text-gray-700 leading-relaxed mb-4">
-            Dans un domaine où les zones grises sont nombreuses, nous plaçons la <strong>conformité et la transparence</strong> au cœur de notre démarche. Chaque contenu inclut une analyse des risques légaux et réglementaires, particulièrement en matière de crypto-actifs et d'intelligence artificielle.
+            Dans un domaine où les zones grises sont nombreuses, la <strong>conformité et la transparence</strong> sont au cœur de la démarche. Chaque contenu inclut une analyse des risques légaux et réglementaires, particulièrement en matière de crypto-actifs et d'intelligence artificielle.
           </p>
           <p class="text-gray-700 leading-relaxed">
-            Nous ne sommes ni conseillers financiers, ni juristes, mais nous nous engageons à fournir des informations fiables et à orienter vers les ressources officielles lorsque nécessaire.
+            Zangoun n'est ni conseiller financier, ni juriste, mais s'engage à fournir des informations fiables et à orienter vers les ressources officielles lorsque nécessaire.
           </p>
         </div>
       </section>
-      
-      <!-- Services -->
+
+      <!-- Accompaniment -->
       <section class="mb-16 border-t border-gray-200 pt-16">
         <h2 class="font-display font-bold text-3xl text-volkano-dark mb-6">Accompagnement stratégique</h2>
-        <div class="bg-white border border-gray-200 rounded-xl p-8">
+        <div class="bg-white border border-gray-200 rounded-2xl p-8">
           <p class="text-gray-700 leading-relaxed mb-6">
-            Au-delà des contenus et outils publics, nous proposons un <strong>accompagnement stratégique sur demande</strong> pour les entrepreneurs et organisations souhaitant :
+            Au-delà des contenus et outils publics, Zangoun propose un <strong>accompagnement ponctuel sur demande</strong> pour les entrepreneurs et organisations souhaitant :
           </p>
           <ul class="space-y-3 mb-6">
             <li class="flex items-start">
-              <span class="text-volkano-orange mr-2">✓</span>
+              <span class="text-volkano-blue mr-3 font-bold">✓</span>
               <span class="text-gray-700">Structurer leur approche de l'IA et de l'automatisation</span>
             </li>
             <li class="flex items-start">
-              <span class="text-volkano-orange mr-2">✓</span>
+              <span class="text-volkano-blue mr-3 font-bold">✓</span>
               <span class="text-gray-700">Développer une stratégie crypto conforme et rationnelle</span>
             </li>
             <li class="flex items-start">
-              <span class="text-volkano-orange mr-2">✓</span>
+              <span class="text-volkano-blue mr-3 font-bold">✓</span>
               <span class="text-gray-700">Optimiser leurs processus avec les bons outils numériques</span>
             </li>
           </ul>
-          <Button href={`mailto:${siteConfig.email}`} variant="primary">
+          <a href={`mailto:${siteConfig.email}`} class="btn-primary">
             Nous contacter
-          </Button>
+          </a>
         </div>
       </section>
-      
+
       <!-- Contact -->
-      <section class="text-center bg-volkano-gray rounded-xl p-8">
+      <section id="contact" class="text-center bg-volkano-gray rounded-2xl p-8">
         <h2 class="font-display font-bold text-2xl text-volkano-dark mb-4">
           Restons en contact
         </h2>
         <p class="text-gray-600 mb-6">
-          Questions, suggestions ou collaboration ? N'hésitez pas à nous écrire.
+          Questions, suggestions ou collaboration ? N'hésitez pas à écrire.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button href={`mailto:${siteConfig.email}`} variant="primary">
+          <a href={`mailto:${siteConfig.email}`} class="btn-primary">
             {siteConfig.email}
-          </Button>
-          <Button href={siteConfig.social.linkedin} variant="outline">
+          </a>
+          <a href={siteConfig.social.linkedin} class="btn-secondary">
             LinkedIn
-          </Button>
+          </a>
         </div>
       </section>
     </div>

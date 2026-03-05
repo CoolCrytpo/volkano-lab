@@ -1,54 +1,48 @@
 export const siteConfig = {
-  siteName: "Volkano Lab",
-  tagline: "Comprendre avant d'agir.",
-  domainPrimary: "volkanolab.com",
-  domainSecondary: ["volkanolab.fr", "volkanolab.re"],
-  email: "contact@volkanolab.re",
+  siteName: "Zangoun",
+  tagline: "Comprendre la technologie pour agir.",
+  domainPrimary: "zangoun.com",
+  domainSecondary: ["zangoun.fr", "zangoun.re"],
+  email: "contact@zangoun.com",
   location: "La Réunion",
   legalStatus: "Projet indépendant — La Réunion",
   siret: null as string | null,
   showSiret: false,
   ownerName: "Sébastien Rivière",
   companyName: null as string | null,
-  
-  // Social links
   social: {
     facebook: "#",
     linkedin: "#",
     whatsapp: "#",
+    twitter: "#",
   },
-  
-  // Navigation
   navigation: [
-    { name: "Accueil", href: "/" },
-    { name: "Décrypter", href: "/decrypter" },
-    { name: "Boîte à outils", href: "/outils" },
+    { name: "Outils", href: "/outils" },
+    { name: "Guides", href: "/guides" },
+    { name: "Lab", href: "/lab" },
+    { name: "Projets", href: "/projets" },
     { name: "À propos", href: "/a-propos" },
   ],
-  
-  // Footer links
   footerLinks: [
     { name: "Mentions légales", href: "/mentions-legales" },
     { name: "Politique de confidentialité", href: "/politique-confidentialite" },
     { name: "Disclaimer", href: "/disclaimer" },
   ],
-  
-  // Colors
   colors: {
-    primary: "#F39C12", // Orange
-    dark: "#1A1A1A", // Noir
+    primary: "#34A2ED",
+    dark: "#0D0D0F",
     white: "#FFFFFF",
-    accent: "#34A2ED", // Bleu tech
+    accent: "#E85D04",
     lightGray: "#F5F5F5",
   },
-  
-  // SEO Keywords
   keywords: [
-    "outils pédagogiques blockchain et IA",
-    "simulateur crypto France",
     "IA pour entrepreneur",
+    "simulateur crypto France",
     "automatisation",
-    "outils numériques",
+    "blockchain pédagogie",
+    "outils tech pratiques",
+    "fiscalité crypto",
+    "DCA crypto calculateur",
   ],
 };
 

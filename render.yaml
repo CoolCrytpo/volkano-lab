@@ -4,17 +4,26 @@ services:
     env: node
     plan: free
     buildCommand: pnpm install && pnpm run build
-    startCommand: pnpm run preview
+    startCommand: node dist/server/entry.mjs
     envVars:
       - key: NODE_ENV
         value: production
       - key: SITE
         value: https://volkano-lab.onrender.com
+      # Stripe
       - key: PUBLIC_STRIPE_PUBLISHABLE_KEY
         sync: false
       - key: STRIPE_SECRET_KEY
         sync: false
-    staticPublishPath: dist
+      # Keystatic GitHub OAuth (créer sur https://github.com/settings/applications/new)
+      # Homepage URL: https://volkano-lab.onrender.com
+      # Callback URL: https://volkano-lab.onrender.com/api/keystatic/github/oauth/callback
+      - key: KEYSTATIC_GITHUB_CLIENT_ID
+        sync: false
+      - key: KEYSTATIC_GITHUB_CLIENT_SECRET
+        sync: false
+      - key: KEYSTATIC_SECRET
+        sync: false
     routes:
       - path: /admin
         destination: /admin

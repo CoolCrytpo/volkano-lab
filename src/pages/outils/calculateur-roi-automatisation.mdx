@@ -1,0 +1,58 @@
+---
+layout: ../../layouts/ToolLayout.astro
+title: "Calculateur ROI automatisation"
+description: "Estimez la rentabilité d'une automatisation de processus. Calculez vos économies annuelles, votre ROI et le délai de retour sur investissement en quelques clics."
+tags: ["Automatisation", "ROI", "Productivité"]
+premium: false
+---
+import CalculateurROI from '../../components/tools/CalculateurROI.tsx';
+
+<p slot="problem">
+  "Est-ce que ça vaut la peine d'automatiser ce processus ?" — c'est la question que tout entrepreneur se pose. Sans chiffres concrets, impossible de décider. Ce calculateur traduit votre temps et vos coûts en euros économisés pour vous donner une réponse claire.
+</p>
+
+<div slot="how-it-works">
+
+Le ROI d'une automatisation se calcule en comparant les gains (temps libéré × coût horaire × fréquence) aux coûts (outil + setup) :
+
+**Économie annuelle = Temps automatisé × Coût horaire × Fréquence annuelle**
+
+**ROI = (Économie annuelle − Coût annuel) ÷ Coût annuel × 100**
+
+**Payback = Coût total ÷ Économie annuelle × 12 mois**
+
+</div>
+
+<div slot="demo">
+  <CalculateurROI client:load />
+</div>
+
+<div slot="use-cases">
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Justifier l'achat d'un outil d'automatisation</strong> (Zapier, Make, n8n) auprès de son équipe ou de sa direction.</p>
+  </div>
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Prioriser ses automatisations</strong> en comparant le ROI de plusieurs processus candidats et en commençant par les plus rentables.</p>
+  </div>
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Calculer le coût réel d'une tâche manuelle</strong> récurrente et prendre conscience de ce qu'elle représente à l'échelle d'une année.</p>
+  </div>
+</div>
+
+<div slot="faq">
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Quels processus peut-on automatiser ?</h3>
+    <p class="text-gray-600">Tout processus répétitif, basé sur des règles et réalisé régulièrement est candidat à l'automatisation : relances clients, génération de rapports, transferts de données entre outils, notifications, sauvegardes, tâches de veille, etc.</p>
+  </div>
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Quel coût horaire utiliser ?</h3>
+    <p class="text-gray-600">Pour un freelance ou entrepreneur, utilisez votre taux journalier divisé par 7-8h. Pour un salarié, utilisez le coût chargé total (salaire brut + charges patronales). En moyenne, comptez 30-80€/h selon le profil.</p>
+  </div>
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Les résultats sont-ils garantis ?</h3>
+    <p class="text-gray-600">Non. Ce calculateur donne une estimation basée sur vos hypothèses. La vraie valeur d'une automatisation inclut aussi des bénéfices difficiles à chiffrer : moins d'erreurs humaines, meilleure qualité de vie au travail, scalabilité accrue.</p>
+  </div>
+</div>

@@ -7,54 +7,91 @@ interface Props {
   tags?: string[];
   date?: string;
   premium?: boolean;
+  price?: string;
 }
 
-const { title, description, href, image, tags = [], date, premium = false } = Astro.props;
+const { title, description, href, image, tags = [], date, premium = false, price } = Astro.props;
+
+// Tag color mapping
+const tagColorMap: Record<string, string> = {
+  'IA': 'bg-volkano-blue/10 text-volkano-blue border-volkano-blue/20',
+  'Crypto': 'bg-yellow-50 text-yellow-700 border-yellow-200',
+  'Automatisation': 'bg-purple-50 text-purple-700 border-purple-200',
+  'Stratégie': 'bg-green-50 text-green-700 border-green-200',
+  'Conformité': 'bg-red-50 text-red-700 border-red-200',
+  'Outils': 'bg-gray-50 text-gray-600 border-gray-200',
+  'Simulateur': 'bg-volkano-fire/10 text-volkano-fire border-volkano-fire/20',
+  'Template': 'bg-indigo-50 text-indigo-700 border-indigo-200',
+};
+
+function getTagColor(tag: string): string {
+  return tagColorMap[tag] || 'bg-gray-50 text-gray-600 border-gray-100';
+}
 ---
 
 <a href={href} class="group block h-full">
-  <article class="h-full flex flex-col bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-    {image && (
-      <div class="relative aspect-video overflow-hidden">
-        <img 
-          src={image} 
+  <article class="h-full flex flex-col bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden">
+    <!-- Image or placeholder -->
+    <div class="relative aspect-video overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+      {image ? (
+        <img
+          src={image}
           alt={title}
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
-        {premium && (
-          <div class="absolute top-4 right-4 px-3 py-1 bg-volkano-orange text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg">
-            Premium
-          </div>
-        )}
-        <div class="absolute inset-0 bg-gradient-to-t from-volkano-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-      </div>
-    )}
-    
-    <div class="p-8 flex-1 flex flex-col">
-      <div class="flex flex-wrap gap-2 mb-4">
-        {tags.map(tag => (
-          <span class="px-2 py-1 bg-gray-50 text-gray-500 text-[10px] font-bold uppercase tracking-widest rounded-md border border-gray-100">
-            {tag}
-          </span>
-        ))}
-      </div>
-      
-      <h3 class="text-xl font-display font-bold text-volkano-dark mb-3 group-hover:text-volkano-orange transition-colors line-clamp-2">
+      ) : (
+        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-volkano-dark to-gray-800">
+          <svg class="w-16 h-16 text-volkano-orange opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+        </div>
+      )}
+
+      {premium && (
+        <div class="absolute top-4 right-4 px-3 py-1 text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-lg" style="background: linear-gradient(135deg, #E85D04, #FAA307);">
+          Premium
+        </div>
+      )}
+
+      <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="p-6 flex-1 flex flex-col">
+      <!-- Tags -->
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mb-4">
+          {tags.map(tag => (
+            <span class={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full border ${getTagColor(tag)}`}>
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <!-- Title -->
+      <h3 class="text-lg font-display font-bold text-volkano-dark mb-3 group-hover:text-volkano-fire transition-colors line-clamp-2 leading-snug">
         {title}
       </h3>
-      
-      <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3 flex-1">
+
+      <!-- Description -->
+      <p class="text-gray-500 text-sm leading-relaxed line-clamp-3 flex-1 mb-4">
         {description}
       </p>
-      
-      <div class="flex items-center justify-between pt-6 border-t border-gray-50">
-        {date && (
+
+      <!-- Footer -->
+      <div class="flex items-center justify-between pt-4 border-t border-gray-50">
+        {date ? (
           <time class="text-xs font-medium text-gray-400">
-            {new Date(date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
+            {new Date(date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'short', day: 'numeric' })}
           </time>
+        ) : price ? (
+          <span class="text-sm font-bold text-volkano-dark">{price}</span>
+        ) : (
+          <span></span>
         )}
-        <span class="text-volkano-orange font-bold text-sm inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+        <span class="text-volkano-fire font-bold text-sm inline-flex items-center gap-1.5 group-hover:translate-x-1 transition-transform duration-200">
           Découvrir
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />

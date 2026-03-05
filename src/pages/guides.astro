@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+
+const guides = [
+  { title: "Comprendre la fiscalité crypto en France", description: "Guide complet sur la flat tax, les obligations déclaratives et comment déclarer correctement ses crypto-actifs.", href: "/guides/fiscalite-crypto-france", tags: ["Crypto", "Fiscalité"], date: "2026-02-14" },
+  { title: "L'IA générative en 2026 : opportunités et risques", description: "Analyse approfondie des avancées en IA générative et leurs implications concrètes pour entrepreneurs.", href: "/guides/ia-generative-2026", tags: ["IA", "Stratégie"], date: "2026-02-09" },
+  { title: "Automatiser sa veille tech sans se perdre", description: "Méthode pratique pour construire un système de veille efficace avec les bons outils.", href: "/guides/automatiser-veille-tech", tags: ["Automatisation", "Outils"], date: "2026-02-04" },
+  { title: "Blockchain : les fondamentaux expliqués simplement", description: "Comprendre le fonctionnement des blockchains, des smart contracts et du Web3 sans jargon.", href: "/guides/blockchain-fondamentaux", tags: ["Blockchain", "Education"], date: "2026-01-28" },
+];
+
+const categories = ["Tous", "IA", "Crypto", "Automatisation", "Blockchain"];
+---
+
+<BaseLayout title="Guides & Ressources" description="Guides pédagogiques sur l'IA, la blockchain et l'automatisation. Explications structurées, exemples concrets et checklists actionnables.">
+  <!-- Hero -->
+  <section class="py-24 bg-volkano-dark relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-pattern-dark opacity-20"></div>
+    <div class="absolute top-0 left-0 w-full h-full pointer-events-none" style="background: radial-gradient(ellipse at 30% 50%, rgba(52,162,237,0.08) 0%, transparent 60%);"></div>
+    <div class="container relative z-10 mx-auto px-4 text-center">
+      <span class="tag-blue mb-6 inline-block">Guides pédagogiques</span>
+      <h1 class="font-display font-bold text-5xl md:text-6xl text-white mb-6">
+        Comprendre les technologies
+      </h1>
+      <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+        Des ressources structurées pour aller de la confusion à la compréhension, avec des exemples concrets et des checklists actionnables.
+      </p>
+    </div>
+  </section>
+
+  <!-- Filters + Grid -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <!-- Category pills -->
+      <div class="flex flex-wrap gap-3 mb-12 justify-center">
+        {categories.map((cat, i) => (
+          <button class={`px-5 py-2 rounded-full text-sm font-medium transition-all ${i === 0 ? 'bg-volkano-blue text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {guides.map(g => <Card {...g} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

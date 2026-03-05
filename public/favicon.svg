@@ -1,9 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
-    <path d="M50.4 78.5a75.1 75.1 0 0 0-28.5 6.9l24.2-65.7c.7-2 1.9-3.2 3.4-3.2h29c1.5 0 2.7 1.2 3.4 3.2l24.2 65.7s-11.6-7-28.5-7L67 45.5c-.4-1.7-1.6-2.8-2.9-2.8-1.3 0-2.5 1.1-2.9 2.7L50.4 78.5Zm-1.1 28.2Zm-4.2-20.2c-2 6.6-.6 15.8 4.2 20.2a17.5 17.5 0 0 1 .2-.7 5.5 5.5 0 0 1 5.7-4.5c2.8.1 4.3 1.5 4.7 4.7.2 1.1.2 2.3.2 3.5v.4c0 2.7.7 5.2 2.2 7.4a13 13 0 0 0 5.7 4.9v-.3l-.2-.3c-1.8-5.6-.5-9.5 4.4-12.8l1.5-1a73 73 0 0 0 3.2-2.2 16 16 0 0 0 6.8-11.4c.3-2 .1-4-.6-6l-.8.6-1.6 1a37 37 0 0 1-22.4 2.7c-5-.7-9.7-2-13.2-6.2Z" />
-    <style>
-        path { fill: #000; }
-        @media (prefers-color-scheme: dark) {
-            path { fill: #FFF; }
-        }
-    </style>
+<svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="gb" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="gb2" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="go" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="lava" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#9D0208"/>
+      <stop offset="28%" stop-color="#DC2F02"/>
+      <stop offset="62%" stop-color="#F48C06"/>
+      <stop offset="100%" stop-color="#FFBA08"/>
+    </linearGradient>
+    <linearGradient id="erupt" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#F48C06"/>
+      <stop offset="55%" stop-color="#FFBA08"/>
+      <stop offset="100%" stop-color="#FFDE57" stop-opacity="0.75"/>
+    </linearGradient>
+    <radialGradient id="inner" cx="50%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#FFBA08" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#9D0208" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="clip">
+      <path d="M87 105 L58 178 Q53 193 68 195 L132 195 Q147 193 142 178 L113 105 L113 78 L87 78 Z"/>
+    </clipPath>
+  </defs>
+  <!-- Lava fill -->
+  <path d="M87 105 L58 178 Q53 193 68 195 L132 195 Q147 193 142 178 L113 105 L113 78 L87 78 Z" fill="url(#lava)"/>
+  <path d="M87 105 L58 178 Q53 193 68 195 L132 195 Q147 193 142 178 L113 105 L113 78 L87 78 Z" fill="url(#inner)" opacity="0.5"/>
+  <!-- Bubbles -->
+  <circle cx="80" cy="158" r="5" fill="#FFBA08" opacity="0.55"/>
+  <circle cx="94" cy="138" r="3.5" fill="#FFBA08" opacity="0.5"/>
+  <circle cx="118" cy="160" r="4" fill="#FFBA08" opacity="0.48"/>
+  <circle cx="106" cy="128" r="2.5" fill="#FFBA08" opacity="0.42"/>
+  <circle cx="72" cy="144" r="3" fill="#FAA307" opacity="0.38"/>
+  <!-- Flask outline (blue neon) -->
+  <path d="M87 105 L58 178 Q52 195 68 197 L132 197 Q148 195 142 178 L113 105" fill="none" stroke="#34A2ED" stroke-width="2.8" stroke-linejoin="round" filter="url(#gb2)"/>
+  <line x1="87" y1="78" x2="87" y2="107" stroke="#34A2ED" stroke-width="2.8" filter="url(#gb)"/>
+  <line x1="113" y1="78" x2="113" y2="107" stroke="#34A2ED" stroke-width="2.8" filter="url(#gb)"/>
+  <line x1="84" y1="78" x2="116" y2="78" stroke="#34A2ED" stroke-width="2.5" stroke-linecap="round" filter="url(#gb)"/>
+  <!-- Eruption center -->
+  <path d="M95 78 C93 62 90 46 88 30 Q86 18 100 12 Q114 18 112 30 C110 46 107 62 105 78 Z" fill="url(#erupt)" filter="url(#go)"/>
+  <!-- Left splash -->
+  <path d="M93 78 Q79 63 66 50 Q59 42 62 48 Q71 60 80 72 L88 78 Z" fill="#FAA307" opacity="0.82" filter="url(#go)"/>
+  <path d="M90 77 Q71 56 57 38 Q51 30 55 36 Q67 54 78 70 Z" fill="#FFBA08" opacity="0.65" filter="url(#go)"/>
+  <!-- Right splash -->
+  <path d="M107 78 Q121 63 134 50 Q141 42 138 48 Q129 60 120 72 L112 78 Z" fill="#FAA307" opacity="0.82" filter="url(#go)"/>
+  <path d="M110 77 Q129 56 143 38 Q149 30 145 36 Q133 54 122 70 Z" fill="#FFBA08" opacity="0.65" filter="url(#go)"/>
+  <!-- Droplets -->
+  <circle cx="54" cy="36" r="3.5" fill="#FFBA08" filter="url(#go)" opacity="0.78"/>
+  <circle cx="46" cy="52" r="2.5" fill="#FAA307" filter="url(#go)" opacity="0.72"/>
+  <circle cx="146" cy="34" r="3.5" fill="#FFBA08" filter="url(#go)" opacity="0.78"/>
+  <circle cx="154" cy="50" r="2.5" fill="#FAA307" filter="url(#go)" opacity="0.72"/>
+  <circle cx="88" cy="8" r="2.5" fill="#FFBA08" filter="url(#go)" opacity="0.6"/>
+  <circle cx="112" cy="6" r="2" fill="#FFBA08" filter="url(#go)" opacity="0.55"/>
+  <!-- TOP CUBE (isometric) -->
+  <path d="M100 4 L113 11 L100 18 L87 11 Z" fill="none" stroke="#34A2ED" stroke-width="1.5" filter="url(#gb)" opacity="0.9"/>
+  <path d="M113 11 L113 24 L100 31 L100 18 Z" fill="none" stroke="#34A2ED" stroke-width="1.5" filter="url(#gb)" opacity="0.9"/>
+  <path d="M87 11 L87 24 L100 31 L100 18 Z" fill="none" stroke="#34A2ED" stroke-width="1.5" filter="url(#gb)" opacity="0.9"/>
+  <!-- LEFT LARGE HEX -->
+  <path d="M52 65 L67 73.5 L67 90.5 L52 99 L37 90.5 L37 73.5 Z" fill="none" stroke="#34A2ED" stroke-width="1.8" filter="url(#gb)" opacity="0.88"/>
+  <!-- RIGHT LARGE HEX -->
+  <path d="M148 59 L161 66.5 L161 81.5 L148 89 L135 81.5 L135 66.5 Z" fill="none" stroke="#34A2ED" stroke-width="1.8" filter="url(#gb)" opacity="0.88"/>
+  <!-- LEFT SMALL HEX -->
+  <path d="M64 37 L73 42 L73 52 L64 57 L55 52 L55 42 Z" fill="none" stroke="#34A2ED" stroke-width="1.3" filter="url(#gb)" opacity="0.75"/>
+  <!-- RIGHT SMALL HEX -->
+  <path d="M136 34 L144 39 L144 48 L136 53 L128 48 L128 39 Z" fill="none" stroke="#34A2ED" stroke-width="1.3" filter="url(#gb)" opacity="0.75"/>
+  <!-- Circles -->
+  <circle cx="78" cy="33" r="3.5" fill="none" stroke="#34A2ED" stroke-width="1.3" filter="url(#gb)" opacity="0.82"/>
+  <circle cx="122" cy="30" r="3" fill="none" stroke="#34A2ED" stroke-width="1.2" filter="url(#gb)" opacity="0.78"/>
+  <circle cx="73" cy="20" r="2.2" fill="none" stroke="#34A2ED" stroke-width="1" filter="url(#gb)" opacity="0.65"/>
 </svg>

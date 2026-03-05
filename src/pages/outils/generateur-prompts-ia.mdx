@@ -1,0 +1,60 @@
+---
+layout: ../../layouts/ToolLayout.astro
+title: "Générateur de prompts IA"
+description: "Générez des prompts optimisés pour ChatGPT, Claude ou Gemini adaptés à votre objectif, votre type de contenu et votre niveau de détail souhaité."
+tags: ["IA", "Productivité", "Prompts"]
+premium: false
+---
+import GenerateurPrompts from '../../components/tools/GenerateurPrompts.tsx';
+
+<p slot="problem">
+  Savoir "parler" aux modèles d'IA est une compétence qui s'apprend. Un mauvais prompt donne une réponse générique et inutile. Un bon prompt structuré donne une réponse précise, actionnable et adaptée à votre contexte. Ce générateur vous aide à construire des prompts efficaces sans effort.
+</p>
+
+<div slot="how-it-works">
+
+Un prompt efficace comprend plusieurs éléments clés :
+
+1. **Le rôle** — définit l'expertise de l'IA ("Tu es un expert en...")
+2. **L'objectif** — ce que vous voulez obtenir
+3. **Le contexte** — votre situation spécifique
+4. **Le format** — comment vous voulez la réponse (structurée, bullet points, etc.)
+5. **Le niveau de détail** — superficiel vs. approfondi
+
+Le générateur assemble ces éléments dans un prompt prêt à copier-coller.
+
+</div>
+
+<div slot="demo">
+  <GenerateurPrompts client:load />
+</div>
+
+<div slot="use-cases">
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Rédiger des emails professionnels</strong> en quelques secondes avec le bon ton et le bon niveau de formalisme.</p>
+  </div>
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Créer du contenu marketing</strong> (posts LinkedIn, articles de blog, newsletters) adapté à votre audience.</p>
+  </div>
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Analyser des données ou des problèmes</strong> en guidant l'IA vers une réflexion structurée et approfondie.</p>
+  </div>
+</div>
+
+<div slot="faq">
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Avec quels modèles IA fonctionne ce générateur ?</h3>
+    <p class="text-gray-600">Les prompts générés sont compatibles avec tous les grands modèles de langage : ChatGPT (GPT-4o), Claude (Anthropic), Gemini (Google) et Mistral. La structure du prompt est universelle.</p>
+  </div>
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Le prompt généré est-il prêt à l'emploi ?</h3>
+    <p class="text-gray-600">Oui, il est conçu pour être copié-collé directement dans l'interface de votre modèle IA préféré. Vous pouvez bien sûr l'adapter selon vos besoins spécifiques.</p>
+  </div>
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Puis-je l'utiliser pour du code ?</h3>
+    <p class="text-gray-600">Oui, sélectionnez "Code" comme type de contenu. Pour des prompts de code très spécifiques (debugging, architecture, etc.), complétez les "précisions supplémentaires" avec le langage et le contexte technique.</p>
+  </div>
+</div>

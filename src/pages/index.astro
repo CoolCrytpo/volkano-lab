@@ -1,130 +1,182 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import Pillars from '../components/Pillars.astro';
 import Card from '../components/Card.astro';
-import CTASection from '../components/CTASection.astro';
 import { siteConfig } from '../config/site.config';
 
-// Mock data for tools
 const featuredTools = [
-  {
-    title: "Simulateur ROI IA",
-    description: "Calculez le retour sur investissement potentiel de l'intégration d'outils IA dans votre activité.",
-    href: "/outils/simulateur-roi-ia",
-    image: "/images/tools/roi-ia.jpg",
-    tags: ["IA", "Simulateur"],
-  },
-  {
-    title: "Template Stratégie Crypto",
-    description: "Framework complet pour structurer votre approche d'investissement crypto de manière rationnelle.",
-    href: "/outils/template-strategie-crypto",
-    image: "/images/tools/crypto-strategy.jpg",
-    tags: ["Crypto", "Template"],
-    premium: true,
-  },
-  {
-    title: "Checklist Automatisation",
-    description: "Identifiez les processus automatisables dans votre activité et priorisez vos actions.",
-    href: "/outils/checklist-automatisation",
-    image: "/images/tools/automation.jpg",
-    tags: ["Automatisation", "Template"],
-  }
+  { title: "Simulateur fiscalité crypto", description: "Estimez votre imposition sur les plus-values crypto selon la flat tax française.", href: "/outils/simulateur-fiscalite-crypto", tags: ["Crypto", "Fiscalité"], icon: "💸" },
+  { title: "Calculateur DCA crypto", description: "Calculez votre prix moyen d'achat et la performance de votre stratégie DCA.", href: "/outils/calculateur-dca", tags: ["Crypto", "Investissement"], icon: "📊" },
+  { title: "Générateur de prompts IA", description: "Générez des prompts optimisés adaptés à votre objectif et niveau de détail.", href: "/outils/generateur-prompts-ia", tags: ["IA", "Productivité"], icon: "🤖" },
+  { title: "Générateur d'idées business IA", description: "Découvrez des idées de projets alignées avec l'IA selon votre profil.", href: "/outils/generateur-idees-business-ia", tags: ["IA", "Entrepreneuriat"], icon: "💡" },
+  { title: "Calculateur ROI automatisation", description: "Estimez les économies annuelles réalisables en automatisant vos processus.", href: "/outils/calculateur-roi-automatisation", tags: ["Automatisation", "ROI"], icon: "⚙️" },
 ];
 
-// Mock data for articles
-const latestArticles = [
-  {
-    title: "L'IA générative en 2026 : opportunités et risques",
-    description: "Analyse approfondie des dernières avancées en IA générative et leurs implications pour les entrepreneurs.",
-    href: "/decrypter/ia-generative-2026",
-    image: "/images/articles/ia-2026.jpg",
-    tags: ["IA", "Stratégie"],
-    date: "2026-02-14",
-  },
-  {
-    title: "Automatiser sa veille tech sans se perdre",
-    description: "Méthodologie pratique pour construire un système de veille efficace avec les bons outils.",
-    href: "/decrypter/automatiser-veille-tech",
-    image: "/images/articles/veille-tech.jpg",
-    tags: ["Automatisation", "Outils"],
-    date: "2026-02-09",
-  },
-  {
-    title: "Crypto et conformité en France : guide 2026",
-    description: "Comprendre le cadre légal français pour utiliser et investir dans les cryptomonnaies en toute sécurité.",
-    href: "/decrypter/crypto-conformite-france",
-    image: "/images/articles/crypto-legal.jpg",
-    tags: ["Crypto", "Conformité"],
-    date: "2026-02-04",
-  }
+const featuredGuides = [
+  { title: "Comprendre la fiscalité crypto en France", description: "Guide complet sur la flat tax, les obligations déclaratives et comment déclarer correctement ses crypto-actifs.", href: "/guides/fiscalite-crypto-france", tags: ["Crypto", "Fiscalité"], date: "2026-02-14" },
+  { title: "L'IA générative en 2026 : opportunités et risques", description: "Analyse approfondie des avancées en IA générative et leurs implications concrètes pour entrepreneurs.", href: "/guides/ia-generative-2026", tags: ["IA", "Stratégie"], date: "2026-02-09" },
+  { title: "Automatiser sa veille tech sans se perdre", description: "Méthode pratique pour construire un système de veille efficace avec les bons outils.", href: "/guides/automatiser-veille-tech", tags: ["Automatisation", "Outils"], date: "2026-02-04" },
+];
+
+const pillars = [
+  { id: 'ia', label: 'Intelligence Artificielle', icon: '🤖', color: '#34A2ED', desc: 'GPT, agents, automatisation cognitive, usages pratiques pour professionnels et entrepreneurs.' },
+  { id: 'blockchain', label: 'Blockchain & Crypto', icon: '⛓️', color: '#FAA307', desc: 'Fiscalité, DCA, DeFi, NFT, régulation française, stratégies d\'investissement éclairées.' },
+  { id: 'auto', label: 'Automatisation', icon: '⚙️', color: '#9D0208', desc: 'No-code, scripts, workflows, ROI mesurable. Automatiser les tâches répétitives pour se concentrer sur l\'essentiel.' },
 ];
 ---
 
-<BaseLayout
-  title={siteConfig.siteName}
-  description={`${siteConfig.tagline} Laboratoire indépendant d'exploration en IA, crypto, automatisation et outils numériques.`}
->
+<BaseLayout description="Zangoun transforme la complexité technologique en intelligence pratique. Outils interactifs, guides pédagogiques et expérimentations sur l'IA, la blockchain et l'automatisation.">
+
   <Hero />
-  
-  <Pillars />
-  
-  <!-- Featured Tools - Dark Section -->
+
+  <!-- ===== CONCEPT ZANGOUN ===== -->
+  <section class="py-24 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-5xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <span class="tag-fire mb-6 inline-block">Notre approche</span>
+            <h2 class="font-display font-bold text-4xl md:text-5xl text-volkano-dark mb-6 leading-tight">
+              L'intelligence pratique face à la technologie
+            </h2>
+            <p class="text-lg text-gray-600 leading-relaxed mb-6">
+              Zangoun est une plateforme indépendante qui analyse les technologies et les transforme en outils simples et utiles. Pas de sensationnalisme, pas de jargon inutile — juste des ressources qui vous aident à comprendre et à agir.
+            </p>
+            <p class="text-gray-500 leading-relaxed">
+              Chaque outil, chaque guide répond à une question réelle : comment ça marche ? Combien ça coûte ? Est-ce que c'est fait pour moi ?
+            </p>
+          </div>
+          <!-- 3 piliers -->
+          <div class="space-y-4">
+            {pillars.map(p => (
+              <div class="flex items-start gap-4 p-5 rounded-2xl border border-gray-100 hover:border-gray-200 transition-all hover:shadow-md group">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style={`background: ${p.color}15; border: 1px solid ${p.color}30;`}>
+                  {p.icon}
+                </div>
+                <div>
+                  <h3 class="font-display font-semibold text-volkano-dark mb-1 group-hover:text-volkano-blue transition-colors">{p.label}</h3>
+                  <p class="text-sm text-gray-500 leading-relaxed">{p.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BOITE A OUTILS ===== -->
   <section class="py-32 bg-volkano-dark relative overflow-hidden">
     <div class="absolute inset-0 bg-grid-pattern-dark opacity-20"></div>
+    <div class="absolute top-0 left-1/3 w-[500px] h-[300px] pointer-events-none" style="background: radial-gradient(ellipse, rgba(52,162,237,0.1) 0%, transparent 70%);"></div>
     <div class="container relative z-10 mx-auto px-4">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div class="max-w-2xl">
-          <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
-            Outils à la une
+          <span class="tag-blue mb-4 inline-block">Outils interactifs</span>
+          <h2 class="font-display font-bold text-4xl md:text-5xl text-white mb-4">
+            Des outils pour passer de<br />la théorie à la pratique
           </h2>
-          <p class="text-xl text-gray-400">
-            Des ressources concrètes et des frameworks actionnables pour passer à l'action immédiatement.
-          </p>
+          <p class="text-gray-400 text-lg">Calculateurs, simulateurs et générateurs — utilisables directement dans votre navigateur.</p>
         </div>
-        <a href="/outils" class="btn-outline-white group shrink-0">
+        <a href="/outils" class="btn-primary shrink-0">
           Voir tous les outils
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
+          <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
       </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {featuredTools.map(tool => (
-          <Card {...tool} />
+          <a href={tool.href} class="group glass-card neon-border p-6 hover:border-volkano-blue/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4" style="background: rgba(52,162,237,0.08); border: 1px solid rgba(52,162,237,0.2);">
+              {tool.icon}
+            </div>
+            <h3 class="font-display font-bold text-white mb-2 group-hover:text-volkano-blue transition-colors">{tool.title}</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4">{tool.description}</p>
+            <div class="flex flex-wrap gap-2">
+              {tool.tags.map(t => <span class="tag-blue">{t}</span>)}
+            </div>
+          </a>
         ))}
       </div>
     </div>
   </section>
-  
-  <!-- Latest Articles -->
+
+  <!-- ===== GUIDES & RESSOURCES ===== -->
   <section class="py-32 bg-white">
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div class="max-w-2xl">
-          <h2 class="text-3xl md:text-5xl font-display font-bold text-volkano-dark mb-6">
-            Derniers articles
+          <span class="tag-fire mb-4 inline-block">Guides pédagogiques</span>
+          <h2 class="font-display font-bold text-4xl md:text-5xl text-volkano-dark mb-4">
+            Comprendre les technologies
           </h2>
-          <p class="text-xl text-gray-600">
-            Décryptage, analyse et vulgarisation des tendances tech pour mieux comprendre le monde de demain.
-          </p>
+          <p class="text-gray-600 text-lg">Des explications structurées, avec exemples concrets et checklists actionnables.</p>
         </div>
-        <a href="/decrypter" class="btn-secondary group shrink-0">
-          Lire tous les articles
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
+        <a href="/guides" class="btn-secondary shrink-0">
+          Voir tous les guides
+          <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
       </div>
-      
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {latestArticles.map(article => (
-          <Card {...article} />
-        ))}
+        {featuredGuides.map(g => <Card {...g} />)}
       </div>
     </div>
   </section>
 
-  <CTASection />
+  <!-- ===== LAB + PROJETS (2 colonnes) ===== -->
+  <section class="py-32" style="background: #0A1628;">
+    <div class="container mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Lab -->
+        <div class="glass-card neon-border p-8">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-6" style="background: rgba(52,162,237,0.08); border: 1px solid rgba(52,162,237,0.2);">🔬</div>
+          <h2 class="font-display font-bold text-3xl text-white mb-4">Explorations</h2>
+          <p class="text-gray-400 leading-relaxed mb-6">Le Lab est l'espace d'expérimentation de Zangoun. Tests, analyses technologiques, prototypes et retours d'expérience sur des cas concrets.</p>
+          <ul class="space-y-3 mb-8 text-sm text-gray-400">
+            {['Tests de modèles IA comparatifs', 'Expérimentations DeFi documentées', 'Analyses de smart contracts', 'Prototypes d\'automatisation'].map(item => (
+              <li class="flex items-center gap-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-volkano-blue flex-shrink-0"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <a href="/lab" class="btn-primary inline-flex items-center">Accéder au Lab <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+        </div>
+        <!-- Projets -->
+        <div class="glass-card p-8" style="border: 1px solid rgba(250,163,7,0.2); box-shadow: 0 0 20px rgba(250,163,7,0.05);">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-6" style="background: rgba(250,163,7,0.08); border: 1px solid rgba(250,163,7,0.2);">🚀</div>
+          <h2 class="font-display font-bold text-3xl text-white mb-4">Nos créations</h2>
+          <p class="text-gray-400 leading-relaxed mb-6">Des projets expérimentaux, pédagogiques et utilitaires créés par Zangoun. Outils open-source, livres numériques, formations pratiques.</p>
+          <ul class="space-y-3 mb-8 text-sm text-gray-400">
+            {['Projets pédagogiques open-source', 'Outils expérimentaux publics', 'Livres numériques pratiques', 'Kits de démarrage tech'].map(item => (
+              <li class="flex items-center gap-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-volkano-ember flex-shrink-0"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <a href="/projets" class="btn-fire inline-flex items-center">Voir les projets <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ACCOMPAGNEMENT ===== -->
+  <section class="py-24 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <span class="tag-blue mb-6 inline-block">Accompagnement personnalisé</span>
+        <h2 class="font-display font-bold text-4xl md:text-5xl text-volkano-dark mb-6">
+          Besoin d'aller plus loin ?
+        </h2>
+        <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+          Certaines situations nécessitent une analyse ou un accompagnement spécifique. Zangoun peut intervenir ponctuellement pour aider à comprendre et structurer l'usage des technologies.
+        </p>
+        <a href="/a-propos#contact" class="btn-fire text-base px-10 py-4 inline-flex items-center">
+          Echanger sur votre projet
+          <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>

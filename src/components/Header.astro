@@ -1,96 +1,144 @@
 ---
 import { siteConfig } from '../config/site.config';
-
-const currentPath = Astro.url.pathname;
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
-  <nav class="container mx-auto px-4">
-    <div class="flex items-center justify-between h-20">
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="main-header">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-18 py-3">
+
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-3 group">
-        <div class="w-10 h-10 bg-volkano-dark rounded-xl flex items-center justify-center transform group-hover:rotate-12 transition-transform">
-          <span class="text-2xl">🌋</span>
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110" style="background: #0D0D0F; border: 1px solid rgba(52,162,237,0.3); box-shadow: 0 0 12px rgba(52,162,237,0.15);">
+          <svg viewBox="0 0 200 220" class="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="hgb" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="hgo" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <linearGradient id="hlava" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0%" stop-color="#9D0208"/>
+                <stop offset="30%" stop-color="#DC2F02"/>
+                <stop offset="65%" stop-color="#F48C06"/>
+                <stop offset="100%" stop-color="#FFBA08"/>
+              </linearGradient>
+              <linearGradient id="herupt" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0%" stop-color="#F48C06"/>
+                <stop offset="100%" stop-color="#FFBA08"/>
+              </linearGradient>
+            </defs>
+            <path d="M87 105 L58 178 Q53 193 68 195 L132 195 Q147 193 142 178 L113 105 L113 78 L87 78 Z" fill="url(#hlava)"/>
+            <path d="M87 105 L58 178 Q52 195 68 197 L132 197 Q148 195 142 178 L113 105" fill="none" stroke="#34A2ED" stroke-width="2.8" stroke-linejoin="round" filter="url(#hgb)"/>
+            <line x1="87" y1="78" x2="87" y2="107" stroke="#34A2ED" stroke-width="2.8" filter="url(#hgb)"/>
+            <line x1="113" y1="78" x2="113" y2="107" stroke="#34A2ED" stroke-width="2.8" filter="url(#hgb)"/>
+            <line x1="84" y1="78" x2="116" y2="78" stroke="#34A2ED" stroke-width="2.5" stroke-linecap="round" filter="url(#hgb)"/>
+            <path d="M95 78 C93 62 90 46 88 30 Q86 18 100 12 Q114 18 112 30 C110 46 107 62 105 78 Z" fill="url(#herupt)" filter="url(#hgo)"/>
+            <path d="M93 78 Q79 63 66 50 Q59 42 62 48 Q71 60 80 72 L88 78 Z" fill="#FAA307" opacity="0.82" filter="url(#hgo)"/>
+            <path d="M107 78 Q121 63 134 50 Q141 42 138 48 Q129 60 120 72 L112 78 Z" fill="#FAA307" opacity="0.82" filter="url(#hgo)"/>
+            <path d="M100 4 L113 11 L100 18 L87 11 Z" fill="none" stroke="#34A2ED" stroke-width="1.5" filter="url(#hgb)" opacity="0.9"/>
+            <path d="M113 11 L113 24 L100 31 L100 18 Z" fill="none" stroke="#34A2ED" stroke-width="1.5" filter="url(#hgb)" opacity="0.9"/>
+            <path d="M87 11 L87 24 L100 31 L100 18 Z" fill="none" stroke="#34A2ED" stroke-width="1.5" filter="url(#hgb)" opacity="0.9"/>
+            <path d="M52 65 L67 73.5 L67 90.5 L52 99 L37 90.5 L37 73.5 Z" fill="none" stroke="#34A2ED" stroke-width="1.8" filter="url(#hgb)" opacity="0.88"/>
+            <path d="M148 59 L161 66.5 L161 81.5 L148 89 L135 81.5 L135 66.5 Z" fill="none" stroke="#34A2ED" stroke-width="1.8" filter="url(#hgb)" opacity="0.88"/>
+          </svg>
         </div>
-        <div class="flex flex-col">
-          <div class="font-display font-bold text-xl leading-none text-volkano-dark tracking-tight">{siteConfig.siteName}</div>
-          <div class="text-[10px] uppercase tracking-[0.2em] font-medium text-gray-400 mt-1">{siteConfig.tagline}</div>
-        </div>
+        <span class="font-display font-bold text-xl tracking-tight text-white">Zangoun</span>
       </a>
-      
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center space-x-8">
-        {siteConfig.navigation.map((item) => (
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1">
+        {siteConfig.navigation.map(link => (
           <a
-            href={item.href}
-            class={`text-sm font-medium transition-colors hover:text-volkano-orange ${
-              currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
-                ? 'text-volkano-orange'
-                : 'text-gray-600'
+            href={link.href}
+            class={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+              isActive(link.href)
+                ? 'text-volkano-blue bg-volkano-blue/10'
+                : 'text-gray-300 hover:text-white hover:bg-white/8'
             }`}
           >
-            {item.name}
+            {link.name}
           </a>
         ))}
-      </div>
+      </nav>
 
-      <!-- Contact & Mobile Button -->
-      <div class="flex items-center gap-4">
-        <div class="relative group hidden sm:block">
-          <button class="btn-primary !py-2 !px-5 text-sm">
-            Contact
-          </button>
-          <div class="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right scale-95 group-hover:scale-100 p-2">
-            <a href={`mailto:${siteConfig.email}`} class="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-xl transition-colors">
-              <span class="text-lg">✉️</span>
-              <span class="text-sm font-medium">Email</span>
-            </a>
-            <div class="flex items-center gap-3 p-3 opacity-50 cursor-not-allowed">
-              <span class="text-lg">💬</span>
-              <span class="text-sm font-medium">WhatsApp</span>
-            </div>
-          </div>
-        </div>
-        
-        <button
-          id="mobile-menu-button"
-          class="md:hidden p-2 text-gray-700 hover:text-volkano-orange transition-colors"
-          aria-label="Toggle menu"
-        >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      <!-- Right Actions -->
+      <div class="flex items-center gap-3">
+        <a href="/admin" class="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-400 hover:text-volkano-blue border border-white/10 hover:border-volkano-blue/40 rounded-lg transition-all duration-200">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Admin
+        </a>
+        <a href="/outils" class="btn-primary text-sm py-2.5 px-5">
+          Explorer les outils
+        </a>
+        <!-- Mobile Menu Toggle -->
+        <button id="menu-toggle" class="lg:hidden w-10 h-10 flex items-center justify-center text-gray-300 hover:text-white transition-colors" aria-label="Menu">
+          <svg id="icon-open" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="icon-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
           </svg>
         </button>
       </div>
     </div>
-    
-    <!-- Mobile Navigation -->
-    <div id="mobile-menu" class="hidden md:hidden pb-6 space-y-2 animate-fade-in">
-      {siteConfig.navigation.map((item) => (
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-white/5 bg-volkano-dark/95 backdrop-blur-xl">
+    <div class="container mx-auto px-4 py-4 space-y-1">
+      {siteConfig.navigation.map(link => (
         <a
-          href={item.href}
-          class={`block py-3 px-4 rounded-xl font-medium transition-colors ${
-            currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
-              ? 'bg-volkano-orange/10 text-volkano-orange'
-              : 'text-gray-700 hover:bg-gray-50'
+          href={link.href}
+          class={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
+            isActive(link.href)
+              ? 'text-volkano-blue bg-volkano-blue/10'
+              : 'text-gray-300 hover:text-white hover:bg-white/5'
           }`}
         >
-          {item.name}
+          {link.name}
         </a>
       ))}
-      <a href={`mailto:${siteConfig.email}`} class="block py-3 px-4 rounded-xl font-medium text-volkano-orange bg-volkano-orange/10">
-        Contactez-moi
-      </a>
+      <div class="pt-4 border-t border-white/5">
+        <a href="/admin" class="block px-4 py-3 text-sm text-gray-400 hover:text-volkano-blue transition-colors">Admin</a>
+      </div>
     </div>
-  </nav>
+  </div>
 </header>
-<div class="h-20"></div>
+
+<div class="h-[72px]"></div>
 
 <script>
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  
-  mobileMenuButton?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
+  const header = document.getElementById('main-header');
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+
+  // Scroll effect
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('bg-volkano-dark/90', 'backdrop-blur-xl', 'border-b', 'border-white/5', 'shadow-lg');
+    } else {
+      header?.classList.remove('bg-volkano-dark/90', 'backdrop-blur-xl', 'border-b', 'border-white/5', 'shadow-lg');
+    }
+  });
+
+  // Mobile toggle
+  toggle?.addEventListener('click', () => {
+    const isOpen = !menu?.classList.contains('hidden');
+    menu?.classList.toggle('hidden', isOpen);
+    iconOpen?.classList.toggle('hidden', !isOpen);
+    iconClose?.classList.toggle('hidden', isOpen);
   });
 </script>
+
+<style>
+  #main-header {
+    background: transparent;
+  }
+</style>

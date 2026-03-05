@@ -1,0 +1,181 @@
+---
+/**
+ * Route dynamique pour les outils créés via l'admin Keystatic.
+ * Les fichiers MDX statiques (simulateur-roi-ia.mdx, etc.) ont
+ * priorité sur cette route pour les slugs existants.
+ * Tout nouvel outil créé dans /admin sera servi ici automatiquement.
+ */
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
+import { DocumentRenderer } from '@keystatic/core/renderer';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  // Exclure les slugs gérés par des fichiers MDX statiques
+  const staticSlugs = new Set(['simulateur-roi-ia', 'template-strategie-crypto', 'checklist-automatisation']);
+  return tools
+    .filter(t => !staticSlugs.has(t.data.slug))
+    .map(entry => ({
+      params: { slug: entry.data.slug },
+      props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { title, description, image, tags = [], premium, priceFiat, priceCrypto, stripeProductId, content } = entry.data;
+
+const priceDisplay = priceFiat ? `${priceFiat}€` : 'Gratuit';
+const tagColorMap: Record<string, string> = {
+  'IA':            'bg-volkano-blue/10 text-volkano-blue border-volkano-blue/20',
+  'Crypto':        'bg-yellow-50 text-yellow-700 border-yellow-200',
+  'Automatisation':'bg-purple-50 text-purple-700 border-purple-200',
+  'Template':      'bg-green-50 text-green-700 border-green-200',
+  'Simulateur':    'bg-cyan-50 text-cyan-700 border-cyan-200',
+  'eBook':         'bg-pink-50 text-pink-700 border-pink-200',
+  'Coaching':      'bg-indigo-50 text-indigo-700 border-indigo-200',
+};
+---
+
+<BaseLayout title={title} description={description} image={image ?? undefined}>
+  <article class="py-12">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <div class="grid lg:grid-cols-3 gap-12">
+
+        <!-- Contenu principal -->
+        <div class="lg:col-span-2">
+          <header class="mb-12">
+            <!-- Tags + badge premium -->
+            <div class="flex flex-wrap gap-2 mb-6">
+              {tags.map((tag: string) => (
+                <span class={`px-3 py-1 text-sm font-medium rounded-full border ${tagColorMap[tag] ?? 'bg-gray-100 text-gray-600 border-gray-200'}`}>
+                  {tag}
+                </span>
+              ))}
+              {premium && (
+                <span class="px-3 py-1 text-sm font-semibold rounded-full border"
+                      style="background: linear-gradient(135deg, #E85D04, #FAA307); color: white; border-color: transparent;">
+                  ✦ Premium
+                </span>
+              )}
+            </div>
+
+            <h1 class="font-display font-bold text-4xl md:text-5xl text-volkano-dark mb-6 leading-tight">
+              {title}
+            </h1>
+
+            <p class="text-xl text-gray-600 leading-relaxed mb-8">
+              {description}
+            </p>
+
+            {image && (
+              <div class="aspect-video rounded-2xl overflow-hidden bg-volkano-gray mb-8 shadow-md">
+                <img src={image} alt={title} class="w-full h-full object-cover" />
+              </div>
+            )}
+          </header>
+
+          <!-- Contenu riche depuis Keystatic -->
+          {content && content.length > 0 ? (
+            <div class="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-volkano-dark prose-a:text-volkano-fire prose-strong:text-volkano-dark prose-blockquote:border-volkano-fire">
+              <DocumentRenderer document={content} />
+            </div>
+          ) : (
+            <div class="text-center py-16 text-gray-400">
+              <p>Contenu en cours de rédaction…</p>
+            </div>
+          )}
+
+          <!-- Disclaimer -->
+          <div class="mt-12 bg-volkano-gray border-l-4 border-volkano-fire rounded-lg p-6">
+            <h3 class="font-display font-semibold text-lg text-volkano-dark mb-3">
+              ⚠️ Disclaimer légal pédagogique
+            </h3>
+            <p class="text-gray-700 text-sm leading-relaxed">
+              Cet outil est fourni à titre pédagogique et informatif. Les résultats ne constituent pas
+              des conseils financiers, juridiques ou professionnels. Consultez toujours un expert
+              qualifié avant de prendre des décisions importantes.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="lg:col-span-1">
+          <div class="sticky top-24 space-y-6">
+            <!-- Pricing card -->
+            <div class="bg-white border-2 border-volkano-fire/40 rounded-2xl p-6 shadow-lg" style="box-shadow: 0 0 30px rgba(232,93,4,0.12);">
+              <div class="text-center mb-6">
+                <div class="font-display font-bold text-5xl text-volkano-dark mb-2">
+                  {priceDisplay}
+                </div>
+                {premium && priceFiat && (
+                  <p class="text-gray-500 text-sm">Paiement unique — accès illimité</p>
+                )}
+                {!premium && (
+                  <p class="text-volkano-fire text-sm font-medium">Accès gratuit immédiat</p>
+                )}
+              </div>
+
+              <div class="space-y-3">
+                {!premium ? (
+                  <a href="#" class="btn-primary w-full text-center block">
+                    Accéder gratuitement
+                  </a>
+                ) : (
+                  <>
+                    {stripeProductId ? (
+                      <a href={`/api/checkout?productId=${stripeProductId}`} class="btn-primary w-full text-center block">
+                        Acheter — {priceDisplay}
+                      </a>
+                    ) : (
+                      <a href={`mailto:contact@volkanolab.re?subject=Achat ${title}`} class="btn-primary w-full text-center block">
+                        Commander — {priceDisplay}
+                      </a>
+                    )}
+                    {priceCrypto && (
+                      <a href={`mailto:contact@volkanolab.re?subject=Achat crypto ${title}`}
+                         class="block w-full text-center px-6 py-3 border-2 border-volkano-blue text-volkano-blue font-semibold rounded-full hover:bg-volkano-blue hover:text-white transition-all">
+                        Payer en crypto — {priceCrypto}
+                      </a>
+                    )}
+                  </>
+                )}
+              </div>
+
+              <ul class="mt-6 pt-6 border-t border-gray-100 space-y-3 text-sm text-gray-600">
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-volkano-fire flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  Accès immédiat
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-volkano-fire flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  Mises à jour incluses
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-volkano-fire flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  Support par email
+                </li>
+              </ul>
+            </div>
+
+            <!-- Card aide -->
+            <div class="bg-volkano-gray rounded-xl p-6">
+              <h3 class="font-display font-semibold text-lg text-volkano-dark mb-3">Besoin d'aide ?</h3>
+              <p class="text-gray-600 text-sm mb-4">Des questions sur cet outil ?</p>
+              <a href="/a-propos" class="block w-full text-center px-4 py-2.5 border border-gray-300 text-gray-700 font-medium rounded-xl hover:border-volkano-fire hover:text-volkano-fire transition-all text-sm">
+                Nous contacter
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </article>
+</BaseLayout>

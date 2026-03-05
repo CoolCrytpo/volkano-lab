@@ -1,0 +1,58 @@
+---
+layout: ../../layouts/ToolLayout.astro
+title: "Générateur d'idées de business IA"
+description: "Découvrez des idées de projets entrepreneuriaux exploitant l'IA, adaptées à votre domaine, votre niveau technique et votre type d'activité."
+tags: ["IA", "Entrepreneuriat", "Business"]
+premium: false
+---
+import GenerateurIdeesBusiness from '../../components/tools/GenerateurIdeesBusiness.tsx';
+
+<p slot="problem">
+  L'IA ouvre des opportunités business inédites, mais identifier celles qui correspondent à votre profil et vos compétences n'est pas évident. Ce générateur analyse votre contexte et vous propose des idées concrètes, réalistes et adaptées à votre niveau technique.
+</p>
+
+<div slot="how-it-works">
+
+Le générateur croise trois dimensions pour vous proposer des idées pertinentes :
+
+1. **Votre domaine** — le secteur où vous avez de l'expérience ou de l'intérêt
+2. **Votre niveau technique** — débutant (no-code) à avancé (développement)
+3. **Votre type d'activité** — solo, petite équipe, startup ou side-project
+
+Chaque idée est évaluée selon son **potentiel** (revenus possibles) et sa **difficulté** de mise en œuvre.
+
+</div>
+
+<div slot="demo">
+  <GenerateurIdeesBusiness client:load />
+</div>
+
+<div slot="use-cases">
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Trouver son prochain side-project IA</strong> en identifiant des niches sous-exploitées dans son domaine d'expertise.</p>
+  </div>
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Explorer comment l'IA peut s'intégrer</strong> dans son activité existante pour créer une nouvelle source de revenus.</p>
+  </div>
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Évaluer la faisabilité</strong> de lancer un projet IA en estimant l'effort requis selon son niveau technique actuel.</p>
+  </div>
+</div>
+
+<div slot="faq">
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Les idées sont-elles originales et validées ?</h3>
+    <p class="text-gray-600">Les idées proposées sont basées sur des tendances de marché observées et des modèles business qui fonctionnent. Elles ne sont pas garanties de succès — chaque idée nécessite une validation avec de vrais clients potentiels avant d'investir.</p>
+  </div>
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Je suis non-technique — est-ce utile pour moi ?</h3>
+    <p class="text-gray-600">Absolument. Sélectionnez "Débutant (no-code)" comme niveau technique. La plupart des idées proposées dans ce cas n'exigent pas de coder — elles s'appuient sur des outils comme Zapier, n8n, Notion, Make, ou des interfaces no-code.</p>
+  </div>
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Comment aller plus loin après avoir une idée ?</h3>
+    <p class="text-gray-600">Validez d'abord l'idée en cherchant 5-10 clients potentiels avant de construire quoi que ce soit. Utilisez nos guides sur l'IA pour comprendre les technologies impliquées. En cas de besoin d'accompagnement, contactez-nous via la page À propos.</p>
+  </div>
+</div>

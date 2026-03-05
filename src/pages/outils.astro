@@ -1,199 +1,138 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Card from '../components/Card.astro';
 
-// Temporary static data - will be replaced with content collections
+// 5 outils ZANGOUN principaux
 const tools = [
   {
-    title: "Simulateur ROI IA",
-    description: "Calculez le retour sur investissement potentiel de l'intégration d'outils IA dans votre activité.",
-    href: "/outils/simulateur-roi-ia",
-    image: "/images/tools/roi-ia.jpg",
-    tags: ["IA", "Simulateur"],
+    slug: "simulateur-fiscalite-crypto",
+    title: "Simulateur fiscalité crypto France",
+    description: "Estimez votre imposition sur les plus-values crypto selon la flat tax française (PFU 30%). Calculez votre impôt, votre net après impôt.",
+    tags: ["Crypto", "Fiscalité"],
+    icon: "💸",
+    category: "crypto",
     premium: false,
   },
   {
-    title: "Template Stratégie Crypto",
-    description: "Framework complet pour structurer votre approche d'investissement crypto de manière rationnelle.",
-    href: "/outils/template-strategie-crypto",
-    image: "/images/tools/crypto-template.jpg",
-    tags: ["Crypto", "Template"],
-    premium: true,
+    slug: "calculateur-dca",
+    title: "Calculateur DCA crypto",
+    description: "Calculez votre prix moyen d'achat et la performance de votre stratégie Dollar Cost Averaging. Comparez avec le prix actuel.",
+    tags: ["Crypto", "Investissement"],
+    icon: "📊",
+    category: "crypto",
+    premium: false,
   },
   {
-    title: "Checklist Automatisation",
-    description: "Identifiez les processus automatisables dans votre activité et priorisez vos actions.",
-    href: "/outils/checklist-automatisation",
-    image: "/images/tools/automatisation.jpg",
-    tags: ["Automatisation", "Template"],
+    slug: "generateur-prompts-ia",
+    title: "Générateur de prompts IA",
+    description: "Générez des prompts optimisés adaptés à votre objectif, type de contenu et niveau de détail souhaité.",
+    tags: ["IA", "Productivité"],
+    icon: "🤖",
+    category: "ia",
+    premium: false,
+  },
+  {
+    slug: "generateur-idees-business-ia",
+    title: "Générateur d'idées business IA",
+    description: "Découvrez des idées de projets alignées avec l'IA selon votre domaine, niveau technique et type d'activité.",
+    tags: ["IA", "Entrepreneuriat"],
+    icon: "💡",
+    category: "ia",
+    premium: false,
+  },
+  {
+    slug: "calculateur-roi-automatisation",
+    title: "Calculateur ROI automatisation",
+    description: "Estimez les économies annuelles réalisables en automatisant vos processus. Calculez le payback et le ROI réel.",
+    tags: ["Automatisation", "ROI"],
+    icon: "⚙️",
+    category: "automatisation",
     premium: false,
   },
 ];
 
-const filters = {
-  type: ["Tous", "Gratuit", "Premium"],
-  category: ["Tous", "IA", "Crypto", "Template", "Simulateur"],
-};
+const categories = [
+  { id: "tous", label: "Tous les outils", icon: "🔬" },
+  { id: "ia", label: "Intelligence Artificielle", icon: "🤖" },
+  { id: "crypto", label: "Crypto & Blockchain", icon: "⛓️" },
+  { id: "automatisation", label: "Automatisation", icon: "⚙️" },
+];
 ---
 
 <BaseLayout
-  title="Boîte à outils"
-  description="Outils, templates et simulateurs pour passer de la théorie à la pratique en IA, crypto et automatisation."
+  title="Outils interactifs"
+  description="5 outils gratuits pour calculer, simuler et générer. Fiscalité crypto, DCA, prompts IA, idées business et ROI automatisation."
 >
-  <div class="py-20">
+  <!-- Hero -->
+  <section class="py-24 bg-volkano-dark relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-pattern-dark opacity-20"></div>
+    <div class="absolute top-0 left-1/4 w-[600px] h-[400px] pointer-events-none" style="background: radial-gradient(ellipse, rgba(52,162,237,0.1) 0%, transparent 70%);"></div>
+    <div class="container relative z-10 mx-auto px-4 text-center">
+      <span class="tag-blue mb-6 inline-block">Outils interactifs</span>
+      <h1 class="font-display font-bold text-5xl md:text-6xl text-white mb-6">
+        Boite à outils
+      </h1>
+      <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+        Des calculateurs, simulateurs et générateurs directement utilisables dans votre navigateur. Gratuits, sans inscription.
+      </p>
+    </div>
+  </section>
+
+  <!-- Category filters -->
+  <section class="py-16 bg-white">
     <div class="container mx-auto px-4">
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <div class="inline-flex items-center px-4 py-2 bg-volkano-orange/10 text-volkano-orange rounded-full text-sm font-medium mb-6">
-          <span class="mr-2">🧰</span>
-          Outils
-        </div>
-        <h1 class="font-display font-bold text-4xl md:text-5xl text-volkano-dark mb-6">
-          Boîte à outils
-        </h1>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-          Des ressources concrètes pour passer de la théorie à la pratique
-        </p>
-      </div>
-      
-      <!-- Filters -->
-      <div class="mb-12 space-y-6">
-        <!-- Type Filter -->
-        <div>
-          <h3 class="font-display font-semibold text-sm text-gray-700 mb-3">Type</h3>
-          <div class="flex flex-wrap gap-3">
-            {filters.type.map((type) => (
-              <button
-                class={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  type === "Tous"
-                    ? "bg-volkano-orange text-white"
-                    : "bg-white border border-gray-200 text-gray-700 hover:border-volkano-orange hover:text-volkano-orange"
-                }`}
-                data-filter-type={type}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        <!-- Category Filter -->
-        <div>
-          <h3 class="font-display font-semibold text-sm text-gray-700 mb-3">Catégorie</h3>
-          <div class="flex flex-wrap gap-3">
-            {filters.category.map((category) => (
-              <button
-                class={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  category === "Tous"
-                    ? "bg-volkano-blue text-white"
-                    : "bg-white border border-gray-200 text-gray-700 hover:border-volkano-blue hover:text-volkano-blue"
-                }`}
-                data-filter-category={category}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-      
-      <!-- Tools Grid -->
-      <div id="tools-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-        {tools.map((tool) => (
-          <Card {...tool} />
+
+      <div class="flex flex-wrap gap-3 mb-12 justify-center">
+        {categories.map((cat, i) => (
+          <button class={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all ${i === 0 ? 'bg-volkano-blue text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+            <span>{cat.icon}</span>
+            {cat.label}
+          </button>
         ))}
       </div>
-      
-      <!-- Empty State -->
-      <div id="empty-state" class="hidden text-center py-16">
-        <div class="text-6xl mb-4">🔍</div>
-        <h3 class="font-display font-semibold text-xl text-volkano-dark mb-2">
-          Aucun outil trouvé
-        </h3>
-        <p class="text-gray-600">
-          Essayez de modifier vos filtres
-        </p>
-      </div>
-    </div>
-  </div>
-</BaseLayout>
 
-<script>
-  // Filter functionality
-  let currentTypeFilter = 'Tous';
-  let currentCategoryFilter = 'Tous';
-  
-  const typeButtons = document.querySelectorAll('[data-filter-type]');
-  const categoryButtons = document.querySelectorAll('[data-filter-category]');
-  const toolsGrid = document.getElementById('tools-grid');
-  const emptyState = document.getElementById('empty-state');
-  
-  function updateFilters() {
-    const tools = toolsGrid?.querySelectorAll('article');
-    let visibleCount = 0;
-    
-    tools?.forEach((tool) => {
-      const isPremium = tool.querySelector('.bg-volkano-orange.text-white.text-xs') !== null;
-      const tags = Array.from(tool.querySelectorAll('.bg-volkano-gray.text-gray-700.text-xs')).map(
-        (tag) => tag.textContent?.trim() || ''
-      );
-      
-      let showTool = true;
-      
-      // Type filter
-      if (currentTypeFilter === 'Gratuit' && isPremium) showTool = false;
-      if (currentTypeFilter === 'Premium' && !isPremium) showTool = false;
-      
-      // Category filter
-      if (currentCategoryFilter !== 'Tous' && !tags.includes(currentCategoryFilter)) {
-        showTool = false;
-      }
-      
-      if (showTool) {
-        tool.classList.remove('hidden');
-        visibleCount++;
-      } else {
-        tool.classList.add('hidden');
-      }
-    });
-    
-    // Show/hide empty state
-    if (visibleCount === 0) {
-      emptyState?.classList.remove('hidden');
-    } else {
-      emptyState?.classList.add('hidden');
-    }
-  }
-  
-  typeButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      currentTypeFilter = button.getAttribute('data-filter-type') || 'Tous';
-      
-      // Update active button
-      typeButtons.forEach((btn) => {
-        btn.classList.remove('bg-volkano-orange', 'text-white');
-        btn.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-700');
-      });
-      button.classList.add('bg-volkano-orange', 'text-white');
-      button.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-700');
-      
-      updateFilters();
-    });
-  });
-  
-  categoryButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      currentCategoryFilter = button.getAttribute('data-filter-category') || 'Tous';
-      
-      // Update active button
-      categoryButtons.forEach((btn) => {
-        btn.classList.remove('bg-volkano-blue', 'text-white');
-        btn.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-700');
-      });
-      button.classList.add('bg-volkano-blue', 'text-white');
-      button.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-700');
-      
-      updateFilters();
-    });
-  });
-</script>
+      <!-- Tools Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {tools.map(tool => (
+          <a href={`/outils/${tool.slug}`} class="group border border-gray-100 rounded-2xl p-6 hover:border-volkano-blue/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl" style="background: rgba(52,162,237,0.06); border: 1px solid rgba(52,162,237,0.15);">
+                {tool.icon}
+              </div>
+              {!tool.premium && (
+                <span class="px-3 py-1 bg-green-50 text-green-700 text-xs font-semibold rounded-full">Gratuit</span>
+              )}
+            </div>
+            <h3 class="font-display font-bold text-lg text-volkano-dark mb-2 group-hover:text-volkano-blue transition-colors">{tool.title}</h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-4">{tool.description}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              {tool.tags.map(t => <span class="tag-blue">{t}</span>)}
+            </div>
+            <div class="flex items-center text-volkano-blue text-sm font-semibold gap-1 group-hover:gap-2 transition-all">
+              Utiliser l'outil
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        ))}
+
+        <!-- Bientot disponible placeholder -->
+        <div class="border-2 border-dashed border-gray-200 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-volkano-blue/30 transition-colors min-h-[280px]">
+          <div class="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center text-2xl mb-4">🔮</div>
+          <h3 class="font-display font-semibold text-gray-500 mb-2">Prochainement</h3>
+          <p class="text-xs text-gray-400">De nouveaux outils sont en cours de développement</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA section -->
+  <section class="py-16 bg-volkano-dark">
+    <div class="container mx-auto px-4 text-center max-w-2xl">
+      <h2 class="font-display font-bold text-3xl text-white mb-4">Vous avez une idée d'outil ?</h2>
+      <p class="text-gray-400 mb-8">Si vous avez un besoin spécifique non couvert, n'hésitez pas à nous le faire savoir.</p>
+      <a href={`mailto:contact@zangoun.com?subject=Idée d'outil`} class="btn-primary">
+        Suggérer un outil
+      </a>
+    </div>
+  </section>
+</BaseLayout>

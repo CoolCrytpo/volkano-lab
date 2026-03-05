@@ -1,9 +1,8 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Google Fonts - loaded via BaseLayout for performance */
 
 @layer base {
   html {
@@ -21,11 +20,12 @@
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
+  /* Zangoun glass card - dark version */
   .glass-card {
-    @apply bg-white/80 backdrop-blur-md border border-gray-200/50 shadow-sm;
+    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl;
   }
-  
+
   .dark-glass-card {
     @apply bg-volkano-dark/90 backdrop-blur-md border border-white/10 shadow-xl;
   }
@@ -34,20 +34,126 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-volkano-dark to-volkano-blue;
   }
 
+  /* ── Boutons ── */
+  /* btn-primary: bleu ZANGOUN */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-volkano-orange hover:bg-opacity-90 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98];
+    @apply inline-flex items-center px-6 py-3 bg-volkano-blue text-white font-semibold rounded-full transition-all duration-300 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-volkano-blue focus:ring-offset-2;
+    box-shadow: 0 0 18px rgba(52, 162, 237, 0.35);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 28px rgba(52, 162, 237, 0.55);
+    transform: translateY(-1px);
+  }
+
+  /* btn-fire: orange/lava gradient pour CTAs secondaires */
+  .btn-fire {
+    @apply inline-flex items-center px-6 py-3 text-white font-semibold rounded-full transition-all duration-300;
+    background: linear-gradient(135deg, #E85D04, #FAA307);
+    box-shadow: 0 0 18px rgba(232, 93, 4, 0.35);
+  }
+  .btn-fire:hover {
+    box-shadow: 0 0 28px rgba(232, 93, 4, 0.55);
+    transform: translateY(-1px);
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-volkano-dark text-base font-medium rounded-full text-volkano-dark bg-transparent hover:bg-volkano-dark hover:text-white transition-all duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 border border-volkano-dark
+           text-base font-semibold rounded-full text-volkano-dark bg-transparent
+           hover:bg-volkano-dark hover:text-white
+           transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-volkano-dark focus:ring-offset-2;
   }
 
   .btn-outline-white {
-    @apply inline-flex items-center justify-center px-6 py-3 border border-white text-base font-medium rounded-full text-white bg-transparent hover:bg-white hover:text-volkano-dark transition-all duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3 border border-white/40
+           text-base font-semibold rounded-full text-white bg-transparent
+           hover:bg-white hover:text-volkano-dark
+           transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-volkano-dark;
+  }
+
+  /* Section labels */
+  .section-label {
+    @apply inline-flex items-center px-4 py-2 bg-volkano-fire/10 text-volkano-fire
+           rounded-full text-sm font-bold uppercase tracking-wider mb-6;
+  }
+
+  /* Tag components */
+  .tag-blue {
+    @apply inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full border;
+    background: rgba(52, 162, 237, 0.08);
+    color: #34A2ED;
+    border-color: rgba(52, 162, 237, 0.25);
+  }
+  .tag-fire {
+    @apply inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full border;
+    background: rgba(232, 93, 4, 0.08);
+    color: #E85D04;
+    border-color: rgba(232, 93, 4, 0.25);
+  }
+
+  /* Neon border effect */
+  .neon-border {
+    border: 1px solid rgba(52, 162, 237, 0.3);
+    box-shadow: 0 0 20px rgba(52, 162, 237, 0.1), inset 0 0 20px rgba(52, 162, 237, 0.03);
+  }
+
+  /* Tool output / code display */
+  .tool-output {
+    font-family: 'JetBrains Mono', monospace;
+    @apply bg-volkano-dark text-volkano-glow p-4 rounded-xl text-sm leading-relaxed;
+  }
+
+  /* Font mono utility */
+  .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  /* Prose overrides */
+  .prose-volkano {
+    @apply prose-headings:text-volkano-dark
+           prose-a:text-volkano-blue prose-a:no-underline hover:prose-a:underline
+           prose-strong:text-volkano-dark
+           prose-blockquote:border-volkano-blue prose-blockquote:text-gray-600;
+  }
+
+  /* ── Utilitaires magma ── */
+  .magma-gradient {
+    background: linear-gradient(135deg, #9D0208 0%, #E85D04 50%, #FAA307 100%);
+  }
+
+  .fire-gradient {
+    background: linear-gradient(135deg, #E85D04 0%, #FFBA08 100%);
+  }
+
+  /* Texte avec dégradé magma */
+  .magma-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #E85D04 0%, #FFBA08 100%);
+  }
+
+  /* Glow effects */
+  .glow-fire {
+    text-shadow: 0 0 24px rgba(232, 93, 4, 0.55), 0 0 48px rgba(250, 163, 7, 0.25);
+  }
+  .glow-box-fire {
+    box-shadow: 0 0 30px rgba(232, 93, 4, 0.3), 0 0 60px rgba(157, 2, 8, 0.15);
   }
 }
 
-/* Custom selection color */
+/* Sélection de texte */
 ::selection {
-  @apply bg-volkano-orange/20 text-volkano-dark;
+  background: rgba(52, 162, 237, 0.2);
+  color: #0D0D0F;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #34A2ED; }
+
+/* Focus ring */
+*:focus-visible {
+  @apply outline-none ring-2 ring-volkano-blue ring-offset-2;
 }

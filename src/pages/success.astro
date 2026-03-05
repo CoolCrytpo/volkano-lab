@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site.config';
+---
+
+<BaseLayout
+  title="Paiement confirmé"
+  description="Votre achat a bien été confirmé. Merci pour votre confiance."
+>
+  <div class="min-h-[70vh] flex items-center justify-center py-20">
+    <div class="container mx-auto px-4 max-w-2xl text-center">
+      <!-- Success Icon -->
+      <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8 animate-fade-in">
+        <svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+
+      <div class="animate-slide-up">
+        <div class="inline-flex items-center px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium mb-6">
+          Paiement confirmé
+        </div>
+
+        <h1 class="font-display font-bold text-4xl md:text-5xl text-volkano-dark mb-6">
+          Merci pour votre achat !
+        </h1>
+
+        <p class="text-xl text-gray-600 mb-4">
+          Votre paiement a été traité avec succès. Vous allez recevoir un email de confirmation avec votre lien d'accès dans quelques instants.
+        </p>
+
+        <p class="text-gray-500 mb-12">
+          Si vous ne recevez pas l'email dans les 10 minutes, vérifiez vos spams ou contactez-nous à
+          <a href={`mailto:${siteConfig.email}`} class="text-volkano-orange hover:underline font-medium">{siteConfig.email}</a>
+        </p>
+
+        <div class="bg-volkano-gray rounded-2xl p-8 mb-10 text-left">
+          <h2 class="font-display font-bold text-xl text-volkano-dark mb-4">Et maintenant ?</h2>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <span class="text-volkano-orange font-bold mt-0.5">1.</span>
+              <span class="text-gray-700">Consultez votre boîte email pour recevoir votre lien d'accès.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-volkano-orange font-bold mt-0.5">2.</span>
+              <span class="text-gray-700">Téléchargez ou accédez à votre ressource via le lien fourni.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-volkano-orange font-bold mt-0.5">3.</span>
+              <span class="text-gray-700">N'hésitez pas à nous contacter si vous avez des questions.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/outils" class="btn-primary">
+            Voir d'autres outils
+          </a>
+          <a href="/decrypter" class="btn-secondary">
+            Lire nos articles
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

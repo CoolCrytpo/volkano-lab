@@ -4,32 +4,45 @@ import ReadingFrame from '../components/ReadingFrame.astro';
 import Card from '../components/Card.astro';
 
 interface Props {
-  title: string;
-  description: string;
-  date: string;
+  title?: string;
+  description?: string;
+  date?: string;
   author?: string;
   image?: string;
   tags?: string[];
   readingTime?: string;
-  tldr: string[];
-  impact: string;
+  tldr?: string[];
+  impact?: string;
   risks?: string;
   checklist?: string[];
+  frontmatter?: {
+    title?: string;
+    description?: string;
+    date?: string;
+    author?: string;
+    image?: string;
+    tags?: string[];
+    readingTime?: string;
+    tldr?: string[];
+    impact?: string;
+    risks?: string;
+    checklist?: string[];
+  };
 }
 
-const {
-  title,
-  description,
-  date,
-  author = "Volkano Lab",
-  image,
-  tags = [],
-  readingTime = "5 min",
-  tldr = [],
-  impact = "",
-  risks,
-  checklist = [],
-} = Astro.props;
+// In Astro 5, MDX layouts receive frontmatter under Astro.props.frontmatter
+const fm = Astro.props.frontmatter ?? Astro.props;
+const title = fm.title ?? '';
+const description = fm.description ?? '';
+const date = fm.date ?? '';
+const author = fm.author ?? "Volkano Lab";
+const image = fm.image;
+const tags = fm.tags ?? [];
+const readingTime = fm.readingTime ?? "5 min";
+const tldr = fm.tldr ?? [];
+const impact = fm.impact ?? "";
+const risks = fm.risks;
+const checklist = fm.checklist ?? [];
 
 // Related articles (placeholder)
 const relatedArticles = [

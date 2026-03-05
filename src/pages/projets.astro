@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  { title: "Zangoun Outils", type: "Plateforme", status: "En ligne", icon: "🔬", color: "#34A2ED", desc: "Suite d'outils interactifs gratuits pour calculer, simuler et générer. Fiscalité crypto, DCA, prompts IA, ROI automatisation.", tags: ["Outils", "Open-source"], link: "/outils" },
+  { title: "Guide Fiscalité Crypto 2026", type: "Livre numérique", status: "Disponible", icon: "📚", color: "#FAA307", desc: "Guide complet de 80 pages sur la fiscalité des crypto-actifs en France. Cas pratiques, exemples chiffrés, check-list déclaration.", tags: ["Crypto", "Fiscalité"], link: "#", premium: true, price: "19€" },
+  { title: "Kit Automatisation Pro", type: "Pack", status: "Disponible", icon: "⚙️", color: "#E85D04", desc: "Workflows n8n + templates Notion + checklist ROI. Tout le nécessaire pour automatiser intelligemment.", tags: ["Automatisation", "No-code"], link: "#", premium: true, price: "29€" },
+];
+---
+
+<BaseLayout title="Projets" description="Projets pédagogiques, outils expérimentaux et créations numériques de Zangoun.">
+  <!-- Hero -->
+  <section class="py-24 bg-volkano-dark relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-pattern-dark opacity-20"></div>
+    <div class="container relative z-10 mx-auto px-4">
+      <div class="max-w-3xl">
+        <span class="tag-fire mb-6 inline-block">Créations</span>
+        <h1 class="font-display font-bold text-5xl md:text-6xl text-white mb-6">Nos créations</h1>
+        <p class="text-xl text-gray-400 leading-relaxed">
+          Des projets construits pour rendre la technologie accessible. Outils pratiques, guides approfondis et ressources pédagogiques.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects grid -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {projects.map(p => (
+          <div class="group border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div class="h-2 w-full" style={`background: ${p.color};`}></div>
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style={`background: ${p.color}15;`}>{p.icon}</div>
+                <span class={`px-3 py-1 text-xs font-semibold rounded-full ${p.status === 'En ligne' ? 'bg-green-50 text-green-700' : 'bg-blue-50 text-blue-700'}`}>{p.status}</span>
+              </div>
+              <span class="text-xs uppercase tracking-wider text-gray-400 font-medium">{p.type}</span>
+              <h3 class="font-display font-bold text-xl text-volkano-dark mt-1 mb-3 group-hover:text-volkano-blue transition-colors">{p.title}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed mb-4">{p.desc}</p>
+              <div class="flex flex-wrap gap-2 mb-5">
+                {p.tags.map(t => <span class="tag-blue">{t}</span>)}
+              </div>
+              <div class="flex items-center justify-between pt-4 border-t border-gray-50">
+                {p.premium && p.price && <span class="font-bold text-volkano-dark">{p.price}</span>}
+                <a href={p.link} class={`${p.premium ? '' : 'w-full text-center'} btn-primary text-sm py-2.5 px-5`}>
+                  {p.premium ? 'Acquérir' : 'Accéder gratuitement'}
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

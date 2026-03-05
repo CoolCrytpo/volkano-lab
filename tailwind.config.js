@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         volkano: {
-          // Palette magma/lave — remplace l'orange Telecom
+          // Palette magma/lave
           fire:   '#E85D04',   // CTA principal
           lava:   '#F48C06',   // hover / variante chaude
           ember:  '#FAA307',   // badges / accents
@@ -14,11 +14,12 @@ export default {
           // Aliases compatibilité rétro (évite de tout casser)
           orange: '#E85D04',   // redirigé vers fire
           // Neutres
-          dark:   '#0D0D0F',   // fond principal (légèrement plus sombre qu'avant)
+          dark:   '#0D0D0F',   // fond principal
           blue:   '#34A2ED',   // crypto/tech — inchangé
           light:  '#F5F5F5',
           gray:   '#F5F5F5',
         },
+        'zangoun-navy': '#0A1628',
       },
       backgroundImage: {
         'grid-pattern': "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(0 0 0 / 0.04)'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E\")",
@@ -30,7 +31,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Space Grotesk', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out forwards',

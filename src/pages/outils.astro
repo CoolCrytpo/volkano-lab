@@ -1,136 +1,138 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Card from '../components/Card.astro';
-import { getCollection } from 'astro:content';
 
-// Chargement depuis Keystatic (src/content/tools/)
-const toolEntries = await getCollection('tools');
-
-// Tri par catégorie
-const categories = [
+// 5 outils ZANGOUN principaux
+const tools = [
   {
-    id: 'gratuit',
-    label: 'Ressources gratuites',
-    icon: '🟢',
-    description: 'Templates, guides et outils recommandés — 100% gratuits',
-    subcategories: [
-      { id: 'templates', label: 'Templates' },
-      { id: 'guides', label: 'Guides pratiques' },
-      { id: 'outils-recommandes', label: 'Outils recommandés' },
-    ],
+    slug: "simulateur-fiscalite-crypto",
+    title: "Simulateur fiscalité crypto France",
+    description: "Estimez votre imposition sur les plus-values crypto selon la flat tax française (PFU 30%). Calculez votre impôt, votre net après impôt.",
+    tags: ["Crypto", "Fiscalité"],
+    icon: "💸",
+    category: "crypto",
+    premium: false,
   },
   {
-    id: 'premium',
-    label: 'Ressources premium',
-    icon: '🟠',
-    description: 'eBooks, dossiers approfondis et méthodes détaillées',
-    subcategories: [
-      { id: 'ebooks', label: 'eBooks' },
-      { id: 'dossiers', label: 'Dossiers premium' },
-      { id: 'methodes', label: 'Méthodes détaillées' },
-    ],
+    slug: "calculateur-dca",
+    title: "Calculateur DCA crypto",
+    description: "Calculez votre prix moyen d'achat et la performance de votre stratégie Dollar Cost Averaging. Comparez avec le prix actuel.",
+    tags: ["Crypto", "Investissement"],
+    icon: "📊",
+    category: "crypto",
+    premium: false,
   },
   {
-    id: 'services',
-    label: 'Produits & services',
-    icon: '🔵',
-    description: 'Coaching, packs stratégiques et divertissement éducatif',
-    subcategories: [
-      { id: 'coaching', label: 'Coaching' },
-      { id: 'packs', label: 'Packs stratégiques' },
-      { id: 'divertissement', label: 'Divertissement éducatif' },
-    ],
+    slug: "generateur-prompts-ia",
+    title: "Générateur de prompts IA",
+    description: "Générez des prompts optimisés adaptés à votre objectif, type de contenu et niveau de détail souhaité.",
+    tags: ["IA", "Productivité"],
+    icon: "🤖",
+    category: "ia",
+    premium: false,
+  },
+  {
+    slug: "generateur-idees-business-ia",
+    title: "Générateur d'idées business IA",
+    description: "Découvrez des idées de projets alignées avec l'IA selon votre domaine, niveau technique et type d'activité.",
+    tags: ["IA", "Entrepreneuriat"],
+    icon: "💡",
+    category: "ia",
+    premium: false,
+  },
+  {
+    slug: "calculateur-roi-automatisation",
+    title: "Calculateur ROI automatisation",
+    description: "Estimez les économies annuelles réalisables en automatisant vos processus. Calculez le payback et le ROI réel.",
+    tags: ["Automatisation", "ROI"],
+    icon: "⚙️",
+    category: "automatisation",
+    premium: false,
   },
 ];
 
-// Adapter les entrées Keystatic au format Card
-function toCardProps(entry: typeof toolEntries[0]) {
-  const d = entry.data;
-  return {
-    title: d.title,
-    description: d.description,
-    href: `/outils/${d.slug}`,
-    image: d.image ?? undefined,
-    tags: d.tags ?? [],
-    premium: d.premium ?? false,
-    date: undefined,
-    price: d.priceFiat ? `${d.priceFiat}€` : undefined,
-  };
-}
+const categories = [
+  { id: "tous", label: "Tous les outils", icon: "🔬" },
+  { id: "ia", label: "Intelligence Artificielle", icon: "🤖" },
+  { id: "crypto", label: "Crypto & Blockchain", icon: "⛓️" },
+  { id: "automatisation", label: "Automatisation", icon: "⚙️" },
+];
 ---
 
 <BaseLayout
-  title="Boîte à outils"
-  description="Outils, templates, guides et services pour passer de la théorie à la pratique en IA, crypto et automatisation."
+  title="Outils interactifs"
+  description="5 outils gratuits pour calculer, simuler et générer. Fiscalité crypto, DCA, prompts IA, idées business et ROI automatisation."
 >
-  <div class="py-20">
+  <!-- Hero -->
+  <section class="py-24 bg-volkano-dark relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-pattern-dark opacity-20"></div>
+    <div class="absolute top-0 left-1/4 w-[600px] h-[400px] pointer-events-none" style="background: radial-gradient(ellipse, rgba(52,162,237,0.1) 0%, transparent 70%);"></div>
+    <div class="container relative z-10 mx-auto px-4 text-center">
+      <span class="tag-blue mb-6 inline-block">Outils interactifs</span>
+      <h1 class="font-display font-bold text-5xl md:text-6xl text-white mb-6">
+        Boite à outils
+      </h1>
+      <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+        Des calculateurs, simulateurs et générateurs directement utilisables dans votre navigateur. Gratuits, sans inscription.
+      </p>
+    </div>
+  </section>
+
+  <!-- Category filters -->
+  <section class="py-16 bg-white">
     <div class="container mx-auto px-4">
 
-      <!-- Header -->
-      <div class="text-center mb-20">
-        <div class="section-label">
-          <span class="mr-2">🧪</span>
-          Boîte à outils
-        </div>
-        <h1 class="font-display font-bold text-4xl md:text-5xl text-volkano-dark mb-6">
-          Ressources & Outils
-        </h1>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-          Des ressources concrètes, organisées par besoin, pour passer de la théorie à l'action.
-        </p>
+      <div class="flex flex-wrap gap-3 mb-12 justify-center">
+        {categories.map((cat, i) => (
+          <button class={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all ${i === 0 ? 'bg-volkano-blue text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+            <span>{cat.icon}</span>
+            {cat.label}
+          </button>
+        ))}
       </div>
 
-      <!-- Sections par catégorie -->
-      {categories.map((cat) => {
-        const catTools = toolEntries.filter(e => e.data.category === cat.id);
-
-        return (
-          <section class="mb-24" id={`cat-${cat.id}`}>
-            <!-- En-tête de section -->
-            <div class="flex items-start gap-4 mb-10 pb-6 border-b-2 border-gray-100">
-              <div class={`text-3xl mt-1`}>{cat.icon}</div>
-              <div>
-                <h2 class="font-display font-bold text-2xl md:text-3xl text-volkano-dark mb-2">
-                  {cat.label}
-                </h2>
-                <p class="text-gray-500 text-base">{cat.description}</p>
-                <!-- Sous-catégories pills -->
-                <div class="flex flex-wrap gap-2 mt-3">
-                  {cat.subcategories.map(sub => (
-                    <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full">
-                      {sub.label}
-                    </span>
-                  ))}
-                </div>
+      <!-- Tools Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {tools.map(tool => (
+          <a href={`/outils/${tool.slug}`} class="group border border-gray-100 rounded-2xl p-6 hover:border-volkano-blue/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl" style="background: rgba(52,162,237,0.06); border: 1px solid rgba(52,162,237,0.15);">
+                {tool.icon}
               </div>
+              {!tool.premium && (
+                <span class="px-3 py-1 bg-green-50 text-green-700 text-xs font-semibold rounded-full">Gratuit</span>
+              )}
             </div>
+            <h3 class="font-display font-bold text-lg text-volkano-dark mb-2 group-hover:text-volkano-blue transition-colors">{tool.title}</h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-4">{tool.description}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              {tool.tags.map(t => <span class="tag-blue">{t}</span>)}
+            </div>
+            <div class="flex items-center text-volkano-blue text-sm font-semibold gap-1 group-hover:gap-2 transition-all">
+              Utiliser l'outil
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        ))}
 
-            {catTools.length > 0 ? (
-              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {catTools.map(entry => (
-                  <Card {...toCardProps(entry)} />
-                ))}
-              </div>
-            ) : (
-              <!-- Placeholder "Bientôt disponible" -->
-              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {cat.subcategories.map(sub => (
-                  <div class="group border-2 border-dashed border-gray-200 rounded-2xl p-8 flex flex-col items-center justify-center text-center hover:border-volkano-fire/40 transition-colors min-h-[200px]">
-                    <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center mb-4">
-                      <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                      </svg>
-                    </div>
-                    <p class="font-display font-semibold text-gray-500 mb-1">{sub.label}</p>
-                    <p class="text-xs text-gray-400">Bientôt disponible</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
-        );
-      })}
+        <!-- Bientot disponible placeholder -->
+        <div class="border-2 border-dashed border-gray-200 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-volkano-blue/30 transition-colors min-h-[280px]">
+          <div class="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center text-2xl mb-4">🔮</div>
+          <h3 class="font-display font-semibold text-gray-500 mb-2">Prochainement</h3>
+          <p class="text-xs text-gray-400">De nouveaux outils sont en cours de développement</p>
+        </div>
+      </div>
 
     </div>
-  </div>
+  </section>
+
+  <!-- CTA section -->
+  <section class="py-16 bg-volkano-dark">
+    <div class="container mx-auto px-4 text-center max-w-2xl">
+      <h2 class="font-display font-bold text-3xl text-white mb-4">Vous avez une idée d'outil ?</h2>
+      <p class="text-gray-400 mb-8">Si vous avez un besoin spécifique non couvert, n'hésitez pas à nous le faire savoir.</p>
+      <a href={`mailto:contact@zangoun.com?subject=Idée d'outil`} class="btn-primary">
+        Suggérer un outil
+      </a>
+    </div>
+  </section>
 </BaseLayout>

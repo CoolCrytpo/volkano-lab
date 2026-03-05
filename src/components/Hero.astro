@@ -1,92 +1,81 @@
 ---
+// Hero ZANGOUN
 ---
 
-<section class="relative overflow-hidden bg-volkano-dark pt-16 pb-24 md:pt-28 md:pb-36">
-  <!-- Grid background -->
+<section class="relative min-h-[92vh] flex items-center justify-center overflow-hidden bg-volkano-dark">
+  <!-- Background grid -->
   <div class="absolute inset-0 bg-grid-pattern-dark opacity-20"></div>
 
-  <!-- Glow magma principal — centre haut -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[700px] pointer-events-none"
-       style="background: radial-gradient(ellipse at center, rgba(157,2,8,0.28) 0%, rgba(232,93,4,0.15) 35%, transparent 70%);"></div>
-
-  <!-- Glow ember — bas gauche -->
-  <div class="absolute bottom-0 left-1/4 w-[500px] h-[300px] pointer-events-none"
-       style="background: radial-gradient(ellipse at center, rgba(250,163,7,0.12) 0%, transparent 70%);"></div>
-
-  <!-- Glow bleu — bas droite (tech/crypto) -->
-  <div class="absolute bottom-0 right-1/4 w-[400px] h-[250px] pointer-events-none"
-       style="background: radial-gradient(ellipse at center, rgba(52,162,237,0.10) 0%, transparent 70%);"></div>
+  <!-- Blue glow top-left -->
+  <div class="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full pointer-events-none" style="background: radial-gradient(ellipse, rgba(52,162,237,0.12) 0%, transparent 70%);"></div>
+  <!-- Fire glow top-right -->
+  <div class="absolute -top-20 right-1/4 w-[500px] h-[400px] rounded-full pointer-events-none" style="background: radial-gradient(ellipse, rgba(232,93,4,0.08) 0%, transparent 70%);"></div>
+  <!-- Blue glow bottom-right -->
+  <div class="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full pointer-events-none" style="background: radial-gradient(ellipse, rgba(52,162,237,0.08) 0%, transparent 70%);"></div>
 
   <div class="container relative z-10 mx-auto px-4">
-    <div class="max-w-4xl mx-auto text-center">
+    <div class="max-w-5xl mx-auto text-center">
 
-      <!-- Badge pulsant -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs font-bold uppercase tracking-widest mb-10 animate-fade-in">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest mb-10 border" style="background: rgba(52,162,237,0.08); border-color: rgba(52,162,237,0.25); color: #34A2ED;">
         <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-volkano-fire opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-volkano-fire"></span>
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-volkano-blue opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-volkano-blue"></span>
         </span>
-        Laboratoire indépendant — La Réunion
+        Laboratoire technologique indépendant
       </div>
 
-      <!-- Titre principal -->
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white tracking-tight mb-8 animate-slide-up leading-[1.05]">
-        Comprendre avant
-        <br />
-        <span class="magma-text glow-fire">d'agir.</span>
+      <!-- Headline -->
+      <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl text-white leading-[1.05] tracking-tight mb-8">
+        Comprendre la<br />
+        <span style="background: linear-gradient(135deg, #34A2ED 0%, #FFBA08 50%, #E85D04 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+          technologie
+        </span><br />
+        pour agir.
       </h1>
 
-      <!-- Sous-titre -->
-      <p class="text-lg md:text-xl text-white/60 mb-12 max-w-2xl mx-auto leading-relaxed animate-slide-up [animation-delay:150ms]">
-        Décryptage, structuration et outils actionnables en
-        <span class="text-white font-semibold">IA</span>,
-        <span class="text-white font-semibold">crypto</span>,
-        <span class="text-white font-semibold">automatisation</span>
-        et outils numériques — sans sensationnalisme.
+      <!-- Subheadline -->
+      <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+        IA, blockchain et automatisation expliquées simplement<br class="hidden md:block" />
+        et transformées en <span class="text-white font-medium">outils utiles</span>.
       </p>
 
       <!-- CTAs -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up [animation-delay:300ms]">
-        <a href="/decrypter" class="btn-primary w-full sm:w-auto group text-base px-8 py-3.5">
-          Explorer les articles
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+        <a href="/outils" class="btn-primary text-base px-8 py-4">
+          <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+          Explorer les outils
         </a>
-        <a href="/outils" class="btn-outline-white w-full sm:w-auto text-base px-8 py-3.5">
-          Voir les outils
+        <a href="/guides" class="inline-flex items-center px-8 py-4 text-base font-semibold text-gray-300 border border-white/15 rounded-full hover:border-white/30 hover:text-white transition-all duration-300 hover:bg-white/5">
+          Voir les guides
+          <svg class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
         </a>
       </div>
 
-      <!-- Trust indicators -->
-      <div class="mt-20 pt-10 border-t border-white/10 grid grid-cols-3 gap-6 max-w-xl mx-auto animate-fade-in [animation-delay:600ms]">
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-10 h-10 rounded-xl bg-volkano-fire/10 border border-volkano-fire/20 flex items-center justify-center">
-            <svg class="w-5 h-5 text-volkano-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
+      <!-- Stats / trust indicators -->
+      <div class="flex flex-wrap justify-center gap-8 text-center">
+        {[
+          { num: '5', label: 'Outils interactifs', icon: '🔬' },
+          { num: '3', label: 'Piliers tech', icon: '⚡' },
+          { num: '100%', label: 'Indépendant', icon: '🛡️' },
+        ].map(stat => (
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center text-xl" style="background: rgba(52,162,237,0.08); border: 1px solid rgba(52,162,237,0.2);">
+              {stat.icon}
+            </div>
+            <div class="font-display font-bold text-2xl text-white">{stat.num}</div>
+            <div class="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</div>
           </div>
-          <span class="text-xs font-semibold text-white/50 uppercase tracking-widest text-center">Pédagogique</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-10 h-10 rounded-xl bg-volkano-fire/10 border border-volkano-fire/20 flex items-center justify-center">
-            <svg class="w-5 h-5 text-volkano-ember" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-          </div>
-          <span class="text-xs font-semibold text-white/50 uppercase tracking-widest text-center">Indépendant</span>
-        </div>
-        <div class="flex flex-col items-center gap-2">
-          <div class="w-10 h-10 rounded-xl bg-volkano-blue/10 border border-volkano-blue/20 flex items-center justify-center">
-            <svg class="w-5 h-5 text-volkano-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </div>
-          <span class="text-xs font-semibold text-white/50 uppercase tracking-widest text-center">La Réunion</span>
-        </div>
+        ))}
       </div>
+    </div>
+  </div>
 
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+    <span class="text-xs text-gray-500 uppercase tracking-widest">Découvrir</span>
+    <div class="w-5 h-8 border border-gray-600 rounded-full flex justify-center pt-2">
+      <div class="w-1 h-2 bg-volkano-blue rounded-full animate-bounce"></div>
     </div>
   </div>
 </section>

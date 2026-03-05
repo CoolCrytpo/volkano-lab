@@ -1,0 +1,58 @@
+---
+layout: ../../layouts/ToolLayout.astro
+title: "Calculateur DCA crypto"
+description: "Calculez votre prix moyen d'achat et analysez la performance de votre stratégie DCA (Dollar Cost Averaging). Comparez votre coût d'acquisition moyen au prix actuel."
+tags: ["Crypto", "Investissement", "DCA"]
+premium: false
+---
+import CalculateurDCA from '../../components/tools/CalculateurDCA.tsx';
+
+<p slot="problem">
+  Le DCA (Dollar Cost Averaging) est une des stratégies d'investissement les plus utilisées en crypto, mais calculer son prix moyen sur plusieurs achats à la main est fastidieux et source d'erreurs. Ce calculateur automatise le travail et vous donne une vision claire de votre position.
+</p>
+
+<div slot="how-it-works">
+
+Le DCA consiste à investir des montants réguliers indépendamment du prix. Le calculateur applique la formule :
+
+**Prix moyen DCA = Total investi ÷ Nombre total d'unités achetées**
+
+Pour chaque achat : Unités = Montant investi ÷ Prix d'achat
+
+La **performance** compare la valeur actuelle de votre portefeuille à votre investissement total.
+
+</div>
+
+<div slot="demo">
+  <CalculateurDCA client:load />
+</div>
+
+<div slot="use-cases">
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Suivre son investissement DCA</strong> mensuel sur Bitcoin, Ethereum ou tout autre actif et visualiser l'évolution de son prix moyen.</p>
+  </div>
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Décider de l'opportunité d'un achat</strong> en comparant le prix actuel à son coût moyen d'acquisition.</p>
+  </div>
+  <div class="flex items-start p-4 bg-white border border-gray-100 rounded-xl hover:border-volkano-blue/30 transition-colors">
+    <span class="text-volkano-blue mr-3 text-xl flex-shrink-0">✓</span>
+    <p class="text-gray-700"><strong>Simuler différentes fréquences</strong> d'achat pour optimiser sa stratégie d'accumulation long terme.</p>
+  </div>
+</div>
+
+<div slot="faq">
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Pourquoi faire du DCA en crypto ?</h3>
+    <p class="text-gray-600">Le DCA permet de lisser le risque de volatilité en achetant à différents prix. En cas de baisse, vous achetez plus d'unités pour le même montant, ce qui réduit votre prix moyen. C'est une stratégie de long terme adaptée à la volatilité crypto.</p>
+  </div>
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Le DCA garantit-il un profit ?</h3>
+    <p class="text-gray-600">Non. Le DCA réduit le risque de mauvais timing d'entrée mais ne garantit pas de profit. Si l'actif perd de la valeur sur le long terme, vous serez en perte. Ce simulateur est éducatif — investissez uniquement ce que vous êtes prêt à perdre.</p>
+  </div>
+  <div class="bg-white border border-gray-100 rounded-xl p-6">
+    <h3 class="font-display font-semibold text-xl text-volkano-dark mb-3">Les frais d'achat sont-ils pris en compte ?</h3>
+    <p class="text-gray-600">Dans cette version, les frais ne sont pas inclus dans le calcul du prix moyen. Pour une analyse précise, vous pouvez les intégrer en les ajoutant au montant investi ou en réduisant les unités achetées.</p>
+  </div>
+</div>
